@@ -1,0 +1,975 @@
+﻿using NPOI.OpenXmlFormats.Spreadsheet;
+using NPOI.SS.UserModel;
+using Soneta.Types;
+using Syncfusion.XlsIO;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Trustsoft.ExcelOperation.Moje
+{
+    internal interface IExcelOperationService
+    {
+        /// <summary>
+        /// Creates a workbook according to the conditions passed to the class.
+        /// </summary>
+        /// <returns>Returns the object.</returns>
+        public object CreateWorkbook();
+
+        /// <summary>
+        /// Creates a workbook according to the conditions passed to the class and with the sheet name passed in the parameter.
+        /// </summary>
+        /// <param name="sheetName">Sheet name string.</param>
+        /// <returns>Returns the object.</returns>
+        public object CreateWorkbook(string sheetName);
+
+        /// <summary>
+        /// Changes the name of a specified worksheet in the workbook.
+        /// </summary>
+        /// <param name="sheetName">The current name of the worksheet to be renamed.</param>
+        /// <param name="newName">The new name to assign to the worksheet</param>
+        public void ChangeNameWorksheet(string sheetName, string newName);
+
+        /// <summary>
+        /// Changes the name of a specified worksheet in the workbook.
+        /// </summary>
+        /// <param name="indexsheet">The current index of the worksheet to be renamed.</param>
+        /// <param name="newName">The new name to assign to the worksheet</param>
+        public void ChangeNameWorksheet(int indexsheet, string newName);
+
+        /// <summary>
+        /// Creates a new sheet with the specified name in the workbook.
+        /// </summary>
+        /// <param name="sheetName">New sheet name.</param>
+        /// <returns> Returns the sheet index.</returns>
+        public int AddWorksheet(string sheetName);
+
+        /// <summary>
+        /// Creates a list of sheet containing the index and sheet name.
+        /// </summary>
+        /// <returns>Returns a list of sheets.</returns>
+        public List<Sheet> GetNameSheet();
+
+        /// <summary>
+        /// Deletes a sheet with the specified name in the workbook.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet to be deleted.</param>
+        public void DeleteWorksheet(string sheetName);
+
+        /// <summary>
+        /// Deletes a sheet with the specified name in the workbook.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet to be deleted.</param>
+        public void DeleteWorksheet(int sheetIndex);
+
+        /// <summary>
+        /// Creates a row in the worksheet by index (line number). A sheet is identified by its name.
+        /// </summary>
+        /// <param name="rowIndex">Line number where to insert a new row.</param>
+        /// <param name="sheetName">The name of the sheet in which to insert a new row.</param>
+        public void AddRow(int rowIndex, string sheetName);
+
+        /// <summary>
+        /// Creates a row in the worksheet by index (line number). A sheet is identified by its name.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert a new row.</param>
+        /// <param name="rowIndex">Line number where to insert a new row.</param>
+        public void AddRow(string sheetName, int rowIndex);
+
+        /// <summary>
+        /// Creates a rows in the worksheet by index (line number) and quantity. A sheet is identified by its name.
+        /// </summary>
+        /// <param name="rowIndex">The row number at which to start inserting a new rows.</param>
+        /// <param name="sheetName">The name of the sheet in which to insert a new row.</param>
+        /// <param name="rowCount">Number of rows to insert.</param>
+        public void AddRow(int rowIndex, string sheetName, int rowCount);
+
+        /// <summary>
+        /// Creates a rows in the worksheet by index (line number) and quantity. A sheet is identified by its name.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert a new rows.</param>
+        /// <param name="rowIndex">The row number at which to start inserting a new row.</param>
+        /// <param name="rowCount">Number of rows to insert.</param>
+        public void AddRow(string sheetName, int rowIndex, int rowCount);
+
+        /// <summary>
+        /// Creates a rows in the worksheet by index (line number) and quantity. A sheet is identified by its index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert a new rows.</param>
+        /// <param name="rowIndex">The row number at which to start inserting a new row.</param>
+        /// <param name="rowCount">Number of rows to insert.</param>
+        public void AddRow(int sheetIndex, int rowIndex, int rowCount);
+
+        /// <summary>
+        /// Creates a row in the worksheet by index (line number). A sheet is identified by its index.
+        /// </summary>
+        /// <param name="sheetIndex">Sheet index number in which to insert the row.</param>
+        /// <param name="rowIndex">Line number where to insert a new row.</param>
+        public void AddRow(int sheetIndex, int rowIndex);
+
+        /// <summary>
+        /// Creates a column in the worksheet by index (column number). A sheet is identified by its name.
+        /// </summary>
+        /// <param name="coulmnIndex">Column number where to insert a new column.</param>
+        /// <param name="sheetName">The name of the sheet in which to insert a new column.</param>
+        public void AddColumn(int columnIndex, string sheetName);
+
+        /// <summary>
+        /// Creates a column in the worksheet by index (column number). A sheet is identified by its name.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert a new column.</param>
+        /// <param name="columnIndex">Column number where to insert a new column.</param>
+        public void AddColumn(string sheetName, int columnIndex);
+
+        /// <summary>
+        /// Creates a columns in the worksheet by index (column number) and quantity. A sheet is identified by its index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert a new columns.</param>
+        /// <param name="columnIndex">The column number at which to start inserting a new column.</param>
+        /// <param name="columnCount">Number of columns to insert.</param>
+        public void AddColumn(int sheetIndex, int columnIndex, int columnCount);
+
+        /// <summary>
+        /// Creates a columns in the worksheet by index (column number) and quantity. A sheet is identified by its name.
+        /// </summary>
+        /// <param name="columnIndex">The column number at which to start inserting a new column.</param>
+        /// <param name="sheetName">The name of the sheet in which to insert a new columns.</param>
+        /// <param name="columnCount">Number of columns to insert.</param>
+        public void AddColumn(int columnIndex, string sheetName, int columnCount);
+
+        /// <summary>
+        /// Creates a columns in the worksheet by index (column number) and quantity. A sheet is identified by its name.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert a new columns.</param>
+        /// <param name="columnIndex">The column number at which to start inserting a new column.</param>
+        /// <param name="columnCount">Number of columns to insert.</param>
+        public void AddColumn(string sheetName, int columnIndex, int columnCount);
+
+        /// <summary>
+        /// Creates a column in the worksheet by index (column number). A sheet is identified by its index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert a new column.</param>
+        /// <param name="columnIndex">Column number where to insert a new column.</param>
+        public void AddColumn(int sheetIndex, int columnIndex);
+
+        /// <summary>
+        /// Inserts a text value into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert text value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="text">A text value.</param>
+        public void AddCellValueText(int sheetIndex, int rowIndex, int columnIndex, string text);
+
+        /// <summary>
+        /// Inserts a text value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert text value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="text">A text value.</param>
+        public void AddCellValueText(string sheetName, int rowIndex, int columnIndex, string text);
+
+        /// <summary>
+        /// Deletes the row (identified by its line number) from the sheet. The sheet is identified by name. 
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet which to delete row.</param>
+        /// <param name="rowIndex">The row number which to delete.</param>
+        public void DeleteRow(string sheetName, int rowIndex);
+
+        /// <summary>
+        /// Deletes the row (identified by its line number) from the sheet. The sheet is identified by name. 
+        /// </summary>
+        /// <param name="rowIndex">The row number which to delete.</param>
+        /// <param name="sheetName">The name of the sheet which to delete row.</param>
+        public void DeleteRow(int rowIndex, string sheetName);
+
+        /// <summary>
+        /// Deletes the row (identified by its line number) from the sheet. The sheet is identified by index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to delete row.</param>
+        /// <param name="rowIndex">The row number which to delete.</param>
+        public void DeleteRow(int sheetIndex, int rowIndex);
+
+        /// <summary>
+        /// Deletes the rows (identified by its line number) and quantity from the sheet. The sheet is identified by name.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet which to delete rows.</param>
+        /// <param name="rowIndex">The row number at which to start deleting a row.</param>
+        /// <param name="rowCount">Number of rows to delete.</param>
+        public void DeleteRow(string sheetName, int rowIndex, int rowCount);
+
+        /// <summary>
+        /// Deletes the rows (identified by its line number) and quantity from the sheet. The sheet is identified by name.
+        /// </summary>
+        /// <param name="rowIndex">The row number at which to start deleting a row.</param>
+        /// <param name="sheetName">The name of the sheet which to delete rows.</param>
+        /// <param name="rowCount">Number of rows to delete.</param>
+        public void DeleteRow(int rowIndex, string sheetName, int rowCount);
+
+        /// <summary>
+        /// Deletes the rows (identified by its line number) and quantity from the sheet. The sheet is identified by index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to delete rows.</param>
+        /// <param name="rowIndex">The row number at which to start deleting a row.</param>
+        /// <param name="rowCount">Number of rows to delete.</param>
+        public void DeleteRow(int sheetIndex, int rowIndex, int rowCount);
+
+        /// <summary>
+        /// Deletes the column (identified by its column number) from the sheet. The sheet is identified by name.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet which to delete column.</param>
+        /// <param name="columnIndex">The column number which to delete.</param>
+        public void DeleteColumn(string sheetName, int columnIndex);
+
+        /// <summary>
+        /// Deletes the column (identified by its column number) from the sheet. The sheet is identified by name.
+        /// </summary>
+        /// <param name="columnIndex">The column number which to delete.</param>
+        /// <param name="sheetName">The name of the sheet which to delete column.</param>
+        public void DeleteColumn(int columnIndex, string sheetName);
+
+        /// <summary>
+        /// Deletes the column (identified by its column number) from the sheet. The sheet is identified by index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet which to delete column.</param>
+        /// <param name="columnIndex">The column number which to delete.</param>
+        public void DeleteColumn(int sheetIndex, int columnIndex);
+
+        /// <summary>
+        /// Deletes the columns (identified by its column number) and quantity from the sheet. The sheet is identified by name.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet which to delete columns.</param>
+        /// <param name="columnIndex">The column number at which to start deleting a column.</param>
+        /// <param name="columnCount">Number of columns to delete.</param>
+        public void DeleteColumn(string sheetName, int columnIndex, int columnCount);
+
+        /// <summary>
+        /// Deletes the columns (identified by its column number) and quantity from the sheet. The sheet is identified by name.
+        /// </summary>
+        /// <param name="columnIndex">The column number at which to start deleting a column.</param>
+        /// <param name="sheetName">The name of the sheet which to delete columns.</param>
+        /// <param name="columnCount">Number of columns to delete.</param>
+        public void DeleteColumn(int columnIndex, string sheetName, int columnCount);
+
+        /// <summary>
+        /// Deletes the columns (identified by its column number) and quantity from the sheet. The sheet is identified by index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet which to delete column.</param>
+        /// <param name="columnIndex">The column number at which to start deleting a column.</param>
+        /// <param name="columnCount">Number of columns to delete.</param>
+        public void DeleteColumn(int sheetIndex, int columnIndex, int columnCount);
+
+        /// <summary>
+        /// Inserts a integer value into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert integer value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="value">A integer value.</param>
+        public void AddCellValueInt(int sheetIndex, int rowIndex, int columnIndex, int value);
+
+        /// <summary>
+        /// Inserts a integer value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert text value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="value">A integer value.</param>
+        public void AddCellValueInt(string sheetName, int rowIndex, int columnIndex, int value);
+
+        /// <summary>
+        /// Inserts a decimal value into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The name of the sheet in which to insert decimal value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="value">A decimal value.</param>
+        public void AddCellValueDecimal(int sheetIndex, int rowIndex, int columnIndex, decimal value);
+        /// <summary>
+        /// Inserts a decimal value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert decimal value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="value">A decimal value.</param>
+        public void AddCellValueDecimal(string sheetName, int rowIndex, int columnIndex, decimal value);
+
+        /// <summary>
+        /// Inserts a double precision value into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The name of the sheet in which to insert double precision value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="value">A double precision value.</param>
+        public void AddCellValueDouble(int sheetIndex, int rowIndex, int columnIndex,  double value);
+
+        /// <summary>
+        /// Inserts a double precision value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert double precision value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="value">A double precision value.</param>
+        public void AddCellValueDouble(string sheetName, int rowIndex, int columnIndex, double value);
+
+        /// <summary>
+        /// Sets the height of rows in a sheet. The sheet is identified by index. Rows are identified by row number and quantity (next rows are changed after rowIndex , including rowIndex).
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to change height in row.</param>
+        /// <param name="rowIndex">The row number where the height is to be change.</param>
+        /// <param name="rowCount">Number of rows to change height.</param>
+        /// <param name="height">Row height.</param>
+        public void HeightRow(int sheetIndex, int rowIndex, int rowCount, double height);
+
+        /// <summary>
+        /// Sets the height of rows in a sheet. The sheet is identified by index. Rows are identified by row number from table rowIndices.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to change height in rows.</param>
+        /// <param name="rowIndices">The table row number where the height is to be change.</param>
+        /// <param name="height">Row height.</param>
+        public void HeightRow(int sheetIndex, int[] rowIndices, double height);
+
+        /// <summary>
+        /// Sets the height of row in a sheet. The sheet is identified by index. The row is identified by row number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to change height in row.</param>
+        /// <param name="rowIndex">The row number where the height is to be change.</param>
+        /// <param name="height">Row height.</param>
+        public void HeightRow(int sheetIndex, int rowIndex, double height);
+
+        /// <summary>
+        /// Sets the height of rows in a sheet. The sheet is identified by name. Rows are identified by row number and quantity (next rows are changed after rowIndex , including rowIndex).
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to change height in rows.</param>
+        /// <param name="rowIndex">The row number where the height is to be change.</param>
+        /// <param name="rowCount">Number of rows to change height.</param>
+        /// <param name="height">Row height.</param>
+        public void HeightRow(string sheetName, int rowIndex, int rowCount, double height);
+
+        /// <summary>
+        /// Sets the height of rows in a sheet. The sheet is identified by name. Rows are identified by row number from table rowIndices.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to change height in rows.</param>
+        /// <param name="rowIndices">The table row number where the height is to be change.</param>
+        /// <param name="height">Row height.</param>
+        public void HeightRow(string sheetName, int[] rowIndices, double height);
+
+        /// <summary>
+        /// Sets the height of row in a sheet. The sheet is identified by name. The row is identified by row number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to change height in row.</param>
+        /// <param name="rowIndex">The row number where the height is to be change.</param>
+        /// <param name="height">Row height.</param>
+        public void HeightRow(string sheetName, int rowIndex, double height);
+
+        /// <summary>
+        /// Sets the width of columns in a sheet. The sheet is identified by index. Columnss are identified by column number and quantity (next columns are changed after columnIndex , including columnIndex).
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to change width in columns.</param>
+        /// <param name="columnIndex">The column number where the width is to be change.</param>
+        /// <param name="columnCount">Number of columns to change height.</param>
+        /// <param name="width">Column width.</param>
+        public void WidthColumn(int sheetIndex, int columnIndex, int columnCount, double width);
+
+        /// <summary>
+        /// Sets the width of columns in a sheet. The sheet is identified by index. Columns are identified by column number from table columnIndices.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to change width in columns.</param>
+        /// <param name="columnIndices">The table column number where the height is to be change.</param>
+        /// <param name="width">Column width.</param>
+        public void WidthColumn(int sheetIndex, int[] columnIndices, double width);
+
+        /// <summary>
+        /// Sets the width of column in a sheet. The sheet is identified by index. The column is identified by column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to change width in column.</param>
+        /// <param name="columnIndex">The column number where the width is to be change.</param>
+        /// <param name="width">Column width.</param>
+        public void WidthColumn(int sheetIndex, int columnIndex, double width);
+
+        /// <summary>
+        /// Sets the width of columns in a sheet. The sheet is identified by name. Columns are identified by column number and quantity (next columns are changed after columnIndex , including columnIndex).
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to change width in columns.</param>
+        /// <param name="columnIndex">The column number where the width is to be change.</param>
+        /// <param name="columnCount">Number of columns to change width.</param>
+        /// <param name="width">Column width.</param>
+        public void WidthColumn(string sheetName, int columnIndex, int columnCount, double width);
+
+        /// <summary>
+        /// Sets the width of columns in a sheet. The sheet is identified by name. Columns are identified by column number from table columnIndices.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to change width in columns.</param>
+        /// <param name="columnIndices">The table column number where the width is to be change.</param>
+        /// <param name="width">Column width.</param>
+        public void WidthColumn(string sheetName, int[] columnIndices, double width);
+
+        /// <summary>
+        /// Sets the width of column in a sheet. The sheet is identified by name. The column is identified by column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to change width in column.</param>
+        /// <param name="columnIndex">The column number where the width is to be change.</param>
+        /// <param name="width">Column width.</param>
+        public void WidthColumn(string sheetName, int columnIndex, double width);
+
+        /// <summary>
+        /// Inserts a datetime value into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert datetime value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="date">A datetime value.</param>
+        public void AddCellValueDate(int sheetIndex, int rowIndex, int columnIndex, DateTime date);
+
+        /// <summary>
+        /// Inserts a datetime value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert datetime value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="date">A datetime value.</param>
+        public void AddCellValueDate(string sheetName, int rowIndex, int columnIndex, DateTime date);
+
+        /// <summary>
+        /// Inserts a text value into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert text value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="currency">A currency vakue.</param>
+        public void AddCellValueCurrency(int sheetIndex, int rowIndex, int columnIndex, Currency currency);
+
+        /// <summary>
+        /// Inserts a text value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert text value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="currency">A currency vakue.</param>
+        public void AddCellValueCurrency(string sheetName, int rowIndex, int columnIndex, Currency currency);
+
+        /// <summary>
+        /// Inserts a percent value into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert percent value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="percent">A percent value.</param>
+        public void AddCellValuePercent(int sheetIndex, int rowIndex, int columnIndex, Percent percent);
+
+        /// <summary>
+        /// Inserts a percent value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert percent value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="percent">A percent value.</param>
+        public void AddCellValuePercent(string sheetName, int rowIndex, int columnIndex, Percent percent);
+
+        /// <summary>
+        /// Inserts a text value into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert text value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="time">A time value.</param>
+        public void AddCellValueTime(int sheetIndex, int rowIndex, int columnIndex, Time time);
+
+        /// <summary>
+        /// Inserts a text value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert text value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="time">A time value.</param>
+        public void AddCellValueTime(string sheetName, int rowIndex, int columnIndex, Time time);
+
+        /// <summary>
+        /// Inserts a fraction value into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert fraction value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="fraction">A fraction value.</param>
+        public void AddCellValueFraction(int sheetIndex, int rowIndex, int columnIndex, Fraction fraction);
+
+        /// <summary>
+        /// Inserts a fraction value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert fraction value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="fraction">A fraction value.</param>
+        public void AddCellValueFraction(string sheetName, int rowIndex, int columnIndex, Fraction fraction);
+
+        /// <summary>
+        /// Sets the default black border for a cell. Borders are set from the borderIndex enum, and the line style is set from the LinesIndex. 
+        /// The sheet is identified by its name. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="borderIndex">An array of edges to set.</param>
+        /// <param name="lineIndex">Line style to set.</param>
+        /// <param name="nameSheet">The name of the sheet where the border is to be set.</param>
+        /// <param name="rowIndex">The row number where the border is to be set.</param>
+        /// <param name="columnIndex">The column number where the border is to be set.</param>
+        public void SetBorder(BorderIndex[] borderIndex, LinesIndex lineIndex, string nameSheet, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Sets the default black border for a cell. Borders are set from the borderIndex enum, and the line style is set from the LinesIndex. 
+        /// The sheet is identified by its index. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="borderIndex">An array of edges to set.</param>
+        /// <param name="lineIndex">Line style to set.</param>
+        /// <param name="sheetIndex">The index of the sheet where the border is to be set.</param>
+        /// <param name="rowIndex">The row number where the border is to be set.</param>
+        /// <param name="columnIndex">The column number where the border is to be set.</param>
+        public void SetBorder(BorderIndex[] borderIndex, LinesIndex lineIndex, int sheetIndex, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Sets the color border for a cell. Borders are set from the borderIndex enum, and the line style is set from the LinesIndex. 
+        /// The sheet is identified by its name. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="borderIndex">An array of edges to set.</param>
+        /// <param name="lineIndex">Line style to set.</param>
+        /// <param name="nameSheet">The name of the sheet where the border is to be set.</param>
+        /// <param name="rowIndex">The row number where the border is to be set.</param>
+        /// <param name="columnIndex">The column number where the border is to be set.</param>
+        /// <param name="a">The alpha component of the color (0-255).</param>
+        /// <param name="r">The red component of the color (0-255).</param>
+        /// <param name="g">The green component of the color (0-255).</param>
+        /// <param name="b">The blue component of the color (0-255).</param>
+        public void SetBorder(BorderIndex[] borderIndex, LinesIndex lineIndex, string nameSheet, int rowIndex, int columnIndex, int a, int r, int g, int b);
+
+        /// <summary>
+        /// Sets the color border for a cell. Borders are set from the borderIndex enum, and the line style is set from the LinesIndex. 
+        /// The sheet is identified by its index. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="borderIndex">An array of edges to set.</param>
+        /// <param name="lineIndex">Line style to set.</param>
+        /// <param name="sheetIndex">The index of the sheet where the border is to be set.</param>
+        /// <param name="rowIndex">The row number where the border is to be set.</param>
+        /// <param name="columnIndex">The column number where the border is to be set.</param>
+        /// <param name="a">The alpha component of the color (0-255).</param>
+        /// <param name="r">The red component of the color (0-255).</param>
+        /// <param name="g">The green component of the color (0-255).</param>
+        /// <param name="b">The blue component of the color (0-255).</param>
+        public void SetBorder(BorderIndex[] borderIndex, LinesIndex lineIndex, int sheetIndex, int rowIndex, int columnIndex, int a, int r, int g, int b);
+
+        /// <summary>
+        /// Sets the default black border for a range. Borders are set from the borderIndex enum, and the line style is set from the LinesIndex. 
+        /// The sheet is identified by its name. The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="borderIndex">An array of edges to set.</param>
+        /// <param name="lineIndex">Line style to set.</param>
+        /// <param name="nameSheet">The name of the sheet where the border is to be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        /// <param name="allRange">A logical value indicating whether the operation should be applied to the entire range or only to the border. True = allRange, False = !allRange</param>
+        public void SetBorder(BorderIndex[] borderIndex, LinesIndex lineIndex, string nameSheet, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, bool allRange);
+
+        /// <summary>
+        /// Sets the default black border for a range. Borders are set from the borderIndex enum, and the line style is set from the LinesIndex. 
+        /// The sheet is identified by its index. The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="borderIndex">An array of edges to set.</param>
+        /// <param name="lineIndex">Line style to set.</param>
+        /// <param name="sheetIndex">The index of the sheet where the border is to be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        /// <param name="allRange">A logical value indicating whether the operation should be applied to the entire range or only to the border. True = allRange, False = !allRange</param>
+        public void SetBorder(BorderIndex[] borderIndex, LinesIndex lineIndex, int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, bool allRange);
+
+        /// <summary>
+        /// Sets the color border for a range. Borders are set from the borderIndex enum, and the line style is set from the LinesIndex. 
+        /// The sheet is identified by its name. The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="borderIndex">An array of edges to set.</param>
+        /// <param name="lineIndex">Line style to set.</param>
+        /// <param name="nameSheet">The name of the sheet where the border is to be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        /// <param name="a">The alpha component of the color (0-255).</param>
+        /// <param name="r">The red component of the color (0-255).</param>
+        /// <param name="g">The green component of the color (0-255).</param>
+        /// <param name="b">The blue component of the color (0-255).</param>
+        /// <param name="allRange">A logical value indicating whether the operation should be applied to the entire range or only to the border. True = allRange, False = !allRange</param>
+        public void SetBorder(BorderIndex[] borderIndex, LinesIndex lineIndex, string nameSheet, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, int a, int r, int g, int b, bool allRange);
+
+        /// <summary>
+        /// Sets the color border for a range. Borders are set from the borderIndex enum, and the line style is set from the LinesIndex. 
+        /// The sheet is identified by its index. The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="borderIndex">An array of edges to set.</param>
+        /// <param name="lineIndex">Line style to set.</param>
+        /// <param name="sheetIndex">The index of the sheet where the border is to be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        /// <param name="a">The alpha component of the color (0-255).</param>
+        /// <param name="r">The red component of the color (0-255).</param>
+        /// <param name="g">The green component of the color (0-255).</param>
+        /// <param name="b">The blue component of the color (0-255).</param>
+        /// <param name="allRange">A logical value indicating whether the operation should be applied to the entire range or only to the border. True = allRange, False = !allRange</param>
+        public void SetBorder(BorderIndex[] borderIndex, LinesIndex lineIndex, int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, int a, int r, int g, int b, bool allRange);
+
+        /// <summary>
+        /// Sets the cell color. The sheet is identified by its index. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet where the cell color is to be set.</param>
+        /// <param name="rowIndex">The row number where the cell color is to be set.</param>
+        /// <param name="columnIndex">The column number where the cell color is to be set.</param>
+        /// <param name="a">The alpha component of the color (0-255).</param>
+        /// <param name="r">The red component of the color (0-255).</param>
+        /// <param name="g">The green component of the color (0-255).</param>
+        /// <param name="b">The blue component of the color (0-255).</param>
+        public void CellColor(int sheetIndex, int rowIndex, int columnIndex, int a, int r, int g, int b);
+
+        /// <summary>
+        /// Sets the cell color. The sheet is identified by its name. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet where the cell color is to be set.</param>
+        /// <param name="rowIndex">The row number where the cell color is to be set.</param>
+        /// <param name="columnIndex">The column number where the cell color is to be set.</param>
+        /// <param name="a">The alpha component of the color (0-255).</param>
+        /// <param name="r">The red component of the color (0-255).</param>
+        /// <param name="g">The green component of the color (0-255).</param>
+        /// <param name="b">The blue component of the color (0-255).</param>
+        public void CellColor(string sheetName, int rowIndex, int columnIndex, int a, int r, int g, int b);
+
+        /// <summary>
+        /// Sets the cell color for a range. The sheet is identified by its index. 
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet where the cell color is to be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        /// <param name="a">The alpha component of the color (0-255).</param>
+        /// <param name="r">The red component of the color (0-255).</param>
+        /// <param name="g">The green component of the color (0-255).</param>
+        /// <param name="b">The blue component of the color (0-255).</param>
+        public void CellColor(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, int a, int r, int g, int b);
+
+        /// <summary>
+        /// Sets the cell color for a range. The sheet is identified by its index. 
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet where the cell color is to be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        /// <param name="a">The alpha component of the color (0-255).</param>
+        /// <param name="r">The red component of the color (0-255).</param>
+        /// <param name="g">The green component of the color (0-255).</param>
+        /// <param name="b">The blue component of the color (0-255).</param>
+        public void CellColor(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, int a, int r, int g, int b);
+
+        // text alignment
+        /// <summary>
+        /// Sets the vertical alignment for a cell. The sheet is identified by its index. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="verticalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="sheetIndex">The index of the sheet where the cell color is to be set.</param>
+        /// <param name="rowIndex">The row number where the vertical alignment is to be set.</param>
+        /// <param name="columnIndex">The column number where the vertical alignment is to be set.</param>
+        public void SetVerticalAlignment(VerticalAlignmentIndex verticalAlignmentIndex, int sheetIndex, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Sets the vertical alignment for a cell. The sheet is identified by its name. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="verticalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="sheetName">The name of the sheet where the cell color is to be set.</param>
+        /// <param name="rowIndex">The row number where the vertical alignment is to be set.</param>
+        /// <param name="columnIndex">The column number where the vertical alignment is to be set.</param>
+        public void SetVerticalAlignment(VerticalAlignmentIndex verticalAlignmentIndex, string sheetName, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Sets the vertical alignment for a range. The sheet is identified by its index. 
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="verticalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="sheetIndex">The index of the sheet where the cell color is to be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        public void SetVerticalAlignment(VerticalAlignmentIndex verticalAlignmentIndex, int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex);
+
+        /// <summary>
+        /// Sets the vertical alignment for a range. The sheet is identified by its name. 
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="verticalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="sheetName">The name of the sheet where the cell color is to be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        public void SetVerticalAlignment(VerticalAlignmentIndex verticalAlignmentIndex, string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex);
+
+        /// <summary>
+        /// Sets the horizontal alignment for a cell. The sheet is identified by its index. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="horizontalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="sheetIndex">The index of the sheet where the cell color is to be set.</param>
+        /// <param name="rowIndex">The row number where the vertical alignment is to be set.</param>
+        /// <param name="columnIndex">The column number where the vertical alignment is to be set.</param>
+        public void SetHorizontalAlignment(HorizontalAlignmentIndex horizontalAlignmentIndex, int sheetIndex, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Sets the horizontal alignment for a cell. The sheet is identified by its name. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="horizontalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="sheetName">The name of the sheet where the cell color is to be set.</param>
+        /// <param name="rowIndex">The row number where the vertical alignment is to be set.</param>
+        /// <param name="columnIndex">The column number where the vertical alignment is to be set.</param>
+        public void SetHorizontalAlignment(HorizontalAlignmentIndex horizontalAlignmentIndex, string sheetName, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Sets the horizontal alignment for a range. The sheet is identified by its index. 
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="horizontalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="sheetIndex">The index of the sheet where the cell color is to be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        public void SetHorizontalAlignment(HorizontalAlignmentIndex horizontalAlignmentIndex, int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex);
+
+        /// <summary>
+        /// Sets the horizontal alignment for a range. The sheet is identified by its name. 
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="horizontalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="sheetName">The name of the sheet where the cell color is to be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        public void SetHorizontalAlignment(HorizontalAlignmentIndex horizontalAlignmentIndex, string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex);
+
+        /// <summary>
+        /// Sets bold, italic, underline, double underline, font and font size, text strikethrough, text wrapping for a cell.
+        /// The sheet is identified by its index. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="fontSettings">Configures a font using the Fluent API.</param>
+        /// <example>
+        /// Here is an example of how to use the method:
+        /// <code>
+        /// excelOperation.SetFont(new FontSettings()
+        ///     .SetBold(true)
+        ///     .SetTextCrossed(true)
+        ///     .SetUnderline(true), sheetIndex, rowIndex, columnIndex);
+        /// </code>
+        /// </example>
+        /// <param name="sheetIndex">The index of the sheet where the font is to be set."</param>
+        /// <param name="rowIndex">The row number where the font is to be set.</param>
+        /// <param name="columnIndex">The column number where the font is to be set.</param>
+        public void SetFont(FontSettings fontSettings, int sheetIndex, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Sets bold, italic, underline, double underline, font and font size, text strikethrough, text wrapping for a cell.
+        /// The sheet is identified by its name. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="fontSettings">Configures a font using the Fluent API.</param>
+        /// <example>
+        /// Here is an example of how to use the method:
+        /// <code>
+        /// excelOperation.SetFont(new FontSettings()
+        ///     .SetBold(true)
+        ///     .SetTextCrossed(true)
+        ///     .SetUnderline(true), sheetIndex, rowIndex, columnIndex);
+        /// </code>
+        /// </example>
+        /// <param name="sheetName">The name of the sheet where the font is to be set."</param>
+        /// <param name="rowIndex">The row number where the font is to be set.</param>
+        /// <param name="columnIndex">The column number where the font is to be set.</param>
+        public void SetFont(FontSettings fontSettings, string sheetName, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Sets bold, italic, underline, double underline, font and font size, text strikethrough, text wrapping for a range.
+        /// The sheet is identified by its index. The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="fontSettings">Configures a font using the Fluent API.</param>
+        /// <example>
+        /// Here is an example of how to use the method:
+        /// <code>
+        /// excelOperation.SetFont(new FontSettings()
+        ///     .SetBold(true)
+        ///     .SetTextCrossed(true)
+        ///     .SetUnderline(true), sheetIndex, rowIndex, columnIndex);
+        /// </code>
+        /// </example>
+        /// <param name="sheetIndex">The index of the sheet where the font is to be set."</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        public void SetFont(FontSettings fontSettings, int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex);
+
+        /// <summary>
+        /// Sets bold, italic, underline, double underline, font and font size, text strikethrough, text wrapping for a range.
+        /// The sheet is identified by its name. The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="fontSettings">Configures a font using the Fluent API.</param>
+        /// <example>
+        /// Here is an example of how to use the method:
+        /// <code>
+        /// excelOperation.SetFont(new FontSettings()
+        ///     .SetBold(true)
+        ///     .SetTextCrossed(true)
+        ///     .SetUnderline(true), sheetIndex, rowIndex, columnIndex);
+        /// </code>
+        /// </example>
+        /// <param name="sheetName">The name of the sheet where the font is to be set."</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        public void SetFont(FontSettings fontSettings, string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex);
+
+        /// <summary>
+        /// Merges cells. The sheet is identified by its index. The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet where the cells are to be merged.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        public void MergeCells(int sheetIndex, int firstRowIndex, int lastRowIndex, int firstColumnIndex, int lastColumnIndex);
+
+        /// <summary>
+        /// Merges cells. The sheet is identified by its name. The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet where the cells are to be merged.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        public void MergeCells(string sheetName, int firstRowIndex, int lastRowIndex, int firstColumnIndex, int lastColumnIndex);
+
+        //orientation
+
+        /// <summary>
+        /// Sets the orientation of the values ​​in the cell. The sheet is identified by its index. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet where the cell orientation is to be set.</param>
+        /// <param name="rowIndex">The row number in which the orientation of the cell content is to be set.</param>
+        /// <param name="columnIndex">The column number in which the orientation of the cell content is to be set.</param>
+        /// <param name="orientation">Orientation value in degrees. (0-180)</param>
+        public void ValueOrientation(int sheetIndex, int rowIndex, int columnIndex, short orientation);
+
+        /// <summary>
+        /// Sets the orientation of the values ​​in the cell. The sheet is identified by its name. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet where the cell orientation is to be set.</param>
+        /// <param name="rowIndex">The row number in which the orientation of the cell content is to be set.</param>
+        /// <param name="columnIndex">The column number in which the orientation of the cell content is to be set.</param>
+        /// <param name="orientation">Orientation value in degrees. (0-180)</param>
+        public void ValueOrientation(string sheetName, int rowIndex, int columnIndex, short orientation);
+
+        /// <summary>
+        /// Sets the orientation of the values ​​for a range. The sheet is identified by its index. 
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet where the cell orientation is to be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        /// <param name="orientation">Orientation value in degrees. (0-180)</param>
+        public void ValueOrientation(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, short orientation);
+
+        /// <summary>
+        /// Sets the orientation of the values ​​for a range. The sheet is identified by its name. 
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet where the cell orientation is to be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range.</param>
+        /// <param name="orientation">Orientation value in degrees. (0-180)</param>
+        public void ValueOrientation(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, short orientation);
+
+        /// <summary>
+        /// Sets sheet protection. The sheet is identified by its index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet which the sheet is to be protected.</param>
+        /// <param name="password">Password for sheet.</param>
+        public void SetProtectSheet(int sheetIndex, string password);
+
+        /// <summary>
+        /// Sets sheet protection. The sheet is identified by its index.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet which the sheet is to be protected.</param>
+        /// <param name="password">Password for sheet.</param>
+        public void SetProtectSheet(string sheetName, string password);
+
+        /// <summary>
+        /// Sets the dropdown list in a range. The sheet is identified by its index (where is drop-down list). The dataSheet is identify by its index (where is data to list).
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the drop-down list is to be located.</param>
+        /// <param name="dataSheetIndex">The index of the sheet from which the data is to be taken.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range where the dropdown list is to be.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range where the dropdown list is to be.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range where the dropdown list is to be.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range where the dropdown list is to be.</param>
+        /// <param name="rangeDataToList">Data range for dropdown list.</param>
+        public void DropDownList(int sheetIndex, int dataSheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList);
+
+        /// <summary>
+        /// Sets the dropdown list in a range. The sheet is identified by its name (where is drop-down list). The dataSheet is identify by its index (where is data to list).
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the drop-down list is to be located.</param>
+        /// <param name="dataSheetIndex">The index of the sheet from which the data is to be taken.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range where the dropdown list is to be.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range where the dropdown list is to be.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range where the dropdown list is to be.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range where the dropdown list is to be.</param>
+        /// <param name="rangeDataToList">Data range for dropdown list.</param>
+        public void DropDownList(string sheetName, int dataSheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList);
+
+        /// <summary>
+        /// Sets the dropdown list in a range. The sheet is identified by its index (where is drop-down list). The dataSheet is identify by its name (where is data to list).
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the drop-down list is to be located.</param>
+        /// <param name="dataSheetName">The name of the sheet from which the data is to be taken.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range where the dropdown list is to be.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range where the dropdown list is to be.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range where the dropdown list is to be.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range where the dropdown list is to be.</param>
+        /// <param name="rangeDataToList">Data range for dropdown list.</param>
+        public void DropDownList(int sheetIndex, string dataSheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList);
+
+        /// <summary>
+        /// Sets the dropdown list in a range. The sheet is identified by its name (where is drop-down list). The dataSheet is identify by its name (where is data to list).
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the drop-down list is to be located.</param>
+        /// <param name="dataSheetName">The name of the sheet from which the data is to be taken.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range where the dropdown list is to be.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range where the dropdown list is to be.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range where the dropdown list is to be.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range where the dropdown list is to be.</param>
+        /// <param name="rangeDataToList">Data range for dropdown list.</param>
+        public void DropDownList(string sheetName, string dataSheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList);
+
+    }
+}
