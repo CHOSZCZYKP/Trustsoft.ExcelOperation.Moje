@@ -239,6 +239,26 @@ namespace Trustsoft.ExcelOperation.Moje
             _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Text = text;
         }
 
+        public void AddCellFormula(int sheetIndex, int rowIndex, int columnIndex, string formula)
+        {
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Formula = $"={formula}";
+        }
+
+        public void AddCellFormula(string sheetName, int rowIndex, int columnIndex, string formula)
+        {
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Formula = $"={formula}";
+        }
+
+        public void AddCellFormula(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastCoulmnIndex, string formula)
+        {
+            _workbook.Worksheets[sheetIndex][firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastCoulmnIndex + 1].Formula = $"={formula}";
+        }
+
+        public void AddCellFormula(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastCoulmnIndex, string formula)
+        {
+            _workbook.Worksheets[sheetName][firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastCoulmnIndex + 1].Formula = $"={formula}";
+        }
+
         public void AddCellValueInt(int sheetIndex, int rowIndex, int columnIndex, int value)
         {
             _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Number = value;

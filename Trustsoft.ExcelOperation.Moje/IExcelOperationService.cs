@@ -174,6 +174,48 @@ namespace Trustsoft.ExcelOperation.Moje
         public void AddCellValueText(string sheetName, int rowIndex, int columnIndex, string text);
 
         /// <summary>
+        /// Inserts a formula into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert formula.</param>
+        /// <param name="rowIndex">The row number where the formula is to be set.</param>
+        /// <param name="columnIndex">The column number where the formula is to be set.</param>
+        /// <param name="formula">Formula to be set.</param>
+        public void AddCellFormula(int sheetIndex, int rowIndex, int columnIndex, string formula);
+
+        /// <summary>
+        /// Inserts a formula into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert formula.</param>
+        /// <param name="rowIndex">The row number where the formula is to be set.</param>
+        /// <param name="columnIndex">The column number where the formula is to be set.</param>
+        /// <param name="formula">Formula to be set.</param>
+        public void AddCellFormula(string sheetName, int rowIndex, int columnIndex, string formula);
+
+        /// <summary>
+        /// Inserts a formula into a range in a worksheet. The sheet is identified by its index. 
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert formula.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastCoulmnIndex">The index of the last column in the range.</param>
+        /// <param name="formula">Formula to be set.</param>
+        public void AddCellFormula(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastCoulmnIndex, string formula);
+
+        /// <summary>
+        /// Inserts a formula into a range in a worksheet. The sheet is identified by its name. 
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert formula.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range.</param>
+        /// <param name="lastCoulmnIndex">The index of the last column in the range.</param>
+        /// <param name="formula">Formula to be set.</param>
+        public void AddCellFormula(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastCoulmnIndex, string formula);
+
+        /// <summary>
         /// Deletes the row (identified by its line number) from the sheet. The sheet is identified by name. 
         /// </summary>
         /// <param name="sheetName">The name of the sheet which to delete row.</param>

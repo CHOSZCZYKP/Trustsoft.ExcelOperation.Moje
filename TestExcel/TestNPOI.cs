@@ -85,8 +85,10 @@ namespace TestExcel
             excelOperationNPOI.AddCellValueText(index, 2, 1, "Tekst32");
             excelOperationNPOI.AddCellValueText(index, 2, 2, "Tekst33");
 
-            excelOperationNPOI.AddRow(index, 1);
-            excelOperationNPOI.AddColumn(index, 1);
+            excelOperationNPOI.AddCellFormula(index, 10, 1, "SUM(A6:A10)");
+            
+            //excelOperationNPOI.AddRow(index, 1);
+            //excelOperationNPOI.AddColumn(index, 1);
             
             /*excelOperationNPOI.AddCellValueText(index, 1, 7, "Tekst32");
 

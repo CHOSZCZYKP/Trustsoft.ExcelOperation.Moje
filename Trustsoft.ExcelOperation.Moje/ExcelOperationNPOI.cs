@@ -30,6 +30,57 @@ namespace Trustsoft.ExcelOperation.Moje
 
         public ExcelOperationNPOI() { }
 
+        public void AddCellFormula(int sheetIndex, int rowIndex, int columnIndex, string formula)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellType(CellType.Formula);
+            cell.SetCellFormula(formula);
+        }
+
+        public void AddCellFormula(string sheetName, int rowIndex, int columnIndex, string formula)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellType(CellType.Formula);
+            cell.SetCellFormula(formula);
+        }
+
+        public void AddCellFormula(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastCoulmnIndex, string formula)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+
+            for (int r = firstRowIndex; r <= lastRowIndex; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                for (int c = firstColumnIndex; c <= lastCoulmnIndex; c++)
+                {
+                    ICell cell = row.GetCell(c) ?? row.CreateCell(c);
+                    cell.SetCellType(CellType.Formula);
+                    cell.SetCellFormula(formula);
+                }
+            }
+        }
+
+        public void AddCellFormula(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastCoulmnIndex, string formula)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+
+            for (int r = firstRowIndex; r <= lastRowIndex; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                for (int c = firstColumnIndex; c <= lastCoulmnIndex; c++)
+                {
+                    ICell cell = row.GetCell(c) ?? row.CreateCell(c);
+                    cell.SetCellType(CellType.Formula);
+                    cell.SetCellFormula(formula);
+                }
+            }
+        }
 
         public void AddCellValueCurrency(int sheetIndex, int rowIndex, int columnIndex, Currency currency)
         {

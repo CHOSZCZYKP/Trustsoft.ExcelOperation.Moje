@@ -89,8 +89,10 @@ namespace TestExcel
                 excelOperationSyncfusion.AddCellValueText(index, 2, 0, "Tekst31");
                 excelOperationSyncfusion.AddCellValueText(index, 2, 1, "Tekst32");
                 excelOperationSyncfusion.AddCellValueText(index, 2, 2, "Tekst33");
-                excelOperationSyncfusion.AddRow(index, 1);
-                excelOperationSyncfusion.AddColumn(index, 1);
+
+                excelOperationSyncfusion.AddCellFormula(index, 10, 1, "SUM(A6:A10)");
+                //excelOperationSyncfusion.AddRow(index, 1);
+                //excelOperationSyncfusion.AddColumn(index, 1);
                 /*excelOperationSyncfusion.AddCellValueText(index, 1, 7, "Tekst32");
 
                 excelOperationSyncfusion.AddCellValueText(index, 10, 7, "Tekst32");
