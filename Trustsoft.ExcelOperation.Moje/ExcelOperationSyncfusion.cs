@@ -1,10 +1,13 @@
 ﻿using Markdig.Extensions.Bootstrap;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using NPOI.HSSF.Record.CF;
 using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
+using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
 using SixLabors.ImageSharp;
 using Soneta.Business;
+using Soneta.Kasa.BialaListaApi.Model;
 using Soneta.Kasa.Extensions;
 using Soneta.Types;
 using Syncfusion.Drawing;
@@ -12,6 +15,7 @@ using Syncfusion.XlsIO;
 using System;
 using System.Drawing;
 using Trustsoft.ExcelOperation.Moje.SyncfusionException;
+using static Soneta.Kalend.DefinicjaZestawieniaCzasu;
 using IDataValidation = Syncfusion.XlsIO.IDataValidation;
 using IName = Syncfusion.XlsIO.IName;
 
@@ -232,11 +236,13 @@ namespace Trustsoft.ExcelOperation.Moje
         public void AddCellValueText(int sheetIndex, int rowIndex, int columnIndex, string text)
         {
             _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Text = text;
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].NumberFormat = "@";
         }
 
         public void AddCellValueText(string sheetName, int rowIndex, int columnIndex, string text)
         {
             _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Text = text;
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].NumberFormat = "@";
         }
 
         public void AddCellFormula(int sheetIndex, int rowIndex, int columnIndex, string formula)
@@ -269,6 +275,17 @@ namespace Trustsoft.ExcelOperation.Moje
             _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Number = value;
         }
 
+        public void AddCellValueInt(int sheetIndex, int rowIndex, int columnIndex, int value, string format)
+        {
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Number = value;
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].NumberFormat = format;
+        }
+        public void AddCellValueInt(string sheetName, int rowIndex, int columnIndex, int value, string format)
+        {
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Number = value;
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].NumberFormat = format;
+        }
+
         public void AddCellValueDecimal(int sheetIndex, int rowIndex, int columnIndex, decimal value)
         {
             _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Number = (double)value;
@@ -277,6 +294,17 @@ namespace Trustsoft.ExcelOperation.Moje
         public void AddCellValueDecimal(string sheetName, int rowIndex, int columnIndex, decimal value)
         {
             _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Number = (double)value;
+        }
+
+        public void AddCellValueDecimal(int sheetIndex, int rowIndex, int columnIndex, decimal value, string format)
+        {
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Number = (double)value;
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].NumberFormat = format;
+        }
+        public void AddCellValueDecimal(string sheetName, int rowIndex, int columnIndex, decimal value, string format)
+        {
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Number = (double)value;
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].NumberFormat = format;
         }
 
         public void AddCellValueDouble(int sheetIndex, int rowIndex, int columnIndex, double value)
@@ -289,6 +317,17 @@ namespace Trustsoft.ExcelOperation.Moje
             _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Number = value;
         }
 
+        public void AddCellValueDouble(int sheetIndex, int rowIndex, int columnIndex, double value, string format)
+        {
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Number = value;
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].NumberFormat = format;
+        }
+
+        public void AddCellValueDouble(string sheetName, int rowIndex, int columnIndex, double value, string format)
+        {
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Number = value;
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].NumberFormat = format;
+        }
 
         public void HeightRow(int sheetIndex, int rowIndex, double height)
         {
@@ -375,11 +414,25 @@ namespace Trustsoft.ExcelOperation.Moje
         public void AddCellValueDate(int sheetIndex, int rowIndex, int columnIndex, DateTime date)
         {
             _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].DateTime = date;
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].NumberFormat = "dd.mm.yyyy";
         }
 
         public void AddCellValueDate(string sheetName, int rowIndex, int columnIndex, DateTime date)
         {
             _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].DateTime = date;
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].NumberFormat = "dd.mm.yyyy";
+        }
+
+        public void AddCellValueDate(int sheetIndex, int rowIndex, int columnIndex, DateTime date, string format)
+        {
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].DateTime = date;
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].NumberFormat = format;
+        }
+
+        public void AddCellValueDate(string sheetName, int rowIndex, int columnIndex, DateTime date, string format)
+        {
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].DateTime = date;
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].NumberFormat = format;
         }
 
         public void AddCellValueCurrency(int sheetIndex, int rowIndex, int columnIndex, Currency currency) 
@@ -391,7 +444,6 @@ namespace Trustsoft.ExcelOperation.Moje
         {
             _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Text = currency.ToString();
         }
-
 
         public void AddCellValuePercent(int sheetIndex, int rowIndex, int columnIndex, Percent percent)
         {
@@ -405,6 +457,18 @@ namespace Trustsoft.ExcelOperation.Moje
             _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].NumberFormat = "0.00%";
         }
 
+        public void AddCellValuePercent(int sheetIndex, int rowIndex, int columnIndex, Percent percent, string format)
+        {
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Number = (double)percent;
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].NumberFormat = format;
+        }
+
+        public void AddCellValuePercent(string sheetName, int rowIndex, int columnIndex, Percent percent, string format)
+        {
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Number = (double)percent;
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].NumberFormat = format;
+        }
+
         public void AddCellValueTime(int sheetIndex, int rowIndex, int columnIndex, Time time)
         {
             _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Text = time.ToString();
@@ -414,7 +478,6 @@ namespace Trustsoft.ExcelOperation.Moje
         {
             _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Text = time.ToString();
         }
-
 
         public void AddCellValueFraction(int sheetIndex, int rowIndex, int columnIndex, Fraction fraction)
         {
@@ -426,6 +489,17 @@ namespace Trustsoft.ExcelOperation.Moje
             _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Number = fraction;
         }
 
+        public void AddCellValueFraction(int sheetIndex, int rowIndex, int columnIndex, Fraction fraction, string format)
+        {
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Number = fraction;
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].NumberFormat = format;
+        }
+
+        public void AddCellValueFraction(string sheetName, int rowIndex, int columnIndex, Fraction fraction, string format)
+        {
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Number = fraction;
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].NumberFormat = format;
+        }
 
         public void CellColor(int sheetIndex, int rowIndex, int columnIndex, int a, int r, int g, int b)
         {
@@ -1317,39 +1391,35 @@ namespace Trustsoft.ExcelOperation.Moje
             IWorksheet dataSheet = _workbook.Worksheets[dataSheetIndex];
 
             IRange range = dataSheet.Range[rangeDataToList];
-            
+
             int index = 0;
-            
+            string[] data;
             if (range.Rows.Count() > 1 && range.Columns.Count() == 1)
             {
-                string[] data = new string[range.Rows.Count()];
+                data = new string[range.Rows.Count()];
 
                 foreach (var item in range)
                 {
                     data[index++] = item.Text;
                 }
-                IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
-                IDataValidation dataValidation = cellRange.DataValidation;
-                dataValidation.ListOfValues = data;
-
-                dataValidation.IsSuppressDropDownArrow = false;
-                dataValidation.ShowErrorBox = true;
             }
             else
             {
-                string[] data = new string[range.Columns.Count()];
+                data = new string[range.Columns.Count()];
 
                 foreach (var item in range)
                 {
                     data[index++] = item.Text;
                 }
-                IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
-                IDataValidation dataValidation = cellRange.DataValidation;
-                dataValidation.ListOfValues = data;
-
-                dataValidation.IsSuppressDropDownArrow = false;
-                dataValidation.ShowErrorBox = true;
             }
+            
+            IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
+            IDataValidation dataValidation = cellRange.DataValidation;
+            dataValidation.ListOfValues = data;
+
+            dataValidation.IsSuppressDropDownArrow = false;
+            dataValidation.ShowErrorBox = true;
+            cellRange.CellStyle.NumberFormat = range.CellStyle.NumberFormat;
         }
 
         public void DropDownList(string sheetName, int dataSheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList)
@@ -1360,37 +1430,32 @@ namespace Trustsoft.ExcelOperation.Moje
             IRange range = dataSheet.Range[rangeDataToList];
 
             int index = 0;
-
+            string[] data;
             if (range.Rows.Count() > 1 && range.Columns.Count() == 1)
             {
-                string[] data = new string[range.Rows.Count()];
+                data = new string[range.Rows.Count()];
 
                 foreach (var item in range)
                 {
                     data[index++] = item.Text;
                 }
-                IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
-                IDataValidation dataValidation = cellRange.DataValidation;
-                dataValidation.ListOfValues = data;
-
-                dataValidation.IsSuppressDropDownArrow = false;
-                dataValidation.ShowErrorBox = true;
             }
             else
             {
-                string[] data = new string[range.Columns.Count()];
+                data = new string[range.Columns.Count()];
 
                 foreach (var item in range)
                 {
                     data[index++] = item.Text;
                 }
-                IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
-                IDataValidation dataValidation = cellRange.DataValidation;
-                dataValidation.ListOfValues = data;
-
-                dataValidation.IsSuppressDropDownArrow = false;
-                dataValidation.ShowErrorBox = true;
             }
+            IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
+            IDataValidation dataValidation = cellRange.DataValidation;
+            dataValidation.ListOfValues = data;
+
+            dataValidation.IsSuppressDropDownArrow = false;
+            dataValidation.ShowErrorBox = true;
+            cellRange.CellStyle.NumberFormat = range.CellStyle.NumberFormat;
         }
 
         public void DropDownList(int sheetIndex, string dataSheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList)
@@ -1401,37 +1466,32 @@ namespace Trustsoft.ExcelOperation.Moje
             IRange range = dataSheet.Range[rangeDataToList];
 
             int index = 0;
-
+            string[] data;
             if (range.Rows.Count() > 1 && range.Columns.Count() == 1)
             {
-                string[] data = new string[range.Rows.Count()];
+                data = new string[range.Rows.Count()];
 
                 foreach (var item in range)
                 {
                     data[index++] = item.Text;
                 }
-                IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
-                IDataValidation dataValidation = cellRange.DataValidation;
-                dataValidation.ListOfValues = data;
-
-                dataValidation.IsSuppressDropDownArrow = false;
-                dataValidation.ShowErrorBox = true;
             }
             else
             {
-                string[] data = new string[range.Columns.Count()];
+                data = new string[range.Columns.Count()];
 
                 foreach (var item in range)
                 {
                     data[index++] = item.Text;
                 }
-                IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
-                IDataValidation dataValidation = cellRange.DataValidation;
-                dataValidation.ListOfValues = data;
-
-                dataValidation.IsSuppressDropDownArrow = false;
-                dataValidation.ShowErrorBox = true;
             }
+            IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
+            IDataValidation dataValidation = cellRange.DataValidation;
+            dataValidation.ListOfValues = data;
+
+            dataValidation.IsSuppressDropDownArrow = false;
+            dataValidation.ShowErrorBox = true;
+            cellRange.CellStyle.NumberFormat = range.CellStyle.NumberFormat;
         }
 
         public void DropDownList(string sheetName, string dataSheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList)
@@ -1442,37 +1502,282 @@ namespace Trustsoft.ExcelOperation.Moje
             IRange range = dataSheet.Range[rangeDataToList];
 
             int index = 0;
-
+            string[] data;
             if (range.Rows.Count() > 1 && range.Columns.Count() == 1)
             {
-                string[] data = new string[range.Rows.Count()];
+                data = new string[range.Rows.Count()];
 
                 foreach (var item in range)
                 {
                     data[index++] = item.Text;
                 }
-                IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
-                IDataValidation dataValidation = cellRange.DataValidation;
-                dataValidation.ListOfValues = data;
-
-                dataValidation.IsSuppressDropDownArrow = false;
-                dataValidation.ShowErrorBox = true;
             }
             else
             {
-                string[] data = new string[range.Columns.Count()];
+                data = new string[range.Columns.Count()];
 
                 foreach (var item in range)
                 {
                     data[index++] = item.Text;
                 }
-                IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
-                IDataValidation dataValidation = cellRange.DataValidation;
-                dataValidation.ListOfValues = data;
+            }
+            IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
+            IDataValidation dataValidation = cellRange.DataValidation;
+            dataValidation.ListOfValues = data;
 
-                dataValidation.IsSuppressDropDownArrow = false;
-                dataValidation.ShowErrorBox = true;
+            dataValidation.IsSuppressDropDownArrow = false;
+            dataValidation.ShowErrorBox = true;
+            cellRange.CellStyle.NumberFormat = range.CellStyle.NumberFormat;
+        }
+
+        public void SetAutoWidth(int sheetIndex, int columnIndex)
+        {
+            _workbook.Worksheets[sheetIndex].AutofitColumn(columnIndex + 1);
+        }
+
+        public void SetAutoWidth(string sheetName, int columnIndex)
+        {
+            _workbook.Worksheets[sheetName].AutofitColumn(columnIndex + 1);
+        }
+
+        public void SetAutoWidth(int sheetIndex, int firstColumnIndex, int lastColumnIndex)
+        {
+            for (int col = firstColumnIndex + 1; col <= lastColumnIndex + 1; col++)
+            {
+                _workbook.Worksheets[sheetIndex].AutofitColumn(col);
             }
         }
+
+        public void SetAutoWidth(string sheetName, int firstColumnIndex, int lastColumnIndex)
+        {
+            for (int col = firstColumnIndex + 1; col <= lastColumnIndex + 1; col++)
+            {
+                _workbook.Worksheets[sheetName].AutofitColumn(col);
+            }
+        }
+
+        public void SetAutoWidth(int sheetIndex)
+        {
+            int allUsedColumns = _workbook.Worksheets[sheetIndex].UsedRange.LastColumn;
+            for (int col = 1; col <= allUsedColumns; col++)
+            {
+                _workbook.Worksheets[sheetIndex].AutofitColumn(col);
+            }
+        }
+
+        public void SetAutoWidth(string sheetName)
+        {
+            int allUsedColumns = _workbook.Worksheets[sheetName].UsedRange.LastColumn;
+            for (int col = 1; col <= allUsedColumns; col++)
+            {
+                _workbook.Worksheets[sheetName].AutofitColumn(col);
+            }
+        }
+
+        public void ConditionalFormatting(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, ConditionAndFormatting[] conditionAndFormattings)
+        {
+            IConditionalFormats conditionalFormats = _workbook.Worksheets[sheetIndex][firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1].ConditionalFormats;
+
+            foreach (var conditionalFormatting in conditionAndFormattings)
+            {
+                var comparisonOperatorSyncfusion = SyncfusionHelper.ConvertFromComparisonOperatorSyncfusion(conditionalFormatting.ComparisonOperatorIndex, out bool isEmpty);
+                if (!isEmpty)
+                {
+                    IConditionalFormat format = conditionalFormats.AddCondition();
+                    format.FormatType = ExcelCFType.CellValue;
+                    format.Operator = comparisonOperatorSyncfusion;
+                    format.FirstFormula = conditionalFormatting.Condition;
+                    if (conditionalFormatting.Bold.HasValue)
+                    {
+                        format.IsBold = conditionalFormatting.Bold.Value;
+                    }
+                    if (conditionalFormatting.Italics.HasValue)
+                    {
+                        format.IsItalic = conditionalFormatting.Italics.Value;
+                    }
+                    if (conditionalFormatting.DoubleUnderline.HasValue && conditionalFormatting.DoubleUnderline.Value)
+                    {
+                        format.Underline = ExcelUnderline.Double;
+                    }
+                    else if (conditionalFormatting.Underline.HasValue && conditionalFormatting.Underline.Value)
+                    {
+                        format.Underline = ExcelUnderline.Single;
+                    }
+                    if (conditionalFormatting.BackgroundColorA.HasValue && conditionalFormatting.BackgroundColorR.HasValue && conditionalFormatting.BackgroundColorG.HasValue && conditionalFormatting.BackgroundColorB.HasValue)
+                    {
+                        format.BackColorRGB = Syncfusion.Drawing.Color.FromArgb(conditionalFormatting.BackgroundColorA.Value, conditionalFormatting.BackgroundColorR.Value, conditionalFormatting.BackgroundColorG.Value, conditionalFormatting.BackgroundColorB.Value);
+                    }
+                    if (conditionalFormatting.TextColorA.HasValue && conditionalFormatting.TextColorR.HasValue && conditionalFormatting.TextColorG.HasValue && conditionalFormatting.TextColorB.HasValue)
+                    {
+                        format.FontColorRGB = Syncfusion.Drawing.Color.FromArgb(conditionalFormatting.TextColorA.Value, conditionalFormatting.TextColorR.Value, conditionalFormatting.TextColorG.Value, conditionalFormatting.TextColorB.Value);
+                    }
+                }
+            }
+            
+        }
+
+        public void ConditionalFormatting(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, ConditionAndFormatting[] conditionAndFormattings)
+        {
+            IConditionalFormats conditionalFormats = _workbook.Worksheets[sheetName][firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1].ConditionalFormats;
+
+            foreach (var conditionalFormatting in conditionAndFormattings)
+            {
+                var comparisonOperatorSyncfusion = SyncfusionHelper.ConvertFromComparisonOperatorSyncfusion(conditionalFormatting.ComparisonOperatorIndex, out bool isEmpty);
+                if (!isEmpty)
+                {
+                    IConditionalFormat format = conditionalFormats.AddCondition();
+                    format.FormatType = ExcelCFType.CellValue;
+                    format.Operator = comparisonOperatorSyncfusion;
+                    format.FirstFormula = conditionalFormatting.Condition;
+                    if (conditionalFormatting.Bold.HasValue)
+                    {
+                        format.IsBold = conditionalFormatting.Bold.Value;
+                    }
+                    if (conditionalFormatting.Italics.HasValue)
+                    {
+                        format.IsItalic = conditionalFormatting.Italics.Value;
+                    }
+                    if (conditionalFormatting.DoubleUnderline.HasValue && conditionalFormatting.DoubleUnderline.Value)
+                    {
+                        format.Underline = ExcelUnderline.Double;
+                    }
+                    else if (conditionalFormatting.Underline.HasValue && conditionalFormatting.Underline.Value)
+                    {
+                        format.Underline = ExcelUnderline.Single;
+                    }
+                    if (conditionalFormatting.BackgroundColorA.HasValue && conditionalFormatting.BackgroundColorR.HasValue && conditionalFormatting.BackgroundColorG.HasValue && conditionalFormatting.BackgroundColorB.HasValue)
+                    {
+                        format.BackColorRGB = Syncfusion.Drawing.Color.FromArgb(conditionalFormatting.BackgroundColorA.Value, conditionalFormatting.BackgroundColorR.Value, conditionalFormatting.BackgroundColorG.Value, conditionalFormatting.BackgroundColorB.Value);
+                    }
+                    if (conditionalFormatting.TextColorA.HasValue && conditionalFormatting.TextColorR.HasValue && conditionalFormatting.TextColorG.HasValue && conditionalFormatting.TextColorB.HasValue)
+                    {
+                        format.FontColorRGB = Syncfusion.Drawing.Color.FromArgb(conditionalFormatting.TextColorA.Value, conditionalFormatting.TextColorR.Value, conditionalFormatting.TextColorG.Value, conditionalFormatting.TextColorB.Value);
+                    }
+                }
+            }
+
+        }
+
+        public void ConditionalFormatting(int sheetIndex, int rowIndex, int columnIndex, ConditionAndFormatting[] conditionAndFormattings)
+        {
+            IConditionalFormats conditionalFormats = _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1, rowIndex + 1, columnIndex + 1].ConditionalFormats;
+
+            foreach (var conditionalFormatting in conditionAndFormattings)
+            {
+                var comparisonOperatorSyncfusion = SyncfusionHelper.ConvertFromComparisonOperatorSyncfusion(conditionalFormatting.ComparisonOperatorIndex, out bool isEmpty);
+                if (!isEmpty)
+                {
+                    IConditionalFormat format = conditionalFormats.AddCondition();
+                    format.FormatType = ExcelCFType.CellValue;
+                    format.Operator = comparisonOperatorSyncfusion;
+                    format.FirstFormula = conditionalFormatting.Condition;
+                    if (conditionalFormatting.Bold.HasValue)
+                    {
+                        format.IsBold = conditionalFormatting.Bold.Value;
+                    }
+                    if (conditionalFormatting.Italics.HasValue)
+                    {
+                        format.IsItalic = conditionalFormatting.Italics.Value;
+                    }
+                    if (conditionalFormatting.DoubleUnderline.HasValue && conditionalFormatting.DoubleUnderline.Value)
+                    {
+                        format.Underline = ExcelUnderline.Double;
+                    }
+                    else if (conditionalFormatting.Underline.HasValue && conditionalFormatting.Underline.Value)
+                    {
+                        format.Underline = ExcelUnderline.Single;
+                    }
+                    if (conditionalFormatting.BackgroundColorA.HasValue && conditionalFormatting.BackgroundColorR.HasValue && conditionalFormatting.BackgroundColorG.HasValue && conditionalFormatting.BackgroundColorB.HasValue)
+                    {
+                        format.BackColorRGB = Syncfusion.Drawing.Color.FromArgb(conditionalFormatting.BackgroundColorA.Value, conditionalFormatting.BackgroundColorR.Value, conditionalFormatting.BackgroundColorG.Value, conditionalFormatting.BackgroundColorB.Value);
+                    }
+                    if (conditionalFormatting.TextColorA.HasValue && conditionalFormatting.TextColorR.HasValue && conditionalFormatting.TextColorG.HasValue && conditionalFormatting.TextColorB.HasValue)
+                    {
+                        format.FontColorRGB = Syncfusion.Drawing.Color.FromArgb(conditionalFormatting.TextColorA.Value, conditionalFormatting.TextColorR.Value, conditionalFormatting.TextColorG.Value, conditionalFormatting.TextColorB.Value);
+                    }
+                }
+            }
+
+        }
+
+        public void ConditionalFormatting(string sheetName, int rowIndex, int columnIndex, ConditionAndFormatting[] conditionAndFormattings)
+        {
+            IConditionalFormats conditionalFormats = _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1, rowIndex + 1, columnIndex + 1].ConditionalFormats;
+
+            foreach (var conditionalFormatting in conditionAndFormattings)
+            {
+                var comparisonOperatorSyncfusion = SyncfusionHelper.ConvertFromComparisonOperatorSyncfusion(conditionalFormatting.ComparisonOperatorIndex, out bool isEmpty);
+                if (!isEmpty)
+                {
+                    IConditionalFormat format = conditionalFormats.AddCondition();
+                    format.FormatType = ExcelCFType.CellValue;
+                    format.Operator = comparisonOperatorSyncfusion;
+                    format.FirstFormula = conditionalFormatting.Condition;
+                    if (conditionalFormatting.Bold.HasValue)
+                    {
+                        format.IsBold = conditionalFormatting.Bold.Value;
+                    }
+                    if (conditionalFormatting.Italics.HasValue)
+                    {
+                        format.IsItalic = conditionalFormatting.Italics.Value;
+                    }
+                    if (conditionalFormatting.DoubleUnderline.HasValue && conditionalFormatting.DoubleUnderline.Value)
+                    {
+                        format.Underline = ExcelUnderline.Double;
+                    }
+                    else if (conditionalFormatting.Underline.HasValue && conditionalFormatting.Underline.Value)
+                    {
+                        format.Underline = ExcelUnderline.Single;
+                    }
+                    if (conditionalFormatting.BackgroundColorA.HasValue && conditionalFormatting.BackgroundColorR.HasValue && conditionalFormatting.BackgroundColorG.HasValue && conditionalFormatting.BackgroundColorB.HasValue)
+                    {
+                        format.BackColorRGB = Syncfusion.Drawing.Color.FromArgb(conditionalFormatting.BackgroundColorA.Value, conditionalFormatting.BackgroundColorR.Value, conditionalFormatting.BackgroundColorG.Value, conditionalFormatting.BackgroundColorB.Value);
+                    }
+                    if (conditionalFormatting.TextColorA.HasValue && conditionalFormatting.TextColorR.HasValue && conditionalFormatting.TextColorG.HasValue && conditionalFormatting.TextColorB.HasValue)
+                    {
+                        format.FontColorRGB = Syncfusion.Drawing.Color.FromArgb(conditionalFormatting.TextColorA.Value, conditionalFormatting.TextColorR.Value, conditionalFormatting.TextColorG.Value, conditionalFormatting.TextColorB.Value);
+                    }
+                }
+            }
+
+        }
+
+        public double GetCellValueNumber(int sheetIndex, int rowIndex, int columnIndex)
+        {
+            return _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Number;
+        }
+
+        public double GetCellValueNumber(string sheetName, int rowIndex, int columnIndex)
+        {
+            return _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Number;
+        }
+
+        public string GetCellValueText(int sheetIndex, int rowIndex, int columnIndex)
+        {
+            return _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Text;
+        }
+
+        public string GetCellValueText(string sheetName, int rowIndex, int columnIndex)
+        {
+            return _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Text;
+        }
+
+        public DateTime GetCellValueDate(int sheetIndex, int rowIndex, int columnIndex)
+        {
+            return _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].DateTime;
+        }
+
+        public DateTime GetCellValueDate(string sheetName, int rowIndex, int columnIndex)
+        {
+            return _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].DateTime;
+        }
+        public void MetaData(string author, string subject, string title)
+        {
+            _workbook.Author = author;
+            _workbook.BuiltInDocumentProperties.Subject = subject;
+            _workbook.BuiltInDocumentProperties.Title = title;
+        }
+
+        //COMING SOON NEXT UPDATE
     }
 }

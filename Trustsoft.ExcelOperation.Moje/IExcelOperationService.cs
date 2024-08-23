@@ -315,6 +315,16 @@ namespace Trustsoft.ExcelOperation.Moje
         public void AddCellValueInt(int sheetIndex, int rowIndex, int columnIndex, int value);
 
         /// <summary>
+        /// Inserts a integer value into a cell and set cell format in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert integer value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="value">A integer value.</param>
+        /// <param name="format">Cell format to be set.</param>
+        public void AddCellValueInt(int sheetIndex, int rowIndex, int columnIndex, int value, string format);
+
+        /// <summary>
         /// Inserts a integer value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
         /// </summary>
         /// <param name="sheetName">The name of the sheet in which to insert text value.</param>
@@ -324,13 +334,34 @@ namespace Trustsoft.ExcelOperation.Moje
         public void AddCellValueInt(string sheetName, int rowIndex, int columnIndex, int value);
 
         /// <summary>
+        /// Inserts a integer value into a cell and set cell format in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert text value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="value">A integer value.</param>
+        /// <param name="format">Cell format to be set.</param>
+        public void AddCellValueInt(string sheetName, int rowIndex, int columnIndex, int value, string format);
+
+        /// <summary>
         /// Inserts a decimal value into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
         /// </summary>
-        /// <param name="sheetIndex">The name of the sheet in which to insert decimal value.</param>
+        /// <param name="sheetIndex">The index of the sheet in which to insert decimal value.</param>
         /// <param name="rowIndex">The row number where the value is to be set.</param>
         /// <param name="columnIndex">The column number where the value is to be set.</param>
         /// <param name="value">A decimal value.</param>
         public void AddCellValueDecimal(int sheetIndex, int rowIndex, int columnIndex, decimal value);
+
+        /// <summary>
+        /// Inserts a decimal value into a cell and set cell format in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert decimal value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="value">A decimal value.</param>
+        /// <param name="format">Cell format to be set.</param>
+        public void AddCellValueDecimal(int sheetIndex, int rowIndex, int columnIndex, decimal value, string format);
+
         /// <summary>
         /// Inserts a decimal value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
         /// </summary>
@@ -341,13 +372,33 @@ namespace Trustsoft.ExcelOperation.Moje
         public void AddCellValueDecimal(string sheetName, int rowIndex, int columnIndex, decimal value);
 
         /// <summary>
+        /// Inserts a decimal value into a cell and set cell format in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert decimal value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="value">A decimal value.</param>
+        /// <param name="format">Cell format to be set.</param>
+        public void AddCellValueDecimal(string sheetName, int rowIndex, int columnIndex, decimal value, string format);
+
+        /// <summary>
         /// Inserts a double precision value into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
         /// </summary>
-        /// <param name="sheetIndex">The name of the sheet in which to insert double precision value.</param>
+        /// <param name="sheetIndex">The index of the sheet in which to insert double precision value.</param>
         /// <param name="rowIndex">The row number where the value is to be set.</param>
         /// <param name="columnIndex">The column number where the value is to be set.</param>
         /// <param name="value">A double precision value.</param>
         public void AddCellValueDouble(int sheetIndex, int rowIndex, int columnIndex,  double value);
+
+        /// <summary>
+        /// Inserts a double precision value into a cell and set cell format in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert double precision value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="value">A double precision value.</param>
+        /// <param name="format">Cell format to be set.</param>
+        public void AddCellValueDouble(int sheetIndex, int rowIndex, int columnIndex, double value, string format);
 
         /// <summary>
         /// Inserts a double precision value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
@@ -357,6 +408,16 @@ namespace Trustsoft.ExcelOperation.Moje
         /// <param name="columnIndex">The column number where the value is to be set.</param>
         /// <param name="value">A double precision value.</param>
         public void AddCellValueDouble(string sheetName, int rowIndex, int columnIndex, double value);
+
+        /// <summary>
+        /// Inserts a double precision value into a cell and set cell format in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert double precision value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="value">A double precision value.</param>
+        /// <param name="format">Cell format to be set.</param>
+        public void AddCellValueDouble(string sheetName, int rowIndex, int columnIndex, double value, string format);
 
         /// <summary>
         /// Sets the height of rows in a sheet. The sheet is identified by index. Rows are identified by row number and quantity (next rows are changed after rowIndex , including rowIndex).
@@ -468,6 +529,16 @@ namespace Trustsoft.ExcelOperation.Moje
         public void AddCellValueDate(int sheetIndex, int rowIndex, int columnIndex, DateTime date);
 
         /// <summary>
+        /// Inserts a datetime value into a cell and set cell format in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert datetime value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="date">A datetime value.</param>
+        /// <param name="format">Cell format to be set.</param>
+        public void AddCellValueDate(int sheetIndex, int rowIndex, int columnIndex, DateTime date, string format);
+
+        /// <summary>
         /// Inserts a datetime value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
         /// </summary>
         /// <param name="sheetName">The name of the sheet in which to insert datetime value.</param>
@@ -475,6 +546,16 @@ namespace Trustsoft.ExcelOperation.Moje
         /// <param name="columnIndex">The column number where the value is to be set.</param>
         /// <param name="date">A datetime value.</param>
         public void AddCellValueDate(string sheetName, int rowIndex, int columnIndex, DateTime date);
+
+        /// <summary>
+        /// Inserts a datetime value into a cell and set cell format in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert datetime value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="date">A datetime value.</param>
+        /// <param name="format">Cell format to be set.</param>
+        public void AddCellValueDate(string sheetName, int rowIndex, int columnIndex, DateTime date, string format);
 
         /// <summary>
         /// Inserts a text value into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
@@ -504,6 +585,16 @@ namespace Trustsoft.ExcelOperation.Moje
         public void AddCellValuePercent(int sheetIndex, int rowIndex, int columnIndex, Percent percent);
 
         /// <summary>
+        /// Inserts a percent value into a cell and set cell format in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert percent value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="percent">A percent value.</param>
+        /// <param name="format">Cell format to be set.</param>
+        public void AddCellValuePercent(int sheetIndex, int rowIndex, int columnIndex, Percent percent, string format);
+
+        /// <summary>
         /// Inserts a percent value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
         /// </summary>
         /// <param name="sheetName">The name of the sheet in which to insert percent value.</param>
@@ -511,6 +602,16 @@ namespace Trustsoft.ExcelOperation.Moje
         /// <param name="columnIndex">The column number where the value is to be set.</param>
         /// <param name="percent">A percent value.</param>
         public void AddCellValuePercent(string sheetName, int rowIndex, int columnIndex, Percent percent);
+
+        /// <summary>
+        /// Inserts a percent value into a cell and set cell format in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert percent value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="percent">A percent value.</param>
+        /// <param name="format">Cell format to be set.</param>
+        public void AddCellValuePercent(string sheetName, int rowIndex, int columnIndex, Percent percent, string format);
 
         /// <summary>
         /// Inserts a text value into a cell in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
@@ -540,6 +641,16 @@ namespace Trustsoft.ExcelOperation.Moje
         public void AddCellValueFraction(int sheetIndex, int rowIndex, int columnIndex, Fraction fraction);
 
         /// <summary>
+        /// Inserts a fraction value into a cell and set cell format in a worksheet. Sheet is identified by its index. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which to insert fraction value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="fraction">A fraction value.</param>
+        /// <param name="format">Cell format to be set.</param>
+        public void AddCellValueFraction(int sheetIndex, int rowIndex, int columnIndex, Fraction fraction, string format);
+
+        /// <summary>
         /// Inserts a fraction value into a cell in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
         /// </summary>
         /// <param name="sheetName">The name of the sheet in which to insert fraction value.</param>
@@ -547,6 +658,16 @@ namespace Trustsoft.ExcelOperation.Moje
         /// <param name="columnIndex">The column number where the value is to be set.</param>
         /// <param name="fraction">A fraction value.</param>
         public void AddCellValueFraction(string sheetName, int rowIndex, int columnIndex, Fraction fraction);
+
+        /// <summary>
+        /// Inserts a fraction value into a cell and set cell format in a worksheet. Sheet is identified by its name. The cell is identyfied by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which to insert fraction value.</param>
+        /// <param name="rowIndex">The row number where the value is to be set.</param>
+        /// <param name="columnIndex">The column number where the value is to be set.</param>
+        /// <param name="fraction">A fraction value.</param>
+        /// <param name="format">Cell format to be set.</param>
+        public void AddCellValueFraction(string sheetName, int rowIndex, int columnIndex, Fraction fraction, string format);
 
         /// <summary>
         /// Sets the default black border for a cell. Borders are set from the borderIndex enum, and the line style is set from the LinesIndex. 
@@ -1013,5 +1134,217 @@ namespace Trustsoft.ExcelOperation.Moje
         /// <param name="rangeDataToList">Data range for dropdown list.</param>
         public void DropDownList(string sheetName, string dataSheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList);
 
+        /// <summary>
+        /// Automatically sets the column width to the width cell contents. The sheet is identified by its index. The column is identified by its column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the column width is to be automatically set to the width cell contents.</param>
+        /// <param name="columnIndex">Column number for which the width to be automatically set.</param>
+        public void SetAutoWidth(int sheetIndex, int columnIndex);
+
+        /// <summary>
+        /// Automatically sets the column width to the width cell contents. The sheet is identified by its name. The column is identified by its column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the column width is to be automatically set to the width cell contents.</param>
+        /// <param name="columnIndex">Column number for which the width to be automatically set.</param>
+        public void SetAutoWidth(string sheetName, int columnIndex);
+
+        /// <summary>
+        /// Automatically sets the columns width to the width cell contenst from firtstColumnIndex to lastColumnIndex. The sheet is identified by its index.
+        /// The range is identified by its firstColumn number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the column width is to be automatically set to the width cell contents.</param>
+        /// <param name="firstColumnIndex">Index of the first column in the range in which to automatically set the column width to the width of the cell contents.</param>
+        /// <param name="lastColumnIndex">Index of the last column in the range in which to automatically set the column width to the width of the cell contents.</param>
+        public void SetAutoWidth(int sheetIndex, int firstColumnIndex, int lastColumnIndex);
+
+        /// <summary>
+        /// Automatically sets the columns width to the width cell contenst from firtstColumnIndex to lastColumnIndex. The sheet is identified by its name.
+        /// The range is identified by its firstColumn number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the column width is to be automatically set to the width cell contents.</param>
+        /// <param name="firstColumnIndex">Index of the first column in the range in which to automatically set the column width to the width of the cell contents.</param>
+        /// <param name="lastColumnIndex">Index of the last column in the range in which to automatically set the column width to the width of the cell contents.</param>
+        public void SetAutoWidth(string sheetName, int firstColumnIndex, int lastColumnIndex);
+
+        /// <summary>
+        /// Automatically sets column widths to the width of the cell contents for the all worksheet. The sheet is identified by its index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the column width is to be automatically set to the width cell contents.</param>
+        public void SetAutoWidth(int sheetIndex);
+
+        /// <summary>
+        /// Automatically sets column widths to the width of the cell contents for the all worksheet. The sheet is identified by its name.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the column width is to be automatically set to the width cell contents.</param>
+        public void SetAutoWidth(string sheetName);
+
+        /// <summary>
+        /// Sets condition, comparison operator, bold, italic, underline, double underline, font color and background color for a cell.
+        /// Sets conditional formatting for a cell. The sheet is identified by its index. The cell is identified by its row number and column number.
+        /// Cell condition and styles are identified by ConditionAndFormationg.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which conditional formatting will be set.</param>
+        /// <param name="rowIndex">The row number in which conditional formatting is to be set.</param>
+        /// <param name="columnIndex">The column number on which conditional formatting is to be set.</param>
+        /// <param name="conditionAndFormattings">Configures condition, comparison operator, font and cell style using API.</param>
+        /// <example>
+        /// Here is an example of how to use the method:
+        /// <code>
+        /// excelOperationSyncfusion.ConditionalFormatting(0, 0, 0, new ConditionAndFormatting[] 
+        /// { 
+        ///     new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "0")
+        ///     .SetBackgroundColor(255, 255, 0, 0)
+        ///     .SetBold(true), 
+        ///     new ConditionAndFormatting(ComparisonOperatorIndex.GreaterThan, "3")
+        ///     .SetBackgroundColor(255, 0, 255, 0).SetTextColor(255, 0, 0, 255)
+        ///     .SetItalics(true) 
+        /// });
+        /// </code>
+        /// </example>
+        public void ConditionalFormatting(int sheetIndex, int rowIndex, int columnIndex, ConditionAndFormatting[] conditionAndFormattings);
+
+        /// <summary>
+        /// Sets condition, comparison operator, bold, italic, underline, double underline, font color and background color for a cell.
+        /// Sets conditional formatting for a cell. The sheet is identified by its name. The range is identified by its firstRow number, 
+        /// firstColumn number, lastRow number and lastColumn number. Cell condition and styles are identified by ConditionAndFormationg.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which conditional formatting will be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range for which conditional formatting is to be set.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range for which conditional formatting is to be set.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range for which conditional formatting is to be set.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range for which conditional formatting is to be set.</param>
+        /// <param name="conditionAndFormattings">Configures condition, comparison operator, font and cell style using API.</param>
+        /// <example>
+        /// Here is an example of how to use the method:
+        /// <code>
+        /// excelOperationSyncfusion.ConditionalFormatting(0, 0, 0, 6, 0, new ConditionAndFormatting[] 
+        /// { 
+        ///     new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "0")
+        ///     .SetBackgroundColor(255, 255, 0, 0)
+        ///     .SetBold(true), 
+        ///     new ConditionAndFormatting(ComparisonOperatorIndex.GreaterThan, "3")
+        ///     .SetBackgroundColor(255, 0, 255, 0).SetTextColor(255, 0, 0, 255)
+        ///     .SetItalics(true) 
+        /// });
+        /// </code>
+        /// </example>
+        public void ConditionalFormatting(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, ConditionAndFormatting[] conditionAndFormattings);
+
+        /// <summary>
+        /// Sets condition, comparison operator, bold, italic, underline, double underline, font color and background color for a cell.
+        /// Sets conditional formatting for a cell. The sheet is identified by its name. The cell is identified by its row number and column number.
+        /// Cell condition and styles are identified by ConditionAndFormationg.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which conditional formatting will be set.</param>
+        /// <param name="rowIndex">The row number in which conditional formatting is to be set.</param>
+        /// <param name="columnIndex">The column number on which conditional formatting is to be set.</param>
+        /// <param name="conditionAndFormatting">Configures condition, comparison operator, font and cell style using API.</param>
+        /// <example>
+        /// Here is an example of how to use the method:
+        /// <code>
+        /// excelOperationSyncfusion.ConditionalFormatting(0, 0, 0, new ConditionAndFormatting[] 
+        /// { 
+        ///     new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "0")
+        ///     .SetBackgroundColor(255, 255, 0, 0)
+        ///     .SetBold(true), 
+        ///     new ConditionAndFormatting(ComparisonOperatorIndex.GreaterThan, "3")
+        ///     .SetBackgroundColor(255, 0, 255, 0).SetTextColor(255, 0, 0, 255)
+        ///     .SetItalics(true) 
+        /// });
+        /// </code>
+        /// </example>
+        public void ConditionalFormatting(string sheetName, int rowIndex, int columnIndex, ConditionAndFormatting[] conditionAndFormatting);
+
+        /// <summary>
+        /// Sets condition, comparison operator, bold, italic, underline, double underline, font color and background color for a cell.
+        /// Sets conditional formatting for a cell. The sheet is identified by its name. The range is identified by its firstRow number, 
+        /// firstColumn number, lastRow number and lastColumn number. Cell condition and styles are identified by ConditionAndFormationg.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which conditional formatting will be set.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range for which conditional formatting is to be set.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range for which conditional formatting is to be set.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range for which conditional formatting is to be set.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range for which conditional formatting is to be set.</param>
+        /// <param name="conditionAndFormatting">Configures condition, comparison operator, font and cell style using API.</param>
+        /// <example>
+        /// Here is an example of how to use the method:
+        /// <code>
+        /// excelOperationSyncfusion.ConditionalFormatting(0, 0, 0, 6, 0, new ConditionAndFormatting[] 
+        /// { 
+        ///     new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "0")
+        ///     .SetBackgroundColor(255, 255, 0, 0)
+        ///     .SetBold(true), 
+        ///     new ConditionAndFormatting(ComparisonOperatorIndex.GreaterThan, "3")
+        ///     .SetBackgroundColor(255, 0, 255, 0).SetTextColor(255, 0, 0, 255)
+        ///     .SetItalics(true) 
+        /// });
+        /// </code>
+        /// </example>
+        public void ConditionalFormatting(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, ConditionAndFormatting[] conditionAndFormatting);
+
+        /// <summary>
+        /// Returns the numeric contents of a cell from a worksheet. The sheet is identified by its index. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet from which the number is to be taken.</param>
+        /// <param name="rowIndex">The row number from which the number is to be taken.</param>
+        /// <param name="columnIndex">The column number from which the number is to be taken.</param>
+        /// <returns>Returns the numeric contents of a cell from a worksheet.</returns>
+        public double GetCellValueNumber(int sheetIndex, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Returns the numeric contents of a cell from a worksheet. The sheet is identified by its name. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet from which the number is to be taken.</param>
+        /// <param name="rowIndex">The row number from which the number is to be taken.</param>
+        /// <param name="columnIndex">The column number from which the number is to be taken.</param>
+        /// <returns>Returns the numeric contents of a cell from a worksheet.</returns>
+        public double GetCellValueNumber(string sheetName, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Returns the text contents of a cell from a worksheet. The sheet is identified by its index. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet from which the text is to be taken.</param>
+        /// <param name="rowIndex">The row number from which the text is to be taken.</param>
+        /// <param name="columnIndex">The column number from which the text is to be taken.</param>
+        /// <returns>Returns the text contents of a cell from a worksheet.</returns>
+        public string GetCellValueText(int sheetIndex, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Returns the text contents of a cell from a worksheet. The sheet is identified by its name. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet from which the text is to be taken.</param>
+        /// <param name="rowIndex">The row number from which the text is to be taken.</param>
+        /// <param name="columnIndex">The column number from which the text is to be taken.</param>
+        /// <returns>Returns the text contents of a cell from a worksheet.</returns>
+        public string GetCellValueText(string sheetName, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Returns the date contents of a cell from a worksheet. The sheet is identified by its index. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet from which the date is to be taken.</param>
+        /// <param name="rowIndex">The row number from which the date is to be taken.</param>
+        /// <param name="columnIndex">The column number from which the date is to be taken.</param>
+        /// <returns>Returns the date contents of a cell from a worksheet.</returns>
+        public DateTime GetCellValueDate(int sheetIndex, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Returns the date contents of a cell from a worksheet. The sheet is identified by its name. The cell is identified by its row number and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet from which the date is to be taken.</param>
+        /// <param name="rowIndex">The row number from which the date is to be taken.</param>
+        /// <param name="columnIndex">The column number from which the date is to be taken.</param>
+        /// <returns>Returns the date contents of a cell from a worksheet.</returns>
+        public DateTime GetCellValueDate(string sheetName, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Sets the author, subject, and title of the spreadsheet.
+        /// </summary>
+        /// <param name="author">Author's name.</param>
+        /// <param name="subject">File subject.</param>
+        /// <param name="title">File title.</param>
+        public void MetaData(string author, string subject, string title);
+
+
+        //COMING SOON NEXT UPDATE
     }
 }

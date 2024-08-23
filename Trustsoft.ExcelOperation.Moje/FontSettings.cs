@@ -149,7 +149,7 @@ namespace Trustsoft.ExcelOperation.Moje
         }
 
         /// <summary>
-        /// Sets parameters ARGB.
+        /// Sets parameters ARGB for font.
         /// </summary>
         /// <param name="a">The alpha component of the color (0-255).</param>
         /// <param name="r">The red component of the color (0-255).</param>

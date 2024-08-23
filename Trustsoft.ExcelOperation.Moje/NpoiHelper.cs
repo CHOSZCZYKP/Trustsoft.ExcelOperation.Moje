@@ -13,11 +13,11 @@ namespace Trustsoft.ExcelOperation.Moje
     public class NpoiHelper
     {
         /// <summary>
-        /// Returns the BorderStyle and information whether somthing was returned.
+        /// Returns the BorderStyle and information whether something was returned.
         /// </summary>
         /// <param name="linesIndex">The index of the line style to be set. This can be one of the values from the <see cref="LinesIndex"/>enum.</param>
         /// <param name="isEmpty">Returns true if the worksheet is empty otherwise false.</param>
-        /// <returns>Returns BorderStyle and information whether somthing was returned.</returns>
+        /// <returns>Returns the BorderStyle and information whether something was returned.</returns>
         /// <exception cref="NotImplementedException">Not Implemented Exceotion.</exception>
         public static BorderStyle ConvertFromLineStyleNpoi(LinesIndex linesIndex, out bool isEmpty)
         {
@@ -56,11 +56,11 @@ namespace Trustsoft.ExcelOperation.Moje
         }
 
         /// <summary>
-        /// Returns the HorizontalAlignment and information whether somthing was returned.
+        /// Returns the HorizontalAlignment and information whether something was returned.
         /// </summary>
         /// <param name="horizontalAligmentIndex">The index of the horizontal alignment to be set. This can be one of the values from the <see cref="HorizontalAlignmentIndex"/>enum.</param>
         /// <param name="isEmpty">Returns true if the worksheet is empty otherwise false.</param>
-        /// <returns>Return HorizontalAlignment and information whether somthing was returned.</returns>
+        /// <returns>Returns the HorizontalAlignment and information whether something was returned.</returns>
         /// <exception cref="NotImplementedException">Not Implemented Exceotion.</exception>
         public static HorizontalAlignment ConverFromHorizontalAlignmentNpoi(HorizontalAlignmentIndex horizontalAligmentIndex, out bool isEmpty)
         {
@@ -94,11 +94,11 @@ namespace Trustsoft.ExcelOperation.Moje
         }
 
         /// <summary>
-        /// Returns the VerticalAlignment and information whether somthing was returned.
+        /// Returns the VerticalAlignment and information whether something was returned.
         /// </summary>
         /// <param name="verticalAlignmentIndex">The index of the vertical alignment to be set. This can be one of the values from the <see cref="VerticalAlignmentIndex"/>enum.</param>
         /// <param name="isEmpty">Returns true if the worksheet is empty otherwise false.</param>
-        /// <returns>Return VerticalAlignment and information whether somthing was returned.</returns>
+        /// <returns>Returns the VerticalAlignment and information whether something was returned.</returns>
         /// <exception cref="NotImplementedException">Not Implemented Exceotion.</exception>
         public static VerticalAlignment ConverFromVerticalAligmentNpoi(VerticalAlignmentIndex verticalAlignmentIndex, out bool isEmpty)
         {
@@ -125,6 +125,50 @@ namespace Trustsoft.ExcelOperation.Moje
             }
         }
 
-        
+        /// <summary>
+        /// Returns the ComparisonOperator and information whether something was returned.
+        /// </summary>
+        /// <param name="comparisonOperatorIndex">The index of the comparison operator to be set. This can be one of the values from the <see cref="ComparisonOperatorIndex"/>enum.</param>
+        /// <param name="isEmpty">Returns true if the worksheet is empty otherwise false.</param>
+        /// <returns>Returns the ComparisonOperator and information whether something was returned.</returns>
+        /// <exception cref="NotImplementedException">Not Implemented Exceotion.</exception>
+        public static ComparisonOperator ConvertFromComparisonOperatorNpoi(ComparisonOperatorIndex comparisonOperatorIndex, out bool isEmpty)
+        {
+            switch(comparisonOperatorIndex)
+            {
+                case ComparisonOperatorIndex.None:
+                    isEmpty = false;
+                    return ComparisonOperator.NoComparison;
+                case ComparisonOperatorIndex.Between:
+                    isEmpty = false;
+                    return ComparisonOperator.Between;
+                case ComparisonOperatorIndex.NotBetween:
+                    isEmpty = false;
+                    return ComparisonOperator.NotBetween;
+                case ComparisonOperatorIndex.Equal:
+                    isEmpty = false;
+                    return ComparisonOperator.Equal;
+                case ComparisonOperatorIndex.NotEqual:
+                    isEmpty = false;
+                    return ComparisonOperator.NotEqual;
+                case ComparisonOperatorIndex.LessThan:
+                    isEmpty = false;
+                    return ComparisonOperator.LessThan;
+                case ComparisonOperatorIndex.GreaterThan:
+                    isEmpty = false;
+                    return ComparisonOperator.GreaterThan;
+                case ComparisonOperatorIndex.LessThanOrEqual:
+                    isEmpty = false;
+                    return ComparisonOperator.LessThanOrEqual;
+                case ComparisonOperatorIndex.GreaterThanOrEqual:
+                    isEmpty = false;
+                    return ComparisonOperator.GreaterThanOrEqual;
+                default:
+                    isEmpty = true;
+                    throw new NotImplementedException();
+            }
+        }
+
+
     }
 }

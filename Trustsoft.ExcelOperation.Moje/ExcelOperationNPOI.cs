@@ -5,6 +5,7 @@ using NPOI.SS.UserModel;
 using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
 using NPOI.XWPF.UserModel;
+using Soneta.Core.Extensions;
 using Soneta.Data.QueryDefinition;
 using Soneta.Types;
 using Syncfusion.XlsIO;
@@ -134,6 +135,37 @@ namespace Trustsoft.ExcelOperation.Moje
             cell.CellStyle = newCellStyle;
         }
 
+        public void AddCellValueDate(int sheetIndex, int rowIndex, int columnIndex, DateTime date, string format)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellValue(date);
+
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat(format);
+
+            cell.CellStyle = newCellStyle;
+        }
+        public void AddCellValueDate(string sheetName, int rowIndex, int columnIndex, DateTime date, string format)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellValue(date);
+
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat(format);
+
+            cell.CellStyle = newCellStyle;
+        }
+
         public void AddCellValueDecimal(int sheetIndex, int rowIndex, int columnIndex, decimal value)
         {
             ISheet sheet = _workbook.GetSheetAt(sheetIndex);
@@ -152,6 +184,38 @@ namespace Trustsoft.ExcelOperation.Moje
 
             cell.SetCellType(CellType.Numeric);
             cell.SetCellValue((double)value);
+        }
+
+        public void AddCellValueDecimal(int sheetIndex, int rowIndex, int columnIndex, decimal value, string format)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellType(CellType.Numeric);
+            cell.SetCellValue((double)value);
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat(format);
+
+            cell.CellStyle = newCellStyle;
+        }
+
+        public void AddCellValueDecimal(string sheetName, int rowIndex, int columnIndex, decimal value, string format)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellType(CellType.Numeric);
+            cell.SetCellValue((double)value);
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat(format);
+
+            cell.CellStyle = newCellStyle;
         }
 
         public void AddCellValueDouble(int sheetIndex, int rowIndex, int columnIndex, double value)
@@ -174,6 +238,38 @@ namespace Trustsoft.ExcelOperation.Moje
             cell.SetCellValue(value);
         }
 
+        public void AddCellValueDouble(int sheetIndex, int rowIndex, int columnIndex, double value, string format)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellType(CellType.Numeric);
+            cell.SetCellValue(value);
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat(format);
+
+            cell.CellStyle = newCellStyle;
+        }
+
+        public void AddCellValueDouble(string sheetName, int rowIndex, int columnIndex, double value, string format)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellType(CellType.Numeric);
+            cell.SetCellValue(value);
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat(format);
+
+            cell.CellStyle = newCellStyle;
+        }
+
         public void AddCellValueFraction(int sheetIndex, int rowIndex, int columnIndex, Fraction fraction)
         {
             ISheet sheet = _workbook.GetSheetAt(sheetIndex);
@@ -192,6 +288,38 @@ namespace Trustsoft.ExcelOperation.Moje
 
             cell.SetCellType(CellType.Numeric);
             cell.SetCellValue(fraction);
+        }
+
+        public void AddCellValueFraction(int sheetIndex, int rowIndex, int columnIndex, Fraction fraction, string format)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellType(CellType.Numeric);
+            cell.SetCellValue(fraction);
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat(format);
+
+            cell.CellStyle = newCellStyle;
+        }
+
+        public void AddCellValueFraction(string sheetName, int rowIndex, int columnIndex, Fraction fraction, string format)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellType(CellType.Numeric);
+            cell.SetCellValue(fraction);
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat(format);
+
+            cell.CellStyle = newCellStyle;
         }
 
         public void AddCellValueInt(int sheetIndex, int rowIndex, int columnIndex, int value)
@@ -214,12 +342,45 @@ namespace Trustsoft.ExcelOperation.Moje
             cell.SetCellValue(value);
         }
 
+        public void AddCellValueInt(int sheetIndex, int rowIndex, int columnIndex, int value, string format)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellType(CellType.Numeric);
+            cell.SetCellValue(value);
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat(format);
+
+            cell.CellStyle = newCellStyle;
+        }
+
+        public void AddCellValueInt(string sheetName, int rowIndex, int columnIndex, int value, string format)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellType(CellType.Numeric);
+            cell.SetCellValue(value);
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat(format);
+
+            cell.CellStyle = newCellStyle;
+        }
+
         public void AddCellValuePercent(int sheetIndex, int rowIndex, int columnIndex, Percent percent)
         {
             ISheet sheet = _workbook.GetSheetAt(sheetIndex);
             IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
             ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
 
+            cell.SetCellType(CellType.Numeric);
             cell.SetCellValue(((double)percent));
 
             ICellStyle oldCellStyle = cell.CellStyle;
@@ -246,6 +407,39 @@ namespace Trustsoft.ExcelOperation.Moje
             cell.CellStyle = newCellStyle;
         }
 
+        public void AddCellValuePercent(int sheetIndex, int rowIndex, int columnIndex, Percent percent, string format)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellType(CellType.Numeric);
+            cell.SetCellValue(((double)percent));
+
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat(format);
+
+            cell.CellStyle = newCellStyle;
+        }
+
+        public void AddCellValuePercent(string sheetName, int rowIndex, int columnIndex, Percent percent, string format)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellValue(((double)percent));
+
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat(format);
+
+            cell.CellStyle = newCellStyle;
+        }
+
         public void AddCellValueText(int sheetIndex, int rowIndex, int columnIndex, string text)
         {
             ISheet sheet = _workbook.GetSheetAt(sheetIndex);
@@ -254,6 +448,10 @@ namespace Trustsoft.ExcelOperation.Moje
 
             cell.SetCellType(CellType.String);
             cell.SetCellValue(text);
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat("@");
         }
 
         public void AddCellValueText(string sheetName, int rowIndex, int columnIndex, string text)
@@ -264,6 +462,10 @@ namespace Trustsoft.ExcelOperation.Moje
 
             cell.SetCellType(CellType.String);
             cell.SetCellValue(text);
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat("@");
         }
 
         public void AddCellValueTime(int sheetIndex, int rowIndex, int columnIndex, Time time)
@@ -2697,5 +2899,371 @@ namespace Trustsoft.ExcelOperation.Moje
             dataValidation.ShowErrorBox = true;
             sheet.AddValidationData(dataValidation);
         }
+
+        public void SetAutoWidth(int sheetIndex, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            sheet.AutoSizeColumn(columnIndex);
+        }
+
+        public void SetAutoWidth(string sheetName, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            sheet.AutoSizeColumn(columnIndex);
+        }
+
+        public void SetAutoWidth(int sheetIndex, int firstColumnIndex, int lastColumnIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            for (int col = firstColumnIndex; col <= lastColumnIndex; col++)
+            {
+                sheet.AutoSizeColumn(col);
+            }
+        }
+
+        public void SetAutoWidth(string sheetName, int firstColumnIndex, int lastColumnIndex)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            for (int col = firstColumnIndex; col <= lastColumnIndex; col++)
+            {
+                sheet.AutoSizeColumn(col);
+            }
+        }
+
+        public void SetAutoWidth(int sheetIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            int lastColumnIndex = 0;
+            for (int r = 0; r < sheet.LastRowNum; r++)
+            {
+                IRow row = sheet.GetRow(r);
+                if (row != null && lastColumnIndex < row.LastCellNum)
+                {
+                    lastColumnIndex = row.LastCellNum;
+                }
+            }
+            for (int col = 0; col <= lastColumnIndex; col++)
+            {
+                sheet.AutoSizeColumn(col);
+            }
+        }
+
+        public void SetAutoWidth(string sheetName)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            int lastColumnIndex = 0;
+            for (int r = 0; r < sheet.LastRowNum; r++)
+            {
+                IRow row = sheet.GetRow(r);
+                if (row != null && lastColumnIndex < row.LastCellNum)
+                {
+                    lastColumnIndex = row.LastCellNum;
+                }
+            }
+            for (int col = 0; col <= lastColumnIndex; col++)
+            {
+                sheet.AutoSizeColumn(col);
+            }
+        }
+
+        public void ConditionalFormatting(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, ConditionAndFormatting[] conditionAndFormatting)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+
+            ISheetConditionalFormatting sheetConditionalFormatting = sheet.SheetConditionalFormatting;
+
+            CellRangeAddress[] regions = { new CellRangeAddress(firstRowIndex, lastRowIndex, firstColumnIndex, lastColumnIndex) };
+
+            foreach (var conditionalFormatting in conditionAndFormatting)
+            {
+                var comparisonOperatorNPOI = NpoiHelper.ConvertFromComparisonOperatorNpoi(conditionalFormatting.ComparisonOperatorIndex, out bool isEmpty);
+                if (!isEmpty)
+                {
+                    IConditionalFormattingRule rule = sheetConditionalFormatting.CreateConditionalFormattingRule(comparisonOperatorNPOI, conditionalFormatting.Condition);
+                    
+                    IFontFormatting fontFormatting = rule.CreateFontFormatting();
+                    if (conditionalFormatting.Bold.HasValue && conditionalFormatting.Italics.HasValue)
+                    {
+                        fontFormatting.SetFontStyle(conditionalFormatting.Italics.Value, conditionalFormatting.Bold.Value);
+                    }
+                    else if (conditionalFormatting.Italics.HasValue)
+                    {
+                        fontFormatting.SetFontStyle(conditionalFormatting.Italics.Value, false);
+                    }
+                    else if (conditionalFormatting.Bold.HasValue)
+                    {
+                        fontFormatting.SetFontStyle(false, conditionalFormatting.Bold.Value);
+                    }
+                    if (conditionalFormatting.DoubleUnderline.HasValue && conditionalFormatting.DoubleUnderline.Value)
+                    {
+                        fontFormatting.UnderlineType = FontUnderlineType.Double;
+                    }
+                    else if (conditionalFormatting.Underline.HasValue && conditionalFormatting.Underline.Value)
+                    {
+                        fontFormatting.UnderlineType = FontUnderlineType.Single;
+                    }
+                    if (conditionalFormatting.BackgroundColorA.HasValue && conditionalFormatting.BackgroundColorR.HasValue && conditionalFormatting.BackgroundColorG.HasValue && conditionalFormatting.BackgroundColorB.HasValue)
+                    {
+                        byte[] bytesARGB = new byte[] { (byte)conditionalFormatting.BackgroundColorA.Value, (byte)conditionalFormatting.BackgroundColorR.Value, (byte)conditionalFormatting.BackgroundColorG.Value, (byte)conditionalFormatting.BackgroundColorB.Value };
+                        
+                        XSSFColor backgroundColor = new XSSFColor(bytesARGB);
+                        IPatternFormatting patternFormatting = rule.CreatePatternFormatting();
+                        patternFormatting.FillBackgroundColorColor = backgroundColor;
+                        patternFormatting.FillPattern = FillPattern.SolidForeground;
+
+                    }
+                    if (conditionalFormatting.TextColorA.HasValue && conditionalFormatting.TextColorR.HasValue && conditionalFormatting.TextColorG.HasValue && conditionalFormatting.TextColorB.HasValue)
+                    {
+                        byte[] TextColorARGB = new byte[] { (byte)conditionalFormatting.TextColorA.Value, (byte)conditionalFormatting.TextColorR.Value, (byte)conditionalFormatting.TextColorG.Value, (byte)conditionalFormatting.TextColorB.Value };
+                        XSSFColor xSSFColor = new XSSFColor(TextColorARGB);
+                        fontFormatting.FontColor = xSSFColor;
+                    }
+                    
+                    sheetConditionalFormatting.AddConditionalFormatting(regions, rule);
+                }
+                
+            }
+            
+        }
+
+        public void ConditionalFormatting(int sheetIndex, int rowIndex, int columnIndex, ConditionAndFormatting[] conditionAndFormatting)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+
+            ISheetConditionalFormatting sheetConditionalFormatting = sheet.SheetConditionalFormatting;
+
+            CellRangeAddress[] regions = { new CellRangeAddress(rowIndex, rowIndex, columnIndex, columnIndex) };
+
+            foreach (var conditionalFormatting in conditionAndFormatting)
+            {
+                var comparisonOperatorNPOI = NpoiHelper.ConvertFromComparisonOperatorNpoi(conditionalFormatting.ComparisonOperatorIndex, out bool isEmpty);
+                if (!isEmpty)
+                {
+                    IConditionalFormattingRule rule = sheetConditionalFormatting.CreateConditionalFormattingRule(comparisonOperatorNPOI, conditionalFormatting.Condition);
+
+                    IFontFormatting fontFormatting = rule.CreateFontFormatting();
+                    if (conditionalFormatting.Bold.HasValue && conditionalFormatting.Italics.HasValue)
+                    {
+                        fontFormatting.SetFontStyle(conditionalFormatting.Italics.Value, conditionalFormatting.Bold.Value);
+                    }
+                    else if (conditionalFormatting.Italics.HasValue)
+                    {
+                        fontFormatting.SetFontStyle(conditionalFormatting.Italics.Value, false);
+                    }
+                    else if (conditionalFormatting.Bold.HasValue)
+                    {
+                        fontFormatting.SetFontStyle(false, conditionalFormatting.Bold.Value);
+                    }
+                    if (conditionalFormatting.DoubleUnderline.HasValue && conditionalFormatting.DoubleUnderline.Value)
+                    {
+                        fontFormatting.UnderlineType = FontUnderlineType.Double;
+                    }
+                    else if (conditionalFormatting.Underline.HasValue && conditionalFormatting.Underline.Value)
+                    {
+                        fontFormatting.UnderlineType = FontUnderlineType.Single;
+                    }
+                    if (conditionalFormatting.BackgroundColorA.HasValue && conditionalFormatting.BackgroundColorR.HasValue && conditionalFormatting.BackgroundColorG.HasValue && conditionalFormatting.BackgroundColorB.HasValue)
+                    {
+                        byte[] bytesARGB = new byte[] { (byte)conditionalFormatting.BackgroundColorA.Value, (byte)conditionalFormatting.BackgroundColorR.Value, (byte)conditionalFormatting.BackgroundColorG.Value, (byte)conditionalFormatting.BackgroundColorB.Value };
+
+                        XSSFColor backgroundColor = new XSSFColor(bytesARGB);
+                        IPatternFormatting patternFormatting = rule.CreatePatternFormatting();
+                        patternFormatting.FillBackgroundColorColor = backgroundColor;
+                        patternFormatting.FillPattern = FillPattern.SolidForeground;
+                    }
+                    if (conditionalFormatting.TextColorA.HasValue && conditionalFormatting.TextColorR.HasValue && conditionalFormatting.TextColorG.HasValue && conditionalFormatting.TextColorB.HasValue)
+                    {
+                        byte[] TextColorARGB = new byte[] { (byte)conditionalFormatting.TextColorA.Value, (byte)conditionalFormatting.TextColorR.Value, (byte)conditionalFormatting.TextColorG.Value, (byte)conditionalFormatting.TextColorB.Value };
+                        XSSFColor xSSFColor = new XSSFColor(TextColorARGB);
+                        fontFormatting.FontColor = xSSFColor;
+                    }
+
+                    sheetConditionalFormatting.AddConditionalFormatting(regions, rule);
+                }
+
+            }
+
+        }
+
+        public void ConditionalFormatting(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, ConditionAndFormatting[] conditionAndFormatting)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+
+            ISheetConditionalFormatting sheetConditionalFormatting = sheet.SheetConditionalFormatting;
+
+            CellRangeAddress[] regions = { new CellRangeAddress(firstRowIndex, lastRowIndex, firstColumnIndex, lastColumnIndex) };
+
+            foreach (var conditionalFormatting in conditionAndFormatting)
+            {
+                var comparisonOperatorNPOI = NpoiHelper.ConvertFromComparisonOperatorNpoi(conditionalFormatting.ComparisonOperatorIndex, out bool isEmpty);
+                if (!isEmpty)
+                {
+                    IConditionalFormattingRule rule = sheetConditionalFormatting.CreateConditionalFormattingRule(comparisonOperatorNPOI, conditionalFormatting.Condition);
+
+                    IFontFormatting fontFormatting = rule.CreateFontFormatting();
+                    if (conditionalFormatting.Bold.HasValue && conditionalFormatting.Italics.HasValue)
+                    {
+                        fontFormatting.SetFontStyle(conditionalFormatting.Italics.Value, conditionalFormatting.Bold.Value);
+                    }
+                    else if (conditionalFormatting.Italics.HasValue)
+                    {
+                        fontFormatting.SetFontStyle(conditionalFormatting.Italics.Value, false);
+                    }
+                    else if (conditionalFormatting.Bold.HasValue)
+                    {
+                        fontFormatting.SetFontStyle(false, conditionalFormatting.Bold.Value);
+                    }
+                    if (conditionalFormatting.DoubleUnderline.HasValue && conditionalFormatting.DoubleUnderline.Value)
+                    {
+                        fontFormatting.UnderlineType = FontUnderlineType.Double;
+                    }
+                    else if (conditionalFormatting.Underline.HasValue && conditionalFormatting.Underline.Value)
+                    {
+                        fontFormatting.UnderlineType = FontUnderlineType.Single;
+                    }
+                    if (conditionalFormatting.BackgroundColorA.HasValue && conditionalFormatting.BackgroundColorR.HasValue && conditionalFormatting.BackgroundColorG.HasValue && conditionalFormatting.BackgroundColorB.HasValue)
+                    {
+                        byte[] bytesARGB = new byte[] { (byte)conditionalFormatting.BackgroundColorA.Value, (byte)conditionalFormatting.BackgroundColorR.Value, (byte)conditionalFormatting.BackgroundColorG.Value, (byte)conditionalFormatting.BackgroundColorB.Value };
+
+                        XSSFColor backgroundColor = new XSSFColor(bytesARGB);
+                        IPatternFormatting patternFormatting = rule.CreatePatternFormatting();
+                        patternFormatting.FillBackgroundColorColor = backgroundColor;
+                        patternFormatting.FillPattern = FillPattern.SolidForeground;
+
+                    }
+                    if (conditionalFormatting.TextColorA.HasValue && conditionalFormatting.TextColorR.HasValue && conditionalFormatting.TextColorG.HasValue && conditionalFormatting.TextColorB.HasValue)
+                    {
+                        byte[] TextColorARGB = new byte[] { (byte)conditionalFormatting.TextColorA.Value, (byte)conditionalFormatting.TextColorR.Value, (byte)conditionalFormatting.TextColorG.Value, (byte)conditionalFormatting.TextColorB.Value };
+                        XSSFColor xSSFColor = new XSSFColor(TextColorARGB);
+                        fontFormatting.FontColor = xSSFColor;
+                    }
+
+                    sheetConditionalFormatting.AddConditionalFormatting(regions, rule);
+                }
+
+            }
+
+        }
+
+        public void ConditionalFormatting(string sheetName, int rowIndex, int columnIndex, ConditionAndFormatting[] conditionAndFormatting)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+
+            ISheetConditionalFormatting sheetConditionalFormatting = sheet.SheetConditionalFormatting;
+
+            CellRangeAddress[] regions = { new CellRangeAddress(rowIndex, rowIndex, columnIndex, columnIndex) };
+
+            foreach (var conditionalFormatting in conditionAndFormatting)
+            {
+                var comparisonOperatorNPOI = NpoiHelper.ConvertFromComparisonOperatorNpoi(conditionalFormatting.ComparisonOperatorIndex, out bool isEmpty);
+                if (!isEmpty)
+                {
+                    IConditionalFormattingRule rule = sheetConditionalFormatting.CreateConditionalFormattingRule(comparisonOperatorNPOI, conditionalFormatting.Condition);
+
+                    IFontFormatting fontFormatting = rule.CreateFontFormatting();
+                    if (conditionalFormatting.Bold.HasValue && conditionalFormatting.Italics.HasValue)
+                    {
+                        fontFormatting.SetFontStyle(conditionalFormatting.Italics.Value, conditionalFormatting.Bold.Value);
+                    }
+                    else if (conditionalFormatting.Italics.HasValue)
+                    {
+                        fontFormatting.SetFontStyle(conditionalFormatting.Italics.Value, false);
+                    }
+                    else if (conditionalFormatting.Bold.HasValue)
+                    {
+                        fontFormatting.SetFontStyle(false, conditionalFormatting.Bold.Value);
+                    }
+                    if (conditionalFormatting.DoubleUnderline.HasValue && conditionalFormatting.DoubleUnderline.Value)
+                    {
+                        fontFormatting.UnderlineType = FontUnderlineType.Double;
+                    }
+                    else if (conditionalFormatting.Underline.HasValue && conditionalFormatting.Underline.Value)
+                    {
+                        fontFormatting.UnderlineType = FontUnderlineType.Single;
+                    }
+                    if (conditionalFormatting.BackgroundColorA.HasValue && conditionalFormatting.BackgroundColorR.HasValue && conditionalFormatting.BackgroundColorG.HasValue && conditionalFormatting.BackgroundColorB.HasValue)
+                    {
+                        byte[] bytesARGB = new byte[] { (byte)conditionalFormatting.BackgroundColorA.Value, (byte)conditionalFormatting.BackgroundColorR.Value, (byte)conditionalFormatting.BackgroundColorG.Value, (byte)conditionalFormatting.BackgroundColorB.Value };
+
+                        XSSFColor backgroundColor = new XSSFColor(bytesARGB);
+                        IPatternFormatting patternFormatting = rule.CreatePatternFormatting();
+                        patternFormatting.FillBackgroundColorColor = backgroundColor;
+                        patternFormatting.FillPattern = FillPattern.SolidForeground;
+                    }
+                    if (conditionalFormatting.TextColorA.HasValue && conditionalFormatting.TextColorR.HasValue && conditionalFormatting.TextColorG.HasValue && conditionalFormatting.TextColorB.HasValue)
+                    {
+                        byte[] TextColorARGB = new byte[] { (byte)conditionalFormatting.TextColorA.Value, (byte)conditionalFormatting.TextColorR.Value, (byte)conditionalFormatting.TextColorG.Value, (byte)conditionalFormatting.TextColorB.Value };
+                        XSSFColor xSSFColor = new XSSFColor(TextColorARGB);
+                        fontFormatting.FontColor = xSSFColor;
+                    }
+
+                    sheetConditionalFormatting.AddConditionalFormatting(regions, rule);
+                }
+
+            }
+
+        }
+
+        public double GetCellValueNumber(int sheetIndex, int rowIndex, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex);
+            return cell.NumericCellValue;
+        }
+
+        public double GetCellValueNumber(string sheetName, int rowIndex, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex);
+            return cell.NumericCellValue;
+        }
+
+        public string GetCellValueText(int sheetIndex, int rowIndex, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex);
+            return cell.StringCellValue;
+        }
+
+        public string GetCellValueText(string sheetName, int rowIndex, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex);
+            return cell.StringCellValue;
+        }
+
+        public DateTime GetCellValueDate(int sheetIndex, int rowIndex, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex);
+            return (DateTime)cell.DateCellValue;
+        }
+
+        public DateTime GetCellValueDate(string sheetName, int rowIndex, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex);
+            return (DateTime)cell.DateCellValue;
+        }
+
+        public void MetaData(string author, string subject, string title)
+        {
+            if(_workbook is XSSFWorkbook xssfWorkbook)
+            {
+                var property = xssfWorkbook.GetProperties();
+                property.CoreProperties.Creator = author;
+                property.CoreProperties.Subject = subject;
+                property.CoreProperties.Title = title;
+            }
+            
+        }
+
+        //COMING SOON NEXT UPDATE
     }
 }

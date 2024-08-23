@@ -28,7 +28,7 @@ namespace TestExcel
                 IWorkbook workbook1 = workbook as IWorkbook;
                 //excelOperationSyncfusion.ChangeNameWorksheet("Sheet1", "Nowy");
 
-
+                excelOperationSyncfusion.MetaData("Jan", "Export", "Nowy");
 
                 
                 int index = excelOperationSyncfusion.AddWorksheet("Test1");
@@ -45,13 +45,33 @@ namespace TestExcel
                     excelOperationSyncfusion.AddCellValueText(index, i, 2, item.Name);
                     i++;
                 }
+
+                excelOperationSyncfusion.AddCellValuePercent(0, 1, 3, new Percent(0.8m));
+                excelOperationSyncfusion.AddCellValueDate(0, 2, 3, new DateTime(2024, 8, 21));
+                double procent = excelOperationSyncfusion.GetCellValueNumber(0, 1, 3);
+                DateTime data = excelOperationSyncfusion.GetCellValueDate(0, 2, 3);
+                /*excelOperationSyncfusion.AddCellValueText(0, 0, 1, "Bardzo długi test specjalinie do testów1");
+                excelOperationSyncfusion.AddCellValueText(0, 1, 1, "Bardzo długi test specjalinie do testów11 hahahaha");
+                excelOperationSyncfusion.AddCellValueText(0, 0, 2, "Bardzo długi test specjalinie do testów2");
+                excelOperationSyncfusion.AddCellValueText(0, 0, 3, "Bardzo długi test specjalinie do testów3");
+                excelOperationSyncfusion.SetAutoWidth(0, 1, 2);*/
+
+                /*excelOperationSyncfusion.AddCellValueInt(0, 0, 0, 0);
+                excelOperationSyncfusion.AddCellValueInt(0, 1, 0, 1);
+                excelOperationSyncfusion.AddCellValueInt(0, 2, 0, 2);
+                excelOperationSyncfusion.AddCellValueInt(0, 3, 0, 3);
+                excelOperationSyncfusion.AddCellValueInt(0, 4, 0, 4);
+                excelOperationSyncfusion.AddCellValueInt(0, 5, 0, 5);
+                excelOperationSyncfusion.AddCellValueInt(0, 6, 0, 6);*/
+                excelOperationSyncfusion.ConditionalFormatting(0, 0, 0, 6, 0, new ConditionAndFormatting[] { new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "0").SetBackgroundColor(255, 255, 0, 0).SetBold(true), new ConditionAndFormatting(ComparisonOperatorIndex.GreaterThan, "3").SetBackgroundColor(255, 0, 255, 0).SetTextColor(255, 0, 0, 255).SetItalics(true) });
+
                 int IndexDane = excelOperationSyncfusion.AddWorksheet("Data");
                 excelOperationSyncfusion.AddCellValueText(IndexDane, 0, 0, "Kod");
                 excelOperationSyncfusion.AddCellValueText(IndexDane, 0, 1, "Imię i Nazwisko");
                 excelOperationSyncfusion.AddCellValueText(IndexDane, 1, 0, "Code");
                 excelOperationSyncfusion.AddCellValueText(IndexDane, 1, 1, "Name and Surname");
 
-                excelOperationSyncfusion.AddCellValueText(IndexDane, 2, 0, "722996");
+                excelOperationSyncfusion.AddCellValueText(IndexDane, 2, 0, "0002");
                 excelOperationSyncfusion.AddCellValueText(IndexDane, 2, 1, "Jan Nowak_1");
                 excelOperationSyncfusion.AddCellValueText(IndexDane, 3, 0, "723908");
                 excelOperationSyncfusion.AddCellValueText(IndexDane, 3, 1, "Jan Nowak_2");
@@ -79,6 +99,8 @@ namespace TestExcel
                 excelOperationSyncfusion.AddCellValueText(IndexDane, 14, 1, "Jan Nowak_13");
 
                 excelOperationSyncfusion.DropDownList(0, IndexDane, 0, 0, 20, 0, "$A$3:$A$15");
+
+                
 
                 excelOperationSyncfusion.AddCellValueText(index, 0, 0, "Tekst11");
                 excelOperationSyncfusion.AddCellValueText(index, 0, 1, "Tekst12");

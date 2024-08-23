@@ -41,13 +41,33 @@ namespace TestExcel
                 i++;
             }
 
+            excelOperationNPOI.MetaData("Jan", "Export", "Nowy");
+            excelOperationNPOI.AddCellValuePercent(0, 1, 3, new Percent(0.8m));
+            excelOperationNPOI.AddCellValueDate(0, 2, 3, new DateTime(2024, 8, 21));
+            double procent = excelOperationNPOI.GetCellValueNumber(0, 1, 3);
+            DateTime data = excelOperationNPOI.GetCellValueDate(0, 2, 3);
+            /*excelOperationNPOI.AddCellValueInt(0, 0, 0, 0);
+            excelOperationNPOI.AddCellValueInt(0, 1, 0, 1);
+            excelOperationNPOI.AddCellValueInt(0, 2, 0, 2);
+            excelOperationNPOI.AddCellValueInt(0, 3, 0, 3);
+            excelOperationNPOI.AddCellValueInt(0, 4, 0, 4);
+            excelOperationNPOI.AddCellValueInt(0, 5, 0, 5);
+            excelOperationNPOI.AddCellValueInt(0, 6, 0, 6);*/
+            excelOperationNPOI.ConditionalFormatting(0, 0, 0, 6, 0, new ConditionAndFormatting[] { new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "0").SetBackgroundColor(255, 255, 0, 0).SetBold(true), new ConditionAndFormatting(ComparisonOperatorIndex.GreaterThan, "3").SetBackgroundColor(255, 0, 255, 0).SetTextColor(255, 0, 0, 255).SetItalics(true) });
+
+            /*excelOperationNPOI.AddCellValueText(0, 0, 1, "Bardzo długi test specjalinie do testów1");
+            excelOperationNPOI.AddCellValueText(0, 1, 1, "Bardzo długi test specjalinie do testów11 hahahaha");
+            excelOperationNPOI.AddCellValueText(0, 0, 2, "Bardzo długi test specjalinie do testów2");
+            excelOperationNPOI.AddCellValueText(0, 0, 3, "Bardzo długi test specjalinie do testów3");
+            excelOperationNPOI.SetAutoWidth(0,1,2);*/
+
             int IndexDane = excelOperationNPOI.AddWorksheet("Data");
             excelOperationNPOI.AddCellValueText(IndexDane, 0, 0, "Kod");
             excelOperationNPOI.AddCellValueText(IndexDane, 0, 1, "Imię i Nazwisko");
             excelOperationNPOI.AddCellValueText(IndexDane, 1, 0, "Code");
             excelOperationNPOI.AddCellValueText(IndexDane, 1, 1, "Name and Surname");
 
-            excelOperationNPOI.AddCellValueText(IndexDane, 2, 0, "722996");
+            excelOperationNPOI.AddCellValueText(IndexDane, 2, 0, "00002");
             excelOperationNPOI.AddCellValueText(IndexDane, 2, 1, "Jan Nowak_1");
             excelOperationNPOI.AddCellValueText(IndexDane, 3, 0, "723908");
             excelOperationNPOI.AddCellValueText(IndexDane, 3, 1, "Jan Nowak_2");
