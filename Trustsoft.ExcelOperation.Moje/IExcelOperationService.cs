@@ -432,7 +432,7 @@ namespace Trustsoft.ExcelOperation.Moje
         /// Sets the height of rows in a sheet. The sheet is identified by index. Rows are identified by row number from table rowIndices.
         /// </summary>
         /// <param name="sheetIndex">The index of the sheet in which to change height in rows.</param>
-        /// <param name="rowIndices">The table row number where the height is to be change.</param>
+        /// <param name="rowIndices">Array of rows where the height is to be change.</param>
         /// <param name="height">Row height.</param>
         public void HeightRow(int sheetIndex, int[] rowIndices, double height);
 
@@ -457,7 +457,7 @@ namespace Trustsoft.ExcelOperation.Moje
         /// Sets the height of rows in a sheet. The sheet is identified by name. Rows are identified by row number from table rowIndices.
         /// </summary>
         /// <param name="sheetName">The name of the sheet in which to change height in rows.</param>
-        /// <param name="rowIndices">The table row number where the height is to be change.</param>
+        /// <param name="rowIndices">Array of rows where the height is to be change.</param>
         /// <param name="height">Row height.</param>
         public void HeightRow(string sheetName, int[] rowIndices, double height);
 
@@ -482,7 +482,7 @@ namespace Trustsoft.ExcelOperation.Moje
         /// Sets the width of columns in a sheet. The sheet is identified by index. Columns are identified by column number from table columnIndices.
         /// </summary>
         /// <param name="sheetIndex">The index of the sheet in which to change width in columns.</param>
-        /// <param name="columnIndices">The table column number where the height is to be change.</param>
+        /// <param name="columnIndices">Array of columns where the height is to be change.</param>
         /// <param name="width">Column width.</param>
         public void WidthColumn(int sheetIndex, int[] columnIndices, double width);
 
@@ -507,7 +507,7 @@ namespace Trustsoft.ExcelOperation.Moje
         /// Sets the width of columns in a sheet. The sheet is identified by name. Columns are identified by column number from table columnIndices.
         /// </summary>
         /// <param name="sheetName">The name of the sheet in which to change width in columns.</param>
-        /// <param name="columnIndices">The table column number where the width is to be change.</param>
+        /// <param name="columnIndices">Array of columns where the width is to be change.</param>
         /// <param name="width">Column width.</param>
         public void WidthColumn(string sheetName, int[] columnIndices, double width);
 
@@ -843,7 +843,7 @@ namespace Trustsoft.ExcelOperation.Moje
         /// <summary>
         /// Sets the vertical alignment for a cell. The sheet is identified by its index. The cell is identified by its row number and column number.
         /// </summary>
-        /// <param name="verticalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="verticalAlignmentIndex">Vertical alignment to set.</param>
         /// <param name="sheetIndex">The index of the sheet where the cell color is to be set.</param>
         /// <param name="rowIndex">The row number where the vertical alignment is to be set.</param>
         /// <param name="columnIndex">The column number where the vertical alignment is to be set.</param>
@@ -852,7 +852,7 @@ namespace Trustsoft.ExcelOperation.Moje
         /// <summary>
         /// Sets the vertical alignment for a cell. The sheet is identified by its name. The cell is identified by its row number and column number.
         /// </summary>
-        /// <param name="verticalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="verticalAlignmentIndex">Vertical alignment to set.</param>
         /// <param name="sheetName">The name of the sheet where the cell color is to be set.</param>
         /// <param name="rowIndex">The row number where the vertical alignment is to be set.</param>
         /// <param name="columnIndex">The column number where the vertical alignment is to be set.</param>
@@ -862,7 +862,7 @@ namespace Trustsoft.ExcelOperation.Moje
         /// Sets the vertical alignment for a range. The sheet is identified by its index. 
         /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
         /// </summary>
-        /// <param name="verticalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="verticalAlignmentIndex">Vertical alignment to set.</param>
         /// <param name="sheetIndex">The index of the sheet where the cell color is to be set.</param>
         /// <param name="firstRowIndex">The index of the first row in the range.</param>
         /// <param name="firstColumnIndex">The index of the first column in the range.</param>
@@ -874,7 +874,7 @@ namespace Trustsoft.ExcelOperation.Moje
         /// Sets the vertical alignment for a range. The sheet is identified by its name. 
         /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
         /// </summary>
-        /// <param name="verticalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="verticalAlignmentIndex">Vertical alignment to set.</param>
         /// <param name="sheetName">The name of the sheet where the cell color is to be set.</param>
         /// <param name="firstRowIndex">The index of the first row in the range.</param>
         /// <param name="firstColumnIndex">The index of the first column in the range.</param>
@@ -885,26 +885,26 @@ namespace Trustsoft.ExcelOperation.Moje
         /// <summary>
         /// Sets the horizontal alignment for a cell. The sheet is identified by its index. The cell is identified by its row number and column number.
         /// </summary>
-        /// <param name="horizontalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="horizontalAlignmentIndex">Horizontal alignment to set.</param>
         /// <param name="sheetIndex">The index of the sheet where the cell color is to be set.</param>
-        /// <param name="rowIndex">The row number where the vertical alignment is to be set.</param>
-        /// <param name="columnIndex">The column number where the vertical alignment is to be set.</param>
+        /// <param name="rowIndex">The row number where the horizontal alignment is to be set.</param>
+        /// <param name="columnIndex">The column number where the horizontal alignment is to be set.</param>
         public void SetHorizontalAlignment(HorizontalAlignmentIndex horizontalAlignmentIndex, int sheetIndex, int rowIndex, int columnIndex);
 
         /// <summary>
         /// Sets the horizontal alignment for a cell. The sheet is identified by its name. The cell is identified by its row number and column number.
         /// </summary>
-        /// <param name="horizontalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="horizontalAlignmentIndex">Horizontal alignment to set.</param>
         /// <param name="sheetName">The name of the sheet where the cell color is to be set.</param>
-        /// <param name="rowIndex">The row number where the vertical alignment is to be set.</param>
-        /// <param name="columnIndex">The column number where the vertical alignment is to be set.</param>
+        /// <param name="rowIndex">The row number where the horizontal alignment is to be set.</param>
+        /// <param name="columnIndex">The column number where the horizontal alignment is to be set.</param>
         public void SetHorizontalAlignment(HorizontalAlignmentIndex horizontalAlignmentIndex, string sheetName, int rowIndex, int columnIndex);
 
         /// <summary>
         /// Sets the horizontal alignment for a range. The sheet is identified by its index. 
         /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
         /// </summary>
-        /// <param name="horizontalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="horizontalAlignmentIndex">Horizontal alignment to set.</param>
         /// <param name="sheetIndex">The index of the sheet where the cell color is to be set.</param>
         /// <param name="firstRowIndex">The index of the first row in the range.</param>
         /// <param name="firstColumnIndex">The index of the first column in the range.</param>
@@ -916,7 +916,7 @@ namespace Trustsoft.ExcelOperation.Moje
         /// Sets the horizontal alignment for a range. The sheet is identified by its name. 
         /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
         /// </summary>
-        /// <param name="horizontalAlignmentIndex">An array of vertical alignment to set.</param>
+        /// <param name="horizontalAlignmentIndex">Horizontal alignment to set.</param>
         /// <param name="sheetName">The name of the sheet where the cell color is to be set.</param>
         /// <param name="firstRowIndex">The index of the first row in the range.</param>
         /// <param name="firstColumnIndex">The index of the first column in the range.</param>
@@ -1083,56 +1083,28 @@ namespace Trustsoft.ExcelOperation.Moje
         public void SetProtectSheet(string sheetName, string password);
 
         /// <summary>
-        /// Sets the dropdown list in a range. The sheet is identified by its index (where is drop-down list). The dataSheet is identify by its index (where is data to list).
+        /// Sets the dropdown list in a range. The sheet is identified by its index (where is drop-down list). The range named is identify by its name.
         /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
         /// </summary>
         /// <param name="sheetIndex">The index of the sheet in which the drop-down list is to be located.</param>
-        /// <param name="dataSheetIndex">The index of the sheet from which the data is to be taken.</param>
+        /// <param name="namedRange">Range name set in the Name Manager.</param>
         /// <param name="firstRowIndex">The index of the first row in the range where the dropdown list is to be.</param>
         /// <param name="firstColumnIndex">The index of the first column in the range where the dropdown list is to be.</param>
         /// <param name="lastRowIndex">The index of the last row in the range where the dropdown list is to be.</param>
         /// <param name="lastColumnIndex">The index of the last column in the range where the dropdown list is to be.</param>
-        /// <param name="rangeDataToList">Data range for dropdown list.</param>
-        public void DropDownList(int sheetIndex, int dataSheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList);
+        public void DropDownList(int sheetIndex, string namedRange, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex);
 
         /// <summary>
-        /// Sets the dropdown list in a range. The sheet is identified by its name (where is drop-down list). The dataSheet is identify by its index (where is data to list).
+        /// Sets the dropdown list in a range. The sheet is identified by its name (where is drop-down list). The range name is identify by its name.
         /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
         /// </summary>
         /// <param name="sheetName">The name of the sheet in which the drop-down list is to be located.</param>
-        /// <param name="dataSheetIndex">The index of the sheet from which the data is to be taken.</param>
+        /// <param name="namedRange">Range name set in the Name Manager.</param>
         /// <param name="firstRowIndex">The index of the first row in the range where the dropdown list is to be.</param>
         /// <param name="firstColumnIndex">The index of the first column in the range where the dropdown list is to be.</param>
         /// <param name="lastRowIndex">The index of the last row in the range where the dropdown list is to be.</param>
         /// <param name="lastColumnIndex">The index of the last column in the range where the dropdown list is to be.</param>
-        /// <param name="rangeDataToList">Data range for dropdown list.</param>
-        public void DropDownList(string sheetName, int dataSheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList);
-
-        /// <summary>
-        /// Sets the dropdown list in a range. The sheet is identified by its index (where is drop-down list). The dataSheet is identify by its name (where is data to list).
-        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
-        /// </summary>
-        /// <param name="sheetIndex">The index of the sheet in which the drop-down list is to be located.</param>
-        /// <param name="dataSheetName">The name of the sheet from which the data is to be taken.</param>
-        /// <param name="firstRowIndex">The index of the first row in the range where the dropdown list is to be.</param>
-        /// <param name="firstColumnIndex">The index of the first column in the range where the dropdown list is to be.</param>
-        /// <param name="lastRowIndex">The index of the last row in the range where the dropdown list is to be.</param>
-        /// <param name="lastColumnIndex">The index of the last column in the range where the dropdown list is to be.</param>
-        /// <param name="rangeDataToList">Data range for dropdown list.</param>
-        public void DropDownList(int sheetIndex, string dataSheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList);
-
-        /// <summary>
-        /// Sets the dropdown list in a range. The sheet is identified by its name (where is drop-down list). The dataSheet is identify by its name (where is data to list).
-        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
-        /// </summary>
-        /// <param name="sheetName">The name of the sheet in which the drop-down list is to be located.</param>
-        /// <param name="dataSheetName">The name of the sheet from which the data is to be taken.</param>
-        /// <param name="firstRowIndex">The index of the first row in the range where the dropdown list is to be.</param>
-        /// <param name="firstColumnIndex">The index of the first column in the range where the dropdown list is to be.</param>
-        /// <param name="lastRowIndex">The index of the last row in the range where the dropdown list is to be.</param>
-        /// <param name="lastColumnIndex">The index of the last column in the range where the dropdown list is to be.</param>
-        /// <param name="rangeDataToList">Data range for dropdown list.</param>
-        public void DropDownList(string sheetName, string dataSheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList);
+        public void DropDownList(string sheetName, string namedRange, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex);
 
         /// <summary>
         /// Automatically sets the column width to the width cell contents. The sheet is identified by its index. The column is identified by its column number.
@@ -1182,6 +1154,7 @@ namespace Trustsoft.ExcelOperation.Moje
         /// Sets condition, comparison operator, bold, italic, underline, double underline, font color and background color for a cell.
         /// Sets conditional formatting for a cell. The sheet is identified by its index. The cell is identified by its row number and column number.
         /// Cell condition and styles are identified by ConditionAndFormationg.
+        /// If condition is string then string must be inside \".
         /// </summary>
         /// <param name="sheetIndex">The index of the sheet in which conditional formatting will be set.</param>
         /// <param name="rowIndex">The row number in which conditional formatting is to be set.</param>
@@ -1207,6 +1180,7 @@ namespace Trustsoft.ExcelOperation.Moje
         /// Sets condition, comparison operator, bold, italic, underline, double underline, font color and background color for a cell.
         /// Sets conditional formatting for a cell. The sheet is identified by its name. The range is identified by its firstRow number, 
         /// firstColumn number, lastRow number and lastColumn number. Cell condition and styles are identified by ConditionAndFormationg.
+        /// If condition is string then string must be inside \".
         /// </summary>
         /// <param name="sheetIndex">The index of the sheet in which conditional formatting will be set.</param>
         /// <param name="firstRowIndex">The index of the first row in the range for which conditional formatting is to be set.</param>
@@ -1234,6 +1208,7 @@ namespace Trustsoft.ExcelOperation.Moje
         /// Sets condition, comparison operator, bold, italic, underline, double underline, font color and background color for a cell.
         /// Sets conditional formatting for a cell. The sheet is identified by its name. The cell is identified by its row number and column number.
         /// Cell condition and styles are identified by ConditionAndFormationg.
+        /// If condition is string then string must be inside \".
         /// </summary>
         /// <param name="sheetName">The name of the sheet in which conditional formatting will be set.</param>
         /// <param name="rowIndex">The row number in which conditional formatting is to be set.</param>
@@ -1259,6 +1234,7 @@ namespace Trustsoft.ExcelOperation.Moje
         /// Sets condition, comparison operator, bold, italic, underline, double underline, font color and background color for a cell.
         /// Sets conditional formatting for a cell. The sheet is identified by its name. The range is identified by its firstRow number, 
         /// firstColumn number, lastRow number and lastColumn number. Cell condition and styles are identified by ConditionAndFormationg.
+        /// If condition is string then string must be inside \".
         /// </summary>
         /// <param name="sheetName">The name of the sheet in which conditional formatting will be set.</param>
         /// <param name="firstRowIndex">The index of the first row in the range for which conditional formatting is to be set.</param>
@@ -1343,6 +1319,255 @@ namespace Trustsoft.ExcelOperation.Moje
         /// <param name="subject">File subject.</param>
         /// <param name="title">File title.</param>
         public void MetaData(string author, string subject, string title);
+
+        /// <summary>
+        /// Returns the number of rows from a sheet. The sheet is identified by its index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet from which the number of rows is to be taken.</param>
+        /// <returns>Returns the number of rows from a sheet.</returns>
+        public int GetLastRow(int sheetIndex);
+
+        /// <summary>
+        /// Returns the number of rows from a sheet. The sheet is identified by its name.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet from which the number of rows is to be taken.</param>
+        /// <returns>Returns the number of rows from a sheet.</returns>
+        public int GetLastRow(string sheetName);
+
+        /// <summary>
+        /// Returns the number of columns from a sheet. The sheet is identified by its index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet from which the number of columns is to be taken.</param>
+        /// <returns>Returns the number of columns from a sheet.</returns>
+        public int GetLastColumn(int sheetIndex);
+
+        /// <summary>
+        /// Returns the number of columns from a sheet. The sheet is identified by its name.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet from which the number of columns is to be taken.</param>
+        /// <returns>Returns the number of columns from a sheet.</returns>
+        public int GetLastColumn(string sheetName);
+
+        /// <summary>
+        /// Returns the object. Opens a file. The file is identified by its path.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <returns>Returns the object.</returns>
+        public object OpenSpreadsheet(FileStream path);
+
+        /// <summary>
+        /// Sets the sheet as hidden. The sheet is identified by its index. The sheet visibility is identified by SheetVisibilityIndex.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet to be hidden.</param>
+        /// <param name="sheetVisibilityIndex">Visibility to be set.</param>
+        public void HideSheet(int sheetIndex, SheetVisibilityIndex sheetVisibilityIndex);
+
+        /// <summary>
+        /// Sets the sheet as hidden. The sheet is identified by its name. The sheet visibility is identified by SheetVisibilityIndex.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet to be hidden.</param>
+        /// <param name="sheetVisibilityIndex">Visibility to be set.</param>
+        public void HideSheet(string sheetName, SheetVisibilityIndex sheetVisibilityIndex);
+
+        /// <summary>
+        /// Sets which sheet will be active by default when a file is opened.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet to be set as the default sheet when a file is opened.</param>
+        public void ActiveSheet(int sheetIndex);
+
+        /// <summary>
+        /// Sets which sheet will be active by default when a file is opened.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet to be set as the default sheet when a file is opened.</param>
+        public void ActiveSheet(string sheetName);
+
+        /// <summary>
+        /// Sets one sheet as hidden and the other as active (default). The hidden sheet is identified by index.
+        /// The active sheet is identified by index. The sheet visibility is identified by SheetVisibilityIndex.
+        /// </summary>
+        /// <param name="hideSheetIndex">The index of the sheet to be hidden.</param>
+        /// <param name="activeSheetIndex">The index of the sheet to be set as the default sheet when a file is opened.</param>
+        /// <param name="sheetVisibilityIndex">Visibility to be set.</param>
+        public void HideSheet(int hideSheetIndex, int activeSheetIndex, SheetVisibilityIndex sheetVisibilityIndex);
+
+        /// <summary>
+        /// Sets one sheet as hidden and the other as active (default). The hidden sheet is identified by name.
+        /// The active sheet is identified by name. The sheet visibility is identified by SheetVisibilityIndex.
+        /// </summary>
+        /// <param name="hideSheetName">The name of the sheet to be hidden.</param>
+        /// <param name="activeSheetName">The name of the sheet to be set as the default sheet when a file is opened.</param>
+        /// <param name="sheetVisibilityIndex">Visibility to be set.</param>
+        public void HideSheet(string hideSheetName, string activeSheetName, SheetVisibilityIndex sheetVisibilityIndex);
+
+        /// <summary>
+        /// Sets one sheet as hidden and the other as active (default). The hidden sheet is identified by index.
+        /// The active sheet is identified by name. The sheet visibility is identified by SheetVisibilityIndex.
+        /// </summary>
+        /// <param name="hideSheetIndex">The index of the sheet to be hidden.</param>
+        /// <param name="activeSheetName">The name of the sheet to be set as the default sheet when a file is opened.</param>
+        /// <param name="sheetVisibilityIndex">Visibility to be set.</param>
+        public void HideSheet(int hideSheetIndex, string activeSheetName, SheetVisibilityIndex sheetVisibilityIndex);
+
+        /// <summary>
+        /// Sets one sheet as hidden and the other as active (default). The hidden sheet is identified by name.
+        /// The active sheet is identified by index. The sheet visibility is identified by SheetVisibilityIndex.
+        /// </summary>
+        /// <param name="hideSheetName">The name of the sheet to be hidden.</param>
+        /// <param name="activeSheetIndex">The index of the sheet to be set as the default sheet when a file is opened.</param>
+        /// <param name="sheetVisibilityIndex">Visibility to be set.</param>
+        public void HideSheet(string hideSheetName, int activeSheetIndex, SheetVisibilityIndex sheetVisibilityIndex);
+
+        /// <summary>
+        /// Sets the row as hidden. The sheet is identified by its index. The row is identified by index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the row is to be hidden.</param>
+        /// <param name="rowIndex">The index of the row to be hidden.</param>
+        public void HideRow(int sheetIndex, int rowIndex);
+
+        /// <summary>
+        /// Sets the row as hidden. The sheet is identified by its name. The row is identified by index.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the row is to be hidden.</param>
+        /// <param name="rowIndex">The index of the row to be hidden.</param>
+        public void HideRow(string sheetName, int rowIndex);
+
+        /// <summary>
+        /// Sets the rows as hidden. The sheet is identified by its index. 
+        /// The range is identified by its firstRow number and lastRow number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the rows is to be hidden.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range to be hidden.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range to be hidden.</param>
+        public void HideRow(int sheetIndex, int firstRowIndex, int lastRowIndex);
+
+        /// <summary>
+        /// Sets the rows as hidden. The sheet is identified by its name. 
+        /// The range is identified by its firstRow number and lastRow number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the rows is to be hidden.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range to be hidden.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range to be hidden.</param>
+        public void HideRow(string sheetName, int firstRowIndex, int lastRowIndex);
+
+        /// <summary>
+        /// Sets the rows as hidden. The sheet is identified by its index.
+        /// Rows are identified by row number from table rowIndexes.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the rows is to be hidden.</param>
+        /// <param name="rowIndexes">Array of rows to be hidden.</param>
+        public void HideRow(int sheetIndex, int[] rowIndexes);
+
+        /// <summary>
+        /// Sets the rows as hidden. The sheet is identified by its name.
+        /// Rows are identified by row number from table rowIndexes.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the rows is to be hidden.</param>
+        /// <param name="rowIndexes">Array of rows to be hidden.</param>
+        public void HideRow(string sheetName, int[] rowIndexes);
+
+        /// <summary>
+        /// Sets the column as hidden. The sheet is identified by its index. The column is identified by index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the column is to be hidden.</param>
+        /// <param name="columnIndex">The index of the column to be hidden.</param>
+        public void HideColumn(int sheetIndex, int columnIndex);
+
+        /// <summary>
+        /// Sets the column as hidden. The sheet is identified by its name. The column is identified by index.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the column is to be hidden.</param>
+        /// <param name="columnIndex">The index of the column to be hidden.</param>
+        public void HideColumn(string sheetName, int columnIndex);
+
+        /// <summary>
+        /// Sets the columns as hidden. The sheet is identified by its index. 
+        /// The range is identified by its firstColumn number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the columns is to be hidden.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range to be hidden.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range to be hidden.</param>
+        public void HideColumn(int sheetIndex, int firstColumnIndex, int lastColumnIndex);
+
+        /// <summary>
+        /// Sets the columns as hidden. The sheet is identified by its name. 
+        /// The range is identified by its firstColumn number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the columns is to be hidden.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range to be hidden.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range to be hidden.</param>
+        public void HideColumn(string sheetName, int firstColumnIndex, int lastColumnIndex);
+
+        /// <summary>
+        /// Sets the columns as hidden. The sheet is identified by its index.
+        /// Columns are identified by column number from table columnIndexes.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the columns is to be hidden.</param>
+        /// <param name="columnIndexes">Array of columns to be hidden.</param>
+        public void HideColumn(int sheetIndex, int[] columnIndexes);
+
+        /// <summary>
+        /// Sets the columns as hidden. The sheet is identified by its name.
+        /// Columns are identified by column number from table columnIndexes.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the columns is to be hidden.</param>
+        /// <param name="columnIndexes">Array of columns to be hidden.</param>
+        public void HideColumn(string sheetName, int[] columnIndexes);
+
+        /// <summary>
+        /// Sets the rows and columns as hidden. The sheet is identified by its index.
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the rows and columns is to be hidden.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range to be hidden.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range to be hidden.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range to be hidden.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range to be hidden.</param>
+        public void HideRowAndColumn(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex);
+
+        /// <summary>
+        /// Sets the rows and columns as hidden. The sheet is identified by its name.
+        /// The range is identified by its firstRow number, firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the rows and columns is to be hidden.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range to be hidden.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range to be hidden.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range to be hidden.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range to be hidden.</param>
+        public void HideRowAndColumn(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex);
+
+        /// <summary>
+        /// Sets a name for the range. The sheet is identified by its index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet containing the data for the range.</param>
+        /// <param name="name">Range name.</param>
+        /// <param name="range">Data range.</param>
+        public void NameManager(int sheetIndex, string name, string range);
+
+        /// <summary>
+        /// Sets a name for the range. The sheet is identified by its index.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet containing the data for the range.</param>
+        /// <param name="name">Range name.</param>
+        /// <param name="range">Data range.</param>
+        public void NameManager(string sheetName, string name, string range);
+
+        /// <summary>
+        /// Sets a name for the range. The sheet is identified by its index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet containing the data for the range.</param>
+        /// <param name="name">Range name.</param>
+        /// <param name="range">Data range.</param>
+        /// <param name="comment">Comment to the range.</param>
+        public void NameManager(int sheetIndex, string name, string range, string comment);
+
+        /// <summary>
+        /// Sets a name for the range. The sheet is identified by its index.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet containing the data for the range.</param>
+        /// <param name="name">Range name.</param>
+        /// <param name="range">Data range.</param>
+        /// <param name="comment">Comment to the range.</param>
+        public void NameManager(string sheetName, string name, string range, string comment);
 
 
         //COMING SOON NEXT UPDATE

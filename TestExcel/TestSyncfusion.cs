@@ -8,7 +8,7 @@ using TestExcel;
 using Trustsoft.ExcelOperation.Moje;
 
 
-[assembly: Worker(typeof(TestSyncfusion), typeof(DokEwidencji))]
+[assembly: Worker(typeof(TestSyncfusion), typeof(DokEwidencja))]
 namespace TestExcel
 {
     
@@ -22,6 +22,7 @@ namespace TestExcel
         [Action ("Test Syncfusion", Icon = ActionIcon.Test, Mode = ActionMode.Progress | ActionMode.SingleSession, Target = ActionTarget.Menu | ActionTarget.LocalMenu | ActionTarget.Divider | ActionTarget.ToolbarWithText)]
         public void Eksport()
         {
+            
             using(ExcelOperationSyncfusion excelOperationSyncfusion = new ExcelOperationSyncfusion())
             {
                 var workbook = excelOperationSyncfusion.CreateWorkbook();
@@ -45,7 +46,9 @@ namespace TestExcel
                     excelOperationSyncfusion.AddCellValueText(index, i, 2, item.Name);
                     i++;
                 }
-
+                Time time = new Time(12, 15);
+                excelOperationSyncfusion.AddCellValueTime(0, 0, 1, time);
+                excelOperationSyncfusion.GetCellValueText(0, 0, 1);
                 excelOperationSyncfusion.AddCellValuePercent(0, 1, 3, new Percent(0.8m));
                 excelOperationSyncfusion.AddCellValueDate(0, 2, 3, new DateTime(2024, 8, 21));
                 double procent = excelOperationSyncfusion.GetCellValueNumber(0, 1, 3);
@@ -56,14 +59,30 @@ namespace TestExcel
                 excelOperationSyncfusion.AddCellValueText(0, 0, 3, "Bardzo długi test specjalinie do testów3");
                 excelOperationSyncfusion.SetAutoWidth(0, 1, 2);*/
 
-                /*excelOperationSyncfusion.AddCellValueInt(0, 0, 0, 0);
+                excelOperationSyncfusion.AddCellValueInt(0, 0, 0, 0);
                 excelOperationSyncfusion.AddCellValueInt(0, 1, 0, 1);
                 excelOperationSyncfusion.AddCellValueInt(0, 2, 0, 2);
                 excelOperationSyncfusion.AddCellValueInt(0, 3, 0, 3);
                 excelOperationSyncfusion.AddCellValueInt(0, 4, 0, 4);
                 excelOperationSyncfusion.AddCellValueInt(0, 5, 0, 5);
-                excelOperationSyncfusion.AddCellValueInt(0, 6, 0, 6);*/
-                excelOperationSyncfusion.ConditionalFormatting(0, 0, 0, 6, 0, new ConditionAndFormatting[] { new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "0").SetBackgroundColor(255, 255, 0, 0).SetBold(true), new ConditionAndFormatting(ComparisonOperatorIndex.GreaterThan, "3").SetBackgroundColor(255, 0, 255, 0).SetTextColor(255, 0, 0, 255).SetItalics(true) });
+                excelOperationSyncfusion.AddCellValueInt(0, 6, 0, 6);
+                excelOperationSyncfusion.AddCellValueText(0, 0, 0, "OK");
+                excelOperationSyncfusion.AddCellValueText(0, 1, 0, "ERROR");
+                excelOperationSyncfusion.AddCellValueText(0, 2, 0, "OK");
+                excelOperationSyncfusion.AddCellValueInt(0, 3, 0, 1);
+                excelOperationSyncfusion.AddCellValueInt(0, 4, 0, 1);
+                excelOperationSyncfusion.AddCellValueInt(0, 5, 0, 3);
+                excelOperationSyncfusion.AddCellFormula(0, 6, 0, "SUM(A4:A6)");
+                excelOperationSyncfusion.ConditionalFormatting(0, 0, 0, 6, 0, new ConditionAndFormatting[] 
+                {
+                    //new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "OK").SetBackgroundColor(255, 198, 239, 206).SetTextColor(255, 0, 100, 0),
+                    new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "\"OK\"").SetBackgroundColor(255, 198, 239, 206).SetTextColor(255, 0, 100, 0),
+                    //new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "ERROR").SetBackgroundColor(255, 255, 199, 206).SetTextColor(255, 190, 1, 7),
+                    new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "\"ERROR\"").SetBackgroundColor(255, 255, 199, 206).SetTextColor(255, 190, 1, 7),
+                    new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "3").SetBackgroundColor(255,0,0,255)
+                });
+
+                
 
                 int IndexDane = excelOperationSyncfusion.AddWorksheet("Data");
                 excelOperationSyncfusion.AddCellValueText(IndexDane, 0, 0, "Kod");
@@ -98,9 +117,9 @@ namespace TestExcel
                 excelOperationSyncfusion.AddCellValueText(IndexDane, 14, 0, "727937");
                 excelOperationSyncfusion.AddCellValueText(IndexDane, 14, 1, "Jan Nowak_13");
 
-                excelOperationSyncfusion.DropDownList(0, IndexDane, 0, 0, 20, 0, "$A$3:$A$15");
+                //excelOperationSyncfusion.DropDownList(0, IndexDane, 0, 0, 20, 0, "$A$3:$A$15");
 
-                
+                excelOperationSyncfusion.NameManager("Data", "pawel", "A3:A15");
 
                 excelOperationSyncfusion.AddCellValueText(index, 0, 0, "Tekst11");
                 excelOperationSyncfusion.AddCellValueText(index, 0, 1, "Tekst12");
@@ -113,6 +132,63 @@ namespace TestExcel
                 excelOperationSyncfusion.AddCellValueText(index, 2, 2, "Tekst33");
 
                 excelOperationSyncfusion.AddCellFormula(index, 10, 1, "SUM(A6:A10)");
+
+                var lastRow = excelOperationSyncfusion.GetLastRow("Test1");
+                var lastColumn = excelOperationSyncfusion.GetLastColumn("Test1");
+                excelOperationSyncfusion.HideSheet(3, SheetVisibilityIndex.Hidden);
+                excelOperationSyncfusion.ActiveSheet(1);
+                excelOperationSyncfusion.HideRow("Test1", 0, 1);
+
+                int indexManager = excelOperationSyncfusion.AddWorksheet("Manager");
+                int indexNewManager = excelOperationSyncfusion.AddWorksheet("NewManager");
+                excelOperationSyncfusion.AddCellValueText(indexManager, 0, 0, "Nazwisko");
+                excelOperationSyncfusion.AddCellValueText(indexManager, 0, 1, "Imie");
+                excelOperationSyncfusion.AddCellValueText(indexManager, 1, 0, "Kowalski");
+                excelOperationSyncfusion.AddCellValueText(indexManager, 1, 1, "Jan");
+                excelOperationSyncfusion.AddCellValueText(indexManager, 2, 0, "Kowalski");
+                excelOperationSyncfusion.AddCellValueText(indexManager, 2, 1, "Anna");
+                excelOperationSyncfusion.AddCellValueText(indexManager, 3, 0, "Nowak");
+                excelOperationSyncfusion.AddCellValueText(indexManager, 3, 1, "Piotr");
+                excelOperationSyncfusion.AddCellValueText(indexManager, 4, 0, "Nowal");
+                excelOperationSyncfusion.AddCellValueText(indexManager, 4, 1, "Ewa");
+                excelOperationSyncfusion.AddCellValueText(indexManager, 5, 0, "Wiśniewski");
+                excelOperationSyncfusion.AddCellValueText(indexManager, 5, 1, "Marek");
+
+                excelOperationSyncfusion.AddCellValueText(indexNewManager, 0, 4, "X");
+                excelOperationSyncfusion.AddCellValueText(indexNewManager, 0, 5, "xx1");
+                excelOperationSyncfusion.AddCellValueText(indexNewManager, 0, 6, "yy1");
+                excelOperationSyncfusion.AddCellValueText(indexNewManager, 0, 7, "zz1");
+                excelOperationSyncfusion.AddCellValueText(indexNewManager, 1, 4, "Y");
+                excelOperationSyncfusion.AddCellValueText(indexNewManager, 1, 5, "xx2");
+                excelOperationSyncfusion.AddCellValueText(indexNewManager, 1, 6, "yy2");
+                excelOperationSyncfusion.AddCellValueText(indexNewManager, 1, 7, "zz2");
+                excelOperationSyncfusion.AddCellValueText(indexNewManager, 2, 4, "Z");
+
+                /*excelOperationSyncfusion.NameManager(indexNewManager, "XYZ", $"NewManager!$E$1:$E$3");
+                excelOperationSyncfusion.NameManager(indexNewManager, "X", $"NewManager!$F$1:$F$2");
+                excelOperationSyncfusion.NameManager(indexNewManager, "Y", $"NewManager!$G$1:$G$2");
+                excelOperationSyncfusion.NameManager(indexNewManager, "Z", $"NewManager!$H$1:$H$2");*/
+                excelOperationSyncfusion.NameManager(indexNewManager, "XYZ", "$E$1:$E$3");
+                excelOperationSyncfusion.NameManager(indexNewManager, "X", "$F$1:$F$2");
+                excelOperationSyncfusion.NameManager(indexNewManager, "Y", "$G$1:$G$2");
+                excelOperationSyncfusion.NameManager(indexNewManager, "Z", "$H$1:$H$2");
+
+                excelOperationSyncfusion.DropDownList(indexNewManager, "XYZ", 0, 0, 15, 0);
+                excelOperationSyncfusion.DropDownList(indexNewManager, "INDIRECT($A1)", 0, 1, 15, 1);
+
+
+                /*excelOperationSyncfusion.DropDownList("NewManager", "Manager", 1, 0, 5, 0, "A2:A6");
+                excelOperationSyncfusion.NameManager(indexManager, "Kowalski", "B2:B3");
+                excelOperationSyncfusion.NameManager(indexManager, "Nowak", "B4:B5");
+                excelOperationSyncfusion.NameManager(indexManager, "Wiśniewski", "B6");*/
+
+
+
+
+
+
+
+                //excelOperationSyncfusion.HideRowAndColumn("Test1", 0, 0, 2, 2);
                 //excelOperationSyncfusion.AddRow(index, 1);
                 //excelOperationSyncfusion.AddColumn(index, 1);
                 /*excelOperationSyncfusion.AddCellValueText(index, 1, 7, "Tekst32");

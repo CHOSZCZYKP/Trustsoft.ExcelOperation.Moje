@@ -1385,149 +1385,26 @@ namespace Trustsoft.ExcelOperation.Moje
             _workbook.Worksheets[sheetName].Protect(password);
         }
 
-        public void DropDownList(int sheetIndex, int dataSheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList)
+        public void DropDownList(int sheetIndex, string namedRange, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)//int dataSheetIndex, string rangeDataToList
         {
             IWorksheet sheet = _workbook.Worksheets[sheetIndex];
-            IWorksheet dataSheet = _workbook.Worksheets[dataSheetIndex];
-
-            IRange range = dataSheet.Range[rangeDataToList];
-
-            int index = 0;
-            string[] data;
-            if (range.Rows.Count() > 1 && range.Columns.Count() == 1)
-            {
-                data = new string[range.Rows.Count()];
-
-                foreach (var item in range)
-                {
-                    data[index++] = item.Text;
-                }
-            }
-            else
-            {
-                data = new string[range.Columns.Count()];
-
-                foreach (var item in range)
-                {
-                    data[index++] = item.Text;
-                }
-            }
             
-            IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
-            IDataValidation dataValidation = cellRange.DataValidation;
-            dataValidation.ListOfValues = data;
-
+            IDataValidation dataValidation = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1].DataValidation;
+            dataValidation.AllowType = ExcelDataType.User;
+            dataValidation.FirstFormula = $"={namedRange}";
             dataValidation.IsSuppressDropDownArrow = false;
             dataValidation.ShowErrorBox = true;
-            cellRange.CellStyle.NumberFormat = range.CellStyle.NumberFormat;
         }
 
-        public void DropDownList(string sheetName, int dataSheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList)
+        public void DropDownList(string sheetName, string namedRange, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)//int dataSheetIndex, string rangeDataToList
         {
             IWorksheet sheet = _workbook.Worksheets[sheetName];
-            IWorksheet dataSheet = _workbook.Worksheets[dataSheetIndex];
-
-            IRange range = dataSheet.Range[rangeDataToList];
-
-            int index = 0;
-            string[] data;
-            if (range.Rows.Count() > 1 && range.Columns.Count() == 1)
-            {
-                data = new string[range.Rows.Count()];
-
-                foreach (var item in range)
-                {
-                    data[index++] = item.Text;
-                }
-            }
-            else
-            {
-                data = new string[range.Columns.Count()];
-
-                foreach (var item in range)
-                {
-                    data[index++] = item.Text;
-                }
-            }
-            IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
-            IDataValidation dataValidation = cellRange.DataValidation;
-            dataValidation.ListOfValues = data;
-
+            
+            IDataValidation dataValidation = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1].DataValidation;
+            dataValidation.AllowType = ExcelDataType.User;
+            dataValidation.FirstFormula = $"={namedRange}";
             dataValidation.IsSuppressDropDownArrow = false;
             dataValidation.ShowErrorBox = true;
-            cellRange.CellStyle.NumberFormat = range.CellStyle.NumberFormat;
-        }
-
-        public void DropDownList(int sheetIndex, string dataSheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList)
-        {
-            IWorksheet sheet = _workbook.Worksheets[sheetIndex];
-            IWorksheet dataSheet = _workbook.Worksheets[dataSheetName];
-
-            IRange range = dataSheet.Range[rangeDataToList];
-
-            int index = 0;
-            string[] data;
-            if (range.Rows.Count() > 1 && range.Columns.Count() == 1)
-            {
-                data = new string[range.Rows.Count()];
-
-                foreach (var item in range)
-                {
-                    data[index++] = item.Text;
-                }
-            }
-            else
-            {
-                data = new string[range.Columns.Count()];
-
-                foreach (var item in range)
-                {
-                    data[index++] = item.Text;
-                }
-            }
-            IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
-            IDataValidation dataValidation = cellRange.DataValidation;
-            dataValidation.ListOfValues = data;
-
-            dataValidation.IsSuppressDropDownArrow = false;
-            dataValidation.ShowErrorBox = true;
-            cellRange.CellStyle.NumberFormat = range.CellStyle.NumberFormat;
-        }
-
-        public void DropDownList(string sheetName, string dataSheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList)
-        {
-            IWorksheet sheet = _workbook.Worksheets[sheetName];
-            IWorksheet dataSheet = _workbook.Worksheets[dataSheetName];
-
-            IRange range = dataSheet.Range[rangeDataToList];
-
-            int index = 0;
-            string[] data;
-            if (range.Rows.Count() > 1 && range.Columns.Count() == 1)
-            {
-                data = new string[range.Rows.Count()];
-
-                foreach (var item in range)
-                {
-                    data[index++] = item.Text;
-                }
-            }
-            else
-            {
-                data = new string[range.Columns.Count()];
-
-                foreach (var item in range)
-                {
-                    data[index++] = item.Text;
-                }
-            }
-            IRange cellRange = sheet.Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
-            IDataValidation dataValidation = cellRange.DataValidation;
-            dataValidation.ListOfValues = data;
-
-            dataValidation.IsSuppressDropDownArrow = false;
-            dataValidation.ShowErrorBox = true;
-            cellRange.CellStyle.NumberFormat = range.CellStyle.NumberFormat;
         }
 
         public void SetAutoWidth(int sheetIndex, int columnIndex)
@@ -1754,12 +1631,12 @@ namespace Trustsoft.ExcelOperation.Moje
 
         public string GetCellValueText(int sheetIndex, int rowIndex, int columnIndex)
         {
-            return _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Text;
+            return _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Text.ToString();
         }
 
         public string GetCellValueText(string sheetName, int rowIndex, int columnIndex)
         {
-            return _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Text;
+            return _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Text.ToString();
         }
 
         public DateTime GetCellValueDate(int sheetIndex, int rowIndex, int columnIndex)
@@ -1777,6 +1654,226 @@ namespace Trustsoft.ExcelOperation.Moje
             _workbook.BuiltInDocumentProperties.Subject = subject;
             _workbook.BuiltInDocumentProperties.Title = title;
         }
+
+        public int GetLastRow(int sheetIndex)
+        {
+            return _workbook.Worksheets[sheetIndex].UsedRange.LastRow;
+        }
+
+        public int GetLastRow(string sheetName)
+        {
+            return _workbook.Worksheets[sheetName].UsedRange.LastRow;
+        }
+
+        public int GetLastColumn(int sheetIndex)
+        {
+            return _workbook.Worksheets[sheetIndex].UsedRange.LastColumn;
+        }
+
+        public int GetLastColumn(string sheetName)
+        {
+            return _workbook.Worksheets[sheetName].UsedRange.LastColumn;
+        }
+
+        public object OpenSpreadsheet(FileStream path)
+        {
+            _workbook = _application.Workbooks.Open(path);
+            return _workbook;
+        }
+
+        public void HideSheet(int sheetIndex, SheetVisibilityIndex sheetVisibilityIndex)
+        {
+            var hide = SyncfusionHelper.ConvertFromWorksheetVisibilitySyncfusion(sheetVisibilityIndex, out bool isEmpty);
+            if (!isEmpty)
+            {
+                _workbook.Worksheets[sheetIndex].Visibility = hide;
+                _workbook.Worksheets[0].Activate();
+            }
+        }
+
+        public void HideSheet(string sheetName, SheetVisibilityIndex sheetVisibilityIndex)
+        {
+            var hide = SyncfusionHelper.ConvertFromWorksheetVisibilitySyncfusion(sheetVisibilityIndex, out bool isEmpty);
+            if (!isEmpty)
+            {
+                _workbook.Worksheets[sheetName].Visibility = hide;
+                _workbook.Worksheets[0].Activate();
+            }
+        }
+
+        public void ActiveSheet(int sheetIndex)
+        {
+            _workbook.Worksheets[sheetIndex].Activate();
+        }
+
+        public void ActiveSheet(string sheetName)
+        {
+            _workbook.Worksheets[sheetName].Activate();
+        }
+
+        public void HideSheet(int hidenSheetIndex, int activeSheetIndex, SheetVisibilityIndex sheetVisibilityIndex)
+        {
+            var hide = SyncfusionHelper.ConvertFromWorksheetVisibilitySyncfusion(sheetVisibilityIndex, out bool isEmpty);
+            if (!isEmpty)
+            {
+                _workbook.Worksheets[hidenSheetIndex].Visibility = hide;
+                _workbook.Worksheets[activeSheetIndex].Activate();
+            }
+        }
+
+        public void HideSheet(string hidenSheetName, string activeSheetName, SheetVisibilityIndex sheetVisibilityIndex)
+        {
+            var hide = SyncfusionHelper.ConvertFromWorksheetVisibilitySyncfusion(sheetVisibilityIndex, out bool isEmpty);
+            if (!isEmpty)
+            {
+                _workbook.Worksheets[hidenSheetName].Visibility = hide;
+                _workbook.Worksheets[activeSheetName].Activate();
+            }
+        }
+
+        public void HideSheet(int hidenSheetIndex, string activeSheetName, SheetVisibilityIndex sheetVisibilityIndex)
+        {
+            var hide = SyncfusionHelper.ConvertFromWorksheetVisibilitySyncfusion(sheetVisibilityIndex, out bool isEmpty);
+            if (!isEmpty)
+            {
+                _workbook.Worksheets[hidenSheetIndex].Visibility = hide;
+                _workbook.Worksheets[activeSheetName].Activate();
+            }
+        }
+
+        public void HideSheet(string hidenSheetName, int activeSheetIndex, SheetVisibilityIndex sheetVisibilityIndex)
+        {
+            var hide = SyncfusionHelper.ConvertFromWorksheetVisibilitySyncfusion(sheetVisibilityIndex, out bool isEmpty);
+            if (!isEmpty)
+            {
+                _workbook.Worksheets[hidenSheetName].Visibility = hide;
+                _workbook.Worksheets[activeSheetIndex].Activate();
+            }
+        }
+
+        public void HideRow(int sheetIndex, int rowIndex)
+        {
+            _workbook.Worksheets[sheetIndex].ShowRow(rowIndex + 1, false);
+        }
+
+        public void HideRow(string sheetName, int rowIndex)
+        {
+            _workbook.Worksheets[sheetName].ShowRow(rowIndex + 1, false);
+        }
+
+        public void HideRow(int sheetIndex, int firstRowIndex, int lastRowIndex)
+        {
+            for (int row = firstRowIndex + 1; row <= lastRowIndex + 1; row++)
+            {
+                _workbook.Worksheets[sheetIndex].ShowRow(row, false);
+            }
+        }
+
+        public void HideRow(string sheetName, int firstRowIndex, int lastRowIndex)
+        {
+            for (int row = firstRowIndex + 1; row <= lastRowIndex + 1; row++)
+            {
+                _workbook.Worksheets[sheetName].ShowRow(row, false);
+            }
+        }
+
+        public void HideRow(int sheetIndex, int[] rowIndexes)
+        {
+            foreach (var row in rowIndexes)
+            {
+                _workbook.Worksheets[sheetIndex].ShowRow(row + 1, false);
+            }
+        }
+
+        public void HideRow(string sheetName, int[] rowIndexes)
+        {
+            foreach (var row in rowIndexes)
+            {
+                _workbook.Worksheets[sheetName].ShowRow(row + 1, false);
+            }
+        }
+
+        public void HideColumn(int sheetIndex, int columnIndex)
+        {
+            _workbook.Worksheets[sheetIndex].ShowColumn(columnIndex + 1, false);
+        }
+
+        public void HideColumn(string sheetName, int columnIndex)
+        {
+            _workbook.Worksheets[sheetName].ShowColumn(columnIndex + 1, false);
+        }
+
+        public void HideColumn(int sheetIndex, int firstColumnIndex, int lastColumnIndex)
+        {
+            for (int col = firstColumnIndex + 1; col <= lastColumnIndex + 1; col++)
+            {
+                _workbook.Worksheets[sheetIndex].ShowColumn(col, false);
+            }
+        }
+
+        public void HideColumn(string sheetName, int firstColumnIndex, int lastColumnIndex)
+        {
+            for (int col = firstColumnIndex + 1; col <= lastColumnIndex + 1; col++)
+            {
+                _workbook.Worksheets[sheetName].ShowColumn(col, false);
+            }
+        }
+
+        public void HideColumn(int sheetIndex, int[] columnIndexes)
+        {
+            foreach (var col in columnIndexes)
+            {
+                _workbook.Worksheets[sheetIndex].ShowColumn(col + 1, false);
+            }    
+        }
+
+        public void HideColumn(string sheetName, int[] columnIndexes)
+        {
+            foreach (var col in columnIndexes)
+            {
+                _workbook.Worksheets[sheetName].ShowColumn(col + 1, false);
+            }
+        }
+
+        public void HideRowAndColumn(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)
+        {
+            IRange range = _workbook.Worksheets[sheetIndex].Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
+            _workbook.Worksheets[sheetIndex].ShowRange(range, false);
+        }
+
+        public void HideRowAndColumn(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)
+        {
+            IRange range = _workbook.Worksheets[sheetName].Range[firstRowIndex + 1, firstColumnIndex + 1, lastRowIndex + 1, lastColumnIndex + 1];
+            _workbook.Worksheets[sheetName].ShowRange(range, false);
+        }
+
+        public void NameManager(int sheetIndex, string name, string range)
+        {
+            IName namedRange = _workbook.Names.Add(name);
+            namedRange.RefersToRange = _workbook.Worksheets[sheetIndex].Range[range];
+        }
+
+        public void NameManager(string sheetName, string name, string range)
+        {
+            IName namedRange = _workbook.Names.Add(name);
+            namedRange.RefersToRange = _workbook.Worksheets[sheetName].Range[range];
+        }
+
+        public void NameManager(int sheetIndex, string name, string range, string comment)
+        {
+            IName namedRange = _workbook.Names.Add(name); 
+            namedRange.RefersToRange = _workbook.Worksheets[sheetIndex].Range[range];
+            namedRange.Description = comment;
+        }
+
+        public void NameManager(string sheetName, string name, string range, string comment)
+        {
+            IName namedRange = _workbook.Names.Add(name);
+            namedRange.RefersToRange = _workbook.Worksheets[sheetName].Range[range];
+            namedRange.Description = comment;
+        }
+
+        
 
         //COMING SOON NEXT UPDATE
     }

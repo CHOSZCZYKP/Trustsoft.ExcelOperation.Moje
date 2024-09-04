@@ -108,7 +108,7 @@ namespace Trustsoft.ExcelOperation.Moje
             ISheet sheet = _workbook.GetSheetAt(sheetIndex);
             IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
             ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
-
+            
             cell.SetCellValue(date);
 
             ICellStyle oldCellStyle = cell.CellStyle;
@@ -140,7 +140,7 @@ namespace Trustsoft.ExcelOperation.Moje
             ISheet sheet = _workbook.GetSheetAt(sheetIndex);
             IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
             ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
-
+            cell.SetCellType(CellType.Numeric);
             cell.SetCellValue(date);
 
             ICellStyle oldCellStyle = cell.CellStyle;
@@ -155,7 +155,7 @@ namespace Trustsoft.ExcelOperation.Moje
             ISheet sheet = _workbook.GetSheet(sheetName);
             IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
             ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
-
+            cell.SetCellType(CellType.Numeric);
             cell.SetCellValue(date);
 
             ICellStyle oldCellStyle = cell.CellStyle;
@@ -396,7 +396,7 @@ namespace Trustsoft.ExcelOperation.Moje
             ISheet sheet = _workbook.GetSheet(sheetName);
             IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
             ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
-
+            cell.SetCellType(CellType.Numeric);
             cell.SetCellValue(((double)percent));
 
             ICellStyle oldCellStyle = cell.CellStyle;
@@ -429,7 +429,7 @@ namespace Trustsoft.ExcelOperation.Moje
             ISheet sheet = _workbook.GetSheet(sheetName);
             IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
             ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
-
+            cell.SetCellType(CellType.Numeric);
             cell.SetCellValue(((double)percent));
 
             ICellStyle oldCellStyle = cell.CellStyle;
@@ -1528,10 +1528,6 @@ namespace Trustsoft.ExcelOperation.Moje
         {
             _workbook.RemoveSheetAt(sheetIndex);
         }
-
-        
-
-        
 
         public void HeightRow(int sheetIndex, int rowIndex, double height)
         {
@@ -2832,68 +2828,26 @@ namespace Trustsoft.ExcelOperation.Moje
             sheet.ProtectSheet(password);
         }
 
-        public void DropDownList(int sheetIndex, int dataSheetIndex,  int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList)
+        public void DropDownList(int sheetIndex, string namedRange,  int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)//int dataSheetIndex, string rangeDataToList
         {
             ISheet sheet = _workbook.GetSheetAt(sheetIndex);
-            ISheet dataSheet = _workbook.GetSheetAt(dataSheetIndex);
-            IName nameRange = _workbook.CreateName();
-            nameRange.RefersToFormula = $"{dataSheet.SheetName}!{rangeDataToList}";
-            nameRange.NameName = "DropDownValues";
 
             IDataValidationHelper dataValidationHelper = sheet.GetDataValidationHelper();
             CellRangeAddressList cellRangeAddressList = new CellRangeAddressList(firstRowIndex, lastRowIndex, firstColumnIndex, lastColumnIndex);
-            IDataValidationConstraint dataValidationConstraint = dataValidationHelper.CreateFormulaListConstraint("DropDownValues");
+            IDataValidationConstraint dataValidationConstraint = dataValidationHelper.CreateFormulaListConstraint(namedRange);
             IDataValidation dataValidation = dataValidationHelper.CreateValidation(dataValidationConstraint, cellRangeAddressList);
             dataValidation.SuppressDropDownArrow = true;
             dataValidation.ShowErrorBox = true;
             sheet.AddValidationData(dataValidation);
         }
 
-        public void DropDownList(string sheetName, int dataSheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList)
+        public void DropDownList(string sheetName, string namedRange, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)//int dataSheetIndex, string rangeDataToList
         {
             ISheet sheet = _workbook.GetSheet(sheetName);
-            ISheet dataSheet = _workbook.GetSheetAt(dataSheetIndex);
-            IName nameRange = _workbook.CreateName();
-            nameRange.RefersToFormula = $"{dataSheet.SheetName}!{rangeDataToList}";
-            nameRange.NameName = "DropDownValues";
 
             IDataValidationHelper dataValidationHelper = sheet.GetDataValidationHelper();
             CellRangeAddressList cellRangeAddressList = new CellRangeAddressList(firstRowIndex, lastRowIndex, firstColumnIndex, lastColumnIndex);
-            IDataValidationConstraint dataValidationConstraint = dataValidationHelper.CreateFormulaListConstraint("DropDownValues");
-            IDataValidation dataValidation = dataValidationHelper.CreateValidation(dataValidationConstraint, cellRangeAddressList);
-            dataValidation.SuppressDropDownArrow = true;
-            dataValidation.ShowErrorBox = true;
-            sheet.AddValidationData(dataValidation);
-        }
-
-        public void DropDownList(int sheetIndex, string dataSheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList)
-        {
-            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
-            ISheet dataSheet = _workbook.GetSheet(dataSheetName);
-            IName nameRange = _workbook.CreateName();
-            nameRange.RefersToFormula = $"{dataSheet.SheetName}!{rangeDataToList}";
-            nameRange.NameName = "DropDownValues";
-
-            IDataValidationHelper dataValidationHelper = sheet.GetDataValidationHelper();
-            CellRangeAddressList cellRangeAddressList = new CellRangeAddressList(firstRowIndex, lastRowIndex, firstColumnIndex, lastColumnIndex);
-            IDataValidationConstraint dataValidationConstraint = dataValidationHelper.CreateFormulaListConstraint("DropDownValues");
-            IDataValidation dataValidation = dataValidationHelper.CreateValidation(dataValidationConstraint, cellRangeAddressList);
-            dataValidation.SuppressDropDownArrow = true;
-            dataValidation.ShowErrorBox = true;
-            sheet.AddValidationData(dataValidation);
-        }
-
-        public void DropDownList(string sheetName, string dataSheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, string rangeDataToList)
-        {
-            ISheet sheet = _workbook.GetSheet(sheetName);
-            ISheet dataSheet = _workbook.GetSheet(dataSheetName);
-            IName nameRange = _workbook.CreateName();
-            nameRange.RefersToFormula = $"{dataSheet.SheetName}!{rangeDataToList}";
-            nameRange.NameName = "DropDownValues";
-
-            IDataValidationHelper dataValidationHelper = sheet.GetDataValidationHelper();
-            CellRangeAddressList cellRangeAddressList = new CellRangeAddressList(firstRowIndex, lastRowIndex, firstColumnIndex, lastColumnIndex);
-            IDataValidationConstraint dataValidationConstraint = dataValidationHelper.CreateFormulaListConstraint("DropDownValues");
+            IDataValidationConstraint dataValidationConstraint = dataValidationHelper.CreateFormulaListConstraint(namedRange);
             IDataValidation dataValidation = dataValidationHelper.CreateValidation(dataValidationConstraint, cellRangeAddressList);
             dataValidation.SuppressDropDownArrow = true;
             dataValidation.ShowErrorBox = true;
@@ -3264,6 +3218,298 @@ namespace Trustsoft.ExcelOperation.Moje
             
         }
 
+        public int GetLastRow(int sheetIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            return sheet.LastRowNum + 1;
+        }
+
+        public int GetLastRow(string sheetName)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            return sheet.LastRowNum + 1;
+        }
+
+        public int GetLastColumn(int sheetIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            int columnCount = 0;
+            for(int i = 0; i <= sheet.LastRowNum; i++)
+            {
+                IRow row = sheet.GetRow(i);
+                if(row != null && row.LastCellNum > columnCount)
+                {
+                    columnCount = row.LastCellNum;
+                }
+            }
+            return columnCount;
+        }
+
+        public int GetLastColumn(string sheetName)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            int columnCount = 0;
+            for (int i = 0; i <= sheet.LastRowNum; i++)
+            {
+                IRow row = sheet.GetRow(i);
+                if (row != null && row.LastCellNum > columnCount)
+                {
+                    columnCount = row.LastCellNum;
+                }
+            }
+            return columnCount;
+        }
+
+        public object OpenSpreadsheet(FileStream path)
+        {
+            _workbook = new XSSFWorkbook(path);
+            return _workbook;
+        }
+
+        public void HideSheet(int sheetIndex, SheetVisibilityIndex sheetVisibilityIndex)
+        {
+            var hide = NpoiHelper.ConvertFromSheetStateNpoi(sheetVisibilityIndex, out bool isEmpty);
+            if (!isEmpty)
+            {
+                _workbook.SetSheetHidden(sheetIndex, hide);
+            }
+        }
+
+        public void HideSheet(string sheetName, SheetVisibilityIndex sheetVisibilityIndex)
+        {
+            int sheetIndex = _workbook.GetSheetIndex(sheetName);
+            var hide = NpoiHelper.ConvertFromSheetStateNpoi(sheetVisibilityIndex, out bool isEmpty);
+            if (!isEmpty)
+            {
+                _workbook.SetSheetHidden(sheetIndex, hide);
+            }   
+        }
+
+        public void ActiveSheet(int sheetIndex)
+        {
+            _workbook.SetActiveSheet(sheetIndex);
+        }
+
+        public void ActiveSheet(string sheetName)
+        {
+            int sheetIndex = _workbook.GetSheetIndex(sheetName);
+            _workbook.SetActiveSheet(sheetIndex);
+        }
+
+        public void HideSheet(int hidenSheetIndex, int activeSheetIndex, SheetVisibilityIndex sheetVisibilityIndex)
+        {
+            var hide = NpoiHelper.ConvertFromSheetStateNpoi(sheetVisibilityIndex, out bool isEmpty);
+            if (!isEmpty)
+            {
+                _workbook.SetSheetHidden(hidenSheetIndex, hide);
+                _workbook.SetActiveSheet(activeSheetIndex);
+            }
+        }
+
+        public void HideSheet(string hidenSheetName, string activeSheetName, SheetVisibilityIndex sheetVisibilityIndex)
+        {
+            int hidenSheetIndex = _workbook.GetSheetIndex(hidenSheetName);
+            int activeSheetIndex = _workbook.GetSheetIndex(activeSheetName);
+            var hide = NpoiHelper.ConvertFromSheetStateNpoi(sheetVisibilityIndex, out bool isEmpty);
+            if (!isEmpty)
+            {
+                _workbook.SetSheetHidden(hidenSheetIndex, hide);
+                _workbook.SetActiveSheet(activeSheetIndex);
+            }
+        }
+
+        public void HideSheet(int hidenSheetIndex, string activeSheetName, SheetVisibilityIndex sheetVisibilityIndex)
+        {
+            int activeSheetIndex = _workbook.GetSheetIndex(activeSheetName);
+            var hide = NpoiHelper.ConvertFromSheetStateNpoi(sheetVisibilityIndex, out bool isEmpty);
+            if (!isEmpty)
+            {
+                _workbook.SetSheetHidden(hidenSheetIndex, hide);
+                _workbook.SetActiveSheet(activeSheetIndex);
+            }
+        }
+
+        public void HideSheet(string hidenSheetName, int activeSheetIndex, SheetVisibilityIndex sheetVisibilityIndex)
+        {
+            int hidenSheetIndex = _workbook.GetSheetIndex(hidenSheetName);
+            var hide = NpoiHelper.ConvertFromSheetStateNpoi(sheetVisibilityIndex, out bool isEmpty);
+            if (!isEmpty)
+            {
+                _workbook.SetSheetHidden(hidenSheetIndex, hide);
+                _workbook.SetActiveSheet(activeSheetIndex);
+            }
+        }
+
+        public void HideRow(int sheetIndex, int rowIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            
+            row.ZeroHeight = true;
+        }
+
+        public void HideRow(string sheetName, int rowIndex)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+
+            row.ZeroHeight = true;
+        }
+
+        public void HideRow(int sheetIndex, int firstRowIndex, int lastRowIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            for (int r = firstRowIndex; r <= lastRowIndex; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                row.ZeroHeight = true;
+            }
+        }
+
+        public void HideRow(string sheetName, int firstRowIndex, int lastRowIndex)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            for (int r = firstRowIndex; r <= lastRowIndex; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                row.ZeroHeight = true;
+            }
+        }
+
+        public void HideRow(int sheetIndex, int[] rowIndexes)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            foreach (var r in rowIndexes)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                row.ZeroHeight = true;
+            }
+        }
+
+        public void HideRow(string sheetName, int[] rowIndexes)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            foreach (var r in rowIndexes)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                row.ZeroHeight = true;
+            }
+        }
+
+        public void HideColumn(int sheetIndex, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            sheet.SetColumnHidden(columnIndex, true);
+        }
+
+        public void HideColumn(string sheetName, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            sheet.SetColumnHidden(columnIndex, true);
+        }
+
+        public void HideColumn(int sheetIndex, int firstColumnIndex, int lastColumnIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            for (int col = firstColumnIndex; col <= lastColumnIndex; col++)
+            {
+                sheet.SetColumnHidden(col, true);
+            }
+        }
+
+        public void HideColumn(string sheetName, int firstColumnIndex, int lastColumnIndex)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            for (int col = firstColumnIndex; col <= lastColumnIndex; col++)
+            {
+                sheet.SetColumnHidden(col, true);
+            }
+        }
+
+        public void HideColumn(int sheetIndex, int[] columnIndexes)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            foreach (var col in  columnIndexes)
+            {
+                sheet.SetColumnHidden(col, true);
+            }
+        }
+
+        public void HideColumn(string sheetName, int[] columnIndexes)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            foreach (var col in columnIndexes)
+            {
+                sheet.SetColumnHidden(col, true);
+            }
+        }
+
+        public void HideRowAndColumn(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            for (int r = firstRowIndex; r <= lastRowIndex; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                row.ZeroHeight = true;
+            }
+
+            for (int col = firstColumnIndex; col <= lastColumnIndex; col++)
+            {
+                sheet.SetColumnHidden(col, true);
+            }
+        }
+
+        public void HideRowAndColumn(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            for (int r = firstRowIndex; r <= lastRowIndex; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                row.ZeroHeight = true;
+            }
+
+            for (int col = firstColumnIndex; col <= lastColumnIndex; col++)
+            {
+                sheet.SetColumnHidden(col, true);
+            }
+        }
+
+        public void NameManager(int sheetIndex, string name, string range)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IName namedRange = _workbook.CreateName();
+            namedRange.NameName = name;
+            namedRange.RefersToFormula = $"{sheet.SheetName}!{range}";
+        }
+
+        public void NameManager(string sheetName, string name, string range)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IName namedRange = _workbook.CreateName();
+            namedRange.NameName = name;
+            namedRange.RefersToFormula = $"{sheet.SheetName}!{range}";
+        }
+
+        public void NameManager(int sheetIndex, string name, string range, string comment)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IName namedRange = _workbook.CreateName();
+            namedRange.NameName = name;
+            namedRange.RefersToFormula = $"{sheet.SheetName}!{range}";
+            namedRange.Comment = comment;
+        }
+
+        public void NameManager(string sheetName, string name, string range, string comment)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IName namedRange = _workbook.CreateName();
+            namedRange.NameName = name;
+            namedRange.RefersToFormula = $"{sheet.SheetName}!{range}";
+            namedRange.Comment = comment;
+            
+        }
+
+        
         //COMING SOON NEXT UPDATE
     }
 }

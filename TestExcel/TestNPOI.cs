@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using TestExcel;
 using Trustsoft.ExcelOperation.Moje;
 
-[assembly: Worker(typeof(TestNPOI), typeof(DokEwidencji))]
+[assembly: Worker(typeof(TestNPOI), typeof(DokEwidencja))]
 namespace TestExcel
 {
     public class TestNPOI
@@ -40,7 +40,9 @@ namespace TestExcel
                 excelOperationNPOI.AddCellValueText(index, i, 2, item.Name);
                 i++;
             }
-
+            Time time = new Time(12, 15);
+            excelOperationNPOI.AddCellValueTime(0, 0, 1, time);
+            excelOperationNPOI.GetCellValueText(0, 0, 1);
             excelOperationNPOI.MetaData("Jan", "Export", "Nowy");
             excelOperationNPOI.AddCellValuePercent(0, 1, 3, new Percent(0.8m));
             excelOperationNPOI.AddCellValueDate(0, 2, 3, new DateTime(2024, 8, 21));
@@ -53,7 +55,21 @@ namespace TestExcel
             excelOperationNPOI.AddCellValueInt(0, 4, 0, 4);
             excelOperationNPOI.AddCellValueInt(0, 5, 0, 5);
             excelOperationNPOI.AddCellValueInt(0, 6, 0, 6);*/
-            excelOperationNPOI.ConditionalFormatting(0, 0, 0, 6, 0, new ConditionAndFormatting[] { new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "0").SetBackgroundColor(255, 255, 0, 0).SetBold(true), new ConditionAndFormatting(ComparisonOperatorIndex.GreaterThan, "3").SetBackgroundColor(255, 0, 255, 0).SetTextColor(255, 0, 0, 255).SetItalics(true) });
+            excelOperationNPOI.AddCellValueText(0, 0, 0, "OK");
+            excelOperationNPOI.AddCellValueText(0, 1, 0, "ERROR");
+            excelOperationNPOI.AddCellValueText(0, 2, 0, "OK");
+            excelOperationNPOI.AddCellValueInt(0, 3, 0, 1);
+            excelOperationNPOI.AddCellValueInt(0, 4, 0, 1);
+            excelOperationNPOI.AddCellValueInt(0, 5, 0, 3);
+            excelOperationNPOI.AddCellFormula(0, 6, 0, "SUM(A4:A6)");
+            excelOperationNPOI.ConditionalFormatting(0, 0, 0, 6, 0, new ConditionAndFormatting[]
+            {
+                    //new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "OK").SetBackgroundColor(255, 198, 239, 206).SetTextColor(255, 0, 100, 0),
+                    new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "\"OK\"").SetBackgroundColor(255, 198, 239, 206).SetTextColor(255, 0, 100, 0),
+                    //new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "ERROR").SetBackgroundColor(255, 255, 199, 206).SetTextColor(255, 190, 1, 7),
+                    new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "\"ERROR\"").SetBackgroundColor(255, 255, 199, 206).SetTextColor(255, 190, 1, 7),
+                    new ConditionAndFormatting(ComparisonOperatorIndex.Equal, "3").SetBackgroundColor(255,0,0,255)
+            });
 
             /*excelOperationNPOI.AddCellValueText(0, 0, 1, "Bardzo długi test specjalinie do testów1");
             excelOperationNPOI.AddCellValueText(0, 1, 1, "Bardzo długi test specjalinie do testów11 hahahaha");
@@ -94,7 +110,9 @@ namespace TestExcel
             excelOperationNPOI.AddCellValueText(IndexDane, 14, 0, "727937");
             excelOperationNPOI.AddCellValueText(IndexDane, 14, 1, "Jan Nowak_13");
 
-            excelOperationNPOI.DropDownList(0, IndexDane, 0, 0, 20, 0, "$A$3:$A$15");
+            excelOperationNPOI.NameManager("Data", "pawel", "A3:A15");
+
+            //excelOperationNPOI.DropDownList(0, IndexDane, 0, 0, 20, 0, "$A$3:$A$15");
             excelOperationNPOI.AddCellValueText(index, 0, 0, "Tekst11");
             excelOperationNPOI.AddCellValueText(index, 0, 1, "Tekst12");
             excelOperationNPOI.AddCellValueText(index, 0, 2, "Tekst13");
@@ -106,10 +124,66 @@ namespace TestExcel
             excelOperationNPOI.AddCellValueText(index, 2, 2, "Tekst33");
 
             excelOperationNPOI.AddCellFormula(index, 10, 1, "SUM(A6:A10)");
-            
+
+            var lastRow = excelOperationNPOI.GetLastRow("Test1");
+            var lastColumn = excelOperationNPOI.GetLastColumn("Test1");
+            excelOperationNPOI.HideSheet(3, SheetVisibilityIndex.Hidden);
+            excelOperationNPOI.ActiveSheet(1);
+            excelOperationNPOI.HideRow("Test1", 0, 1);
+
+
+            int indexManager = excelOperationNPOI.AddWorksheet("Manager");
+            int indexNewManager = excelOperationNPOI.AddWorksheet("NewManager");
+            excelOperationNPOI.AddCellValueText(indexManager, 0, 0, "Nazwisko");
+            excelOperationNPOI.AddCellValueText(indexManager, 0, 1, "Imie");
+            excelOperationNPOI.AddCellValueText(indexManager, 1, 0, "Kowalski");
+            excelOperationNPOI.AddCellValueText(indexManager, 1, 1, "Jan");
+            excelOperationNPOI.AddCellValueText(indexManager, 2, 0, "Kowalski");
+            excelOperationNPOI.AddCellValueText(indexManager, 2, 1, "Anna");
+            excelOperationNPOI.AddCellValueText(indexManager, 3, 0, "Nowak");
+            excelOperationNPOI.AddCellValueText(indexManager, 3, 1, "Piotr");
+            excelOperationNPOI.AddCellValueText(indexManager, 4, 0, "Nowal");
+            excelOperationNPOI.AddCellValueText(indexManager, 4, 1, "Ewa");
+            excelOperationNPOI.AddCellValueText(indexManager, 5, 0, "Wiśniewski");
+            excelOperationNPOI.AddCellValueText(indexManager, 5, 1, "Marek");
+
+            excelOperationNPOI.AddCellValueText(indexNewManager, 0, 4, "X");
+            excelOperationNPOI.AddCellValueText(indexNewManager, 0, 5, "xx1");
+            excelOperationNPOI.AddCellValueText(indexNewManager, 0, 6, "yy1");
+            excelOperationNPOI.AddCellValueText(indexNewManager, 0, 7, "zz1");
+            excelOperationNPOI.AddCellValueText(indexNewManager, 1, 4, "Y");
+            excelOperationNPOI.AddCellValueText(indexNewManager, 1, 5, "xx2");
+            excelOperationNPOI.AddCellValueText(indexNewManager, 1, 6, "yy2");
+            excelOperationNPOI.AddCellValueText(indexNewManager, 1, 7, "zz2");
+            excelOperationNPOI.AddCellValueText(indexNewManager, 2, 4, "Z");
+
+            /*excelOperationNPOI.NameManager(indexNewManager, "XYZ", $"NewManager!$E$1:$E$3");
+            excelOperationNPOI.NameManager(indexNewManager, "X", $"NewManager!$F$1:$F$2");
+            excelOperationNPOI.NameManager(indexNewManager, "Y", $"NewManager!$G$1:$G$2");
+            excelOperationNPOI.NameManager(indexNewManager, "Z", $"NewManager!$H$1:$H$2");*/
+            excelOperationNPOI.NameManager(indexNewManager, "XYZ", "$E$1:$E$3");
+            excelOperationNPOI.NameManager(indexNewManager, "X", "$F$1:$F$2");
+            excelOperationNPOI.NameManager(indexNewManager, "Y", "$G$1:$G$2");
+            excelOperationNPOI.NameManager(indexNewManager, "Z", "$H$1:$H$2");
+
+            excelOperationNPOI.DropDownList(indexNewManager, "XYZ", 0, 0, 15, 0);
+            excelOperationNPOI.DropDownList(indexNewManager, "INDIRECT($A1)", 0, 1, 15, 1);
+            /*excelOperationNPOI.NameManager(indexManager, "Kowalski", "B2:B3");
+            excelOperationNPOI.NameManager(indexManager, "Nowak", "B4:B5");
+            excelOperationNPOI.NameManager(indexManager, "Wiśniewski", "B6");
+
+            excelOperationNPOI.DropDownList("Manager", "Manager", 1, 4, 5, 4, "A2:A6");
+
+            excelOperationNPOI.DropDownList("Manager", "Manager", 1, 5, 1, 5, "INDIRECT(E2)");
+            excelOperationNPOI.DropDownList("Manager", "Manager", 2, 5, 2, 5, "INDIRECT(E3)");
+            excelOperationNPOI.DropDownList("Manager", "Manager", 3, 5, 3, 5, "INDIRECT(E4)");
+            excelOperationNPOI.DropDownList("Manager", "Manager", 4, 5, 4, 5, "INDIRECT(E5)");
+            excelOperationNPOI.DropDownList("Manager", "Manager", 5, 5, 5, 5, "INDIRECT(E6)");*/
+
+            //excelOperationNPOI.HideRowAndColumn("Test1", 0, 0, 2, 2);
             //excelOperationNPOI.AddRow(index, 1);
             //excelOperationNPOI.AddColumn(index, 1);
-            
+
             /*excelOperationNPOI.AddCellValueText(index, 1, 7, "Tekst32");
 
             excelOperationNPOI.AddCellValueText(index, 10, 7, "Tekst32");

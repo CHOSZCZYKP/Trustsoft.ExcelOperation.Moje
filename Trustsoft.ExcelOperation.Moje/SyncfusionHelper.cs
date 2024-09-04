@@ -202,5 +202,31 @@ namespace Trustsoft.ExcelOperation.Moje
 
             } 
         }
+
+        /// <summary>
+        /// Returns the WorksheetVisibility and information whether something was returned.
+        /// </summary>
+        /// <param name="sheetVisibilityIndex">The index of the worksheet visibility to be set. This can be one of the values from the <see cref="SheetVisibilityIndex"/>enum.</param>
+        /// <param name="isEmpty">Returns true if the worksheet is empty otherwise false.</param>
+        /// <returns>Returns the WorksheetVisibility and information whether something was returned.</returns>
+        /// <exception cref="NotFiniteNumberException">Not Implemented Exceotion.</exception>
+        public static WorksheetVisibility ConvertFromWorksheetVisibilitySyncfusion(SheetVisibilityIndex sheetVisibilityIndex, out bool isEmpty)
+        {
+            switch(sheetVisibilityIndex)
+            {
+                case SheetVisibilityIndex.Visible:
+                    isEmpty = false;
+                    return WorksheetVisibility.Visible;
+                case SheetVisibilityIndex.Hidden:
+                    isEmpty = false;
+                    return WorksheetVisibility.Hidden;
+                case SheetVisibilityIndex.VeryHidden:
+                    isEmpty = false;
+                    return WorksheetVisibility.StrongHidden;
+                default:
+                    isEmpty= true;
+                    throw new NotFiniteNumberException();
+            }
+        }
     }
 }

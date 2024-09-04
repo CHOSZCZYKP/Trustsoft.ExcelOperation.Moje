@@ -169,6 +169,30 @@ namespace Trustsoft.ExcelOperation.Moje
             }
         }
 
-
+        /// <summary>
+        /// Returns the SheetState and information whether something was returned.
+        /// </summary>
+        /// <param name="sheetVisibilityIndex">The index of the sheet state to be set. This can be one of the values from the <see cref="SheetVisibilityIndex"/>enum.</param>
+        /// <param name="isEmpty">Returns true if the worksheet is empty otherwise false.</param>
+        /// <returns>Returns the SheetState and information whether something was returned.</returns>
+        /// <exception cref="NotImplementedException">Not Implemented Exceotion.</exception>
+        public static SheetState ConvertFromSheetStateNpoi(SheetVisibilityIndex sheetVisibilityIndex, out bool isEmpty)
+        {
+            switch(sheetVisibilityIndex)
+            {
+                case SheetVisibilityIndex.Visible:
+                    isEmpty = false;
+                    return SheetState.Visible;
+                case SheetVisibilityIndex.Hidden:
+                    isEmpty = false;
+                    return SheetState.Hidden;
+                case SheetVisibilityIndex.VeryHidden:
+                    isEmpty = false;
+                    return SheetState.VeryHidden;
+                default:
+                    isEmpty=true; 
+                    throw new NotImplementedException();
+            }
+        }
     }
 }
