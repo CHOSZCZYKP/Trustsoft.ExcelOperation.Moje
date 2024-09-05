@@ -137,7 +137,7 @@ namespace TestExcel
                 var lastColumn = excelOperationSyncfusion.GetLastColumn("Test1");
                 excelOperationSyncfusion.HideSheet(3, SheetVisibilityIndex.Hidden);
                 excelOperationSyncfusion.ActiveSheet(1);
-                excelOperationSyncfusion.HideRow("Test1", 0, 1);
+                //excelOperationSyncfusion.HideRow("Test1", 0, 1);
 
                 int indexManager = excelOperationSyncfusion.AddWorksheet("Manager");
                 int indexNewManager = excelOperationSyncfusion.AddWorksheet("NewManager");
@@ -182,7 +182,13 @@ namespace TestExcel
                 excelOperationSyncfusion.NameManager(indexManager, "Nowak", "B4:B5");
                 excelOperationSyncfusion.NameManager(indexManager, "Wiśniewski", "B6");*/
 
-
+                excelOperationSyncfusion.ProtectColumn("Test1", 0, false);
+                excelOperationSyncfusion.ProtectRow("Test1", 0, false);
+                excelOperationSyncfusion.ProtectCell("Test1", 0, 1, true);
+                excelOperationSyncfusion.ProtectCell("Test1", 1, 0, true);
+                excelOperationSyncfusion.SetProtectSheet("Test1", "XZ");
+                
+                
 
 
 

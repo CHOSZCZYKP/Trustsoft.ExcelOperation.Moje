@@ -129,7 +129,7 @@ namespace TestExcel
             var lastColumn = excelOperationNPOI.GetLastColumn("Test1");
             excelOperationNPOI.HideSheet(3, SheetVisibilityIndex.Hidden);
             excelOperationNPOI.ActiveSheet(1);
-            excelOperationNPOI.HideRow("Test1", 0, 1);
+            //excelOperationNPOI.HideRow("Test1", 0, 1);
 
 
             int indexManager = excelOperationNPOI.AddWorksheet("Manager");
@@ -168,6 +168,13 @@ namespace TestExcel
 
             excelOperationNPOI.DropDownList(indexNewManager, "XYZ", 0, 0, 15, 0);
             excelOperationNPOI.DropDownList(indexNewManager, "INDIRECT($A1)", 0, 1, 15, 1);
+
+            excelOperationNPOI.ProtectColumn("Test1", 0, false);
+            excelOperationNPOI.ProtectRow("Test1", 0, false);
+            excelOperationNPOI.ProtectCell("Test1", 0, 1, true);
+            excelOperationNPOI.ProtectCell("Test1", 1, 0, true);
+            excelOperationNPOI.SetProtectSheet("Test1", "XZ");
+
             /*excelOperationNPOI.NameManager(indexManager, "Kowalski", "B2:B3");
             excelOperationNPOI.NameManager(indexManager, "Nowak", "B4:B5");
             excelOperationNPOI.NameManager(indexManager, "Wiśniewski", "B6");

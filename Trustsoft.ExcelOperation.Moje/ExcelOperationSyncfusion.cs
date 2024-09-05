@@ -1873,6 +1873,123 @@ namespace Trustsoft.ExcelOperation.Moje
             namedRange.Description = comment;
         }
 
+
+        public void ProtectCell(int sheetIndex, int rowIndex, int columnIndex, bool block)
+        {
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].CellStyle.Locked = block;
+        }
+
+        public void ProtectCell(string sheetName, int rowIndex, int columnIndex, bool block)
+        {
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].CellStyle.Locked = block;
+        }
+
+        public void ProtectCell(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, bool block) 
+        {
+            for (int row = firstRowIndex + 1; row <= lastRowIndex + 1; row++)
+            {
+                for (int col = firstColumnIndex + 1; col <= lastColumnIndex + 1; col++)
+                {
+                    _workbook.Worksheets[sheetIndex][row, col].CellStyle.Locked = block;
+                }
+            }
+        }
+
+        public void ProtectCell(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, bool block) 
+        {
+            for (int row = firstRowIndex + 1; row <= lastRowIndex + 1; row++)
+            {
+                for (int col = firstColumnIndex + 1; col <= lastColumnIndex + 1; col++)
+                {
+                    _workbook.Worksheets[sheetName][row, col].CellStyle.Locked = block;
+                }
+            }
+        }
+
+        public void ProtectRow(int sheetIndex, int rowIndex, bool block) 
+        {
+            _workbook.Worksheets[sheetIndex].Rows[rowIndex + 1].CellStyle.Locked = block;
+        }
+
+        public void ProtectRow(string sheetName, int rowIndex, bool block) 
+        {
+            _workbook.Worksheets[sheetName].Rows[rowIndex].CellStyle.Locked = block;
+        }
+
+        public void ProtectRow(int sheetIndex, int firstRowIndex, int lastRowIndex, bool block) 
+        { 
+            for (int row = firstRowIndex; row <= lastRowIndex; row++)
+            {
+                _workbook.Worksheets[sheetIndex].Rows[row].CellStyle.Locked = block;
+            }
+        }
+
+        public void ProtectRow(string sheetName, int firstRowIndex, int lastRowIndex, bool block) 
+        {
+            for (int row = firstRowIndex; row <= lastRowIndex; row++)
+            {
+                _workbook.Worksheets[sheetName].Rows[row].CellStyle.Locked = block;
+            }
+        }
+
+        public void ProtectRow(int sheetIndex, int[] rowIndexes, bool block) 
+        { 
+            foreach (var  rowIndex in rowIndexes)
+            {
+                _workbook.Worksheets[sheetIndex].Rows[rowIndex].CellStyle.Locked = block;
+            }
+        }
+
+        public void ProtectRow(string sheetName, int[] rowIndexes, bool block) 
+        {
+            foreach (var rowIndex in rowIndexes)
+            {
+                _workbook.Worksheets[sheetName].Rows[rowIndex].CellStyle.Locked = block;
+            }
+        }
+
+        public void ProtectColumn(int sheetIndex, int columnIndex, bool block) 
+        {
+            _workbook.Worksheets[sheetIndex].Columns[columnIndex].CellStyle.Locked = block;
+        }
+
+        public void ProtectColumn(string sheetName, int columnIndex, bool block) 
+        {
+            _workbook.Worksheets[sheetName].Columns[columnIndex].CellStyle.Locked = block;
+        }
+
+        public void ProtectColumn(int sheetIndex, int firstColumnIndex, int lastColumnIndex, bool block) 
+        {
+            for (int col = firstColumnIndex; col <= lastColumnIndex; col++)
+            {
+                _workbook.Worksheets[sheetIndex].Columns[col].CellStyle.Locked = block;
+            }
+        }
+
+        public void ProtectColumn(string sheetName, int firstColumnIndex, int lastColumnIndex, bool block) 
+        {
+            for (int col = firstColumnIndex; col <= lastColumnIndex; col++)
+            {
+                _workbook.Worksheets[sheetName].Columns[col].CellStyle.Locked = block;
+            }
+        }
+
+        public void ProtectColumn(int sheetIndex, int[] columnIndexes, bool block) 
+        {
+            foreach (var columnIndex in columnIndexes)
+            {
+                _workbook.Worksheets[sheetIndex].Columns[columnIndex].CellStyle.Locked = block;
+            }
+        }
+
+        public void ProtectColumn(string sheetName, int[] columnIndexes, bool block)
+        {
+            foreach (var columnIndex in columnIndexes)
+            {
+                _workbook.Worksheets[sheetName].Columns[columnIndex].CellStyle.Locked = block;
+            }
+        }
+
         
 
         //COMING SOON NEXT UPDATE

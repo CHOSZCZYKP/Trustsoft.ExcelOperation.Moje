@@ -5,6 +5,7 @@ using NPOI.SS.UserModel;
 using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
 using NPOI.XWPF.UserModel;
+using SixLabors.ImageSharp.PixelFormats;
 using Soneta.Core.Extensions;
 using Soneta.Data.QueryDefinition;
 using Soneta.Types;
@@ -2704,7 +2705,7 @@ namespace Trustsoft.ExcelOperation.Moje
             ISheet sheet = _workbook.GetSheetAt(sheetIndex);
 
             IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
-            ICell cell = row.GetCell(columnIndex) ?? row.GetCell(columnIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
 
             ICellStyle oldStyle = cell.CellStyle;
             ICellStyle newStyle = _workbook.CreateCellStyle();
@@ -2718,7 +2719,7 @@ namespace Trustsoft.ExcelOperation.Moje
             ISheet sheet = _workbook.GetSheet(sheetName);
 
             IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
-            ICell cell = row.GetCell(columnIndex) ?? row.GetCell(columnIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
 
             ICellStyle oldStyle = cell.CellStyle;
             ICellStyle newStyle = _workbook.CreateCellStyle();
@@ -2736,7 +2737,7 @@ namespace Trustsoft.ExcelOperation.Moje
                 IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
                 for (int c = firstColumnIndex; c <= lastColumnIndex; c++)
                 {
-                    ICell cell = row.GetCell(c) ?? row.GetCell(c);
+                    ICell cell = row.GetCell(c) ?? row.CreateCell(c);
 
                     ICellStyle oldStyle = cell.CellStyle;
                     ICellStyle newStyle = _workbook.CreateCellStyle();
@@ -2756,7 +2757,7 @@ namespace Trustsoft.ExcelOperation.Moje
                 IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
                 for (int c = firstColumnIndex; c <= lastColumnIndex; c++)
                 {
-                    ICell cell = row.GetCell(c) ?? row.GetCell(c);
+                    ICell cell = row.GetCell(c) ?? row.CreateCell(c);
 
                     ICellStyle oldStyle = cell.CellStyle;
                     ICellStyle newStyle = _workbook.CreateCellStyle();
@@ -3288,12 +3289,14 @@ namespace Trustsoft.ExcelOperation.Moje
         public void ActiveSheet(int sheetIndex)
         {
             _workbook.SetActiveSheet(sheetIndex);
+            _workbook.SetSelectedTab(sheetIndex);
         }
 
         public void ActiveSheet(string sheetName)
         {
             int sheetIndex = _workbook.GetSheetIndex(sheetName);
             _workbook.SetActiveSheet(sheetIndex);
+            _workbook.SetSelectedTab(sheetIndex);
         }
 
         public void HideSheet(int hidenSheetIndex, int activeSheetIndex, SheetVisibilityIndex sheetVisibilityIndex)
@@ -3509,7 +3512,246 @@ namespace Trustsoft.ExcelOperation.Moje
             
         }
 
+        public void ProtectCell(int sheetIndex, int rowIndex, int columnIndex, bool block)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+            cell.CellStyle = cellStyle;
+        }
+
+        public void ProtectCell(string sheetName, int rowIndex, int columnIndex, bool block)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+            cell.CellStyle = cellStyle;
+        }
+
+        public void ProtectCell(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, bool block)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            for (int r = firstRowIndex; r <= lastRowIndex; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                for (int  c = firstColumnIndex; c <= lastColumnIndex; c++)
+                {
+                    ICell cell = row.GetCell(c) ?? row.CreateCell(c);
+                    ICellStyle cellStyle = _workbook.CreateCellStyle();
+                    cellStyle.IsLocked = block;
+                    cell.CellStyle = cellStyle;
+                }
+            }
+        }
+
+        public void ProtectCell(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, bool block)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            for (int r = firstRowIndex; r <= lastRowIndex; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                for (int c = firstColumnIndex; c <= lastColumnIndex; c++)
+                {
+                    ICell cell = row.GetCell(c) ?? row.CreateCell(c);
+                    ICellStyle cellStyle = _workbook.CreateCellStyle();
+                    cellStyle.IsLocked = block;
+                    cell.CellStyle = cellStyle;
+                }
+            }
+        }
+
+        public void ProtectRow(int sheetIndex, int rowIndex, bool block)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+            
+            foreach (var cell in row.Cells)
+            {
+                cell.CellStyle = cellStyle;
+            }
+        }
+
+        public void ProtectRow(string sheetName, int rowIndex, bool block)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+
+            foreach (var cell in row.Cells)
+            {
+                cell.CellStyle = cellStyle;
+            }
+        }
+
+        public void ProtectRow(int sheetIndex, int firstRowIndex, int lastRowIndex, bool block)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+
+            for (int r = firstRowIndex; r <= lastRowIndex; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                foreach (var cell in row.Cells)
+                {
+                    cell.CellStyle = cellStyle;
+                }
+            }
+        }
+
+        public void ProtectRow(string sheetName, int firstRowIndex, int lastRowIndex, bool block)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+
+            for (int r = firstRowIndex; r <= lastRowIndex; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                foreach (var cell in row.Cells)
+                {
+                    cell.CellStyle = cellStyle;
+                }
+            }
+        }
+
+        public void ProtectRow(int sheetIndex, int[] rowIndexes, bool block)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+
+            foreach (var r in rowIndexes)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                foreach (var cell in row.Cells)
+                {
+                    cell.CellStyle = cellStyle;
+                }
+            }
+        }
+
+        public void ProtectRow(string sheetName, int[] rowIndexes, bool block)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+
+            foreach (var r in rowIndexes)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                foreach (var cell in row.Cells)
+                {
+                    cell.CellStyle = cellStyle;
+                }
+            }
+        }
+
+        public void ProtectColumn(int sheetIndex, int columnIndex, bool block)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+
+            for (int r = 0; r <= sheet.LastRowNum; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+                cell.CellStyle = cellStyle;
+            }
+        }
+
+        public void ProtectColumn(string sheetName, int columnIndex, bool block)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+
+            for (int r = 0; r <= sheet.LastRowNum; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+                cell.CellStyle = cellStyle;
+            }
+        }
+
+        public void ProtectColumn(int sheetIndex, int firstColumnIndex, int lastColumnIndex, bool block)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+
+            for (int r = 0; r <= sheet.LastRowNum; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                for (int c = firstColumnIndex; c <= lastColumnIndex; c++)
+                {
+                    ICell cell = row.GetCell(c) ?? row.CreateCell(c);
+                    cell.CellStyle = cellStyle;
+                }
+            }
+        }
+
+        public void ProtectColumn(string sheetName, int firstColumnIndex, int lastColumnIndex, bool block)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+
+            for (int r = 0; r <= sheet.LastRowNum; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                for (int c = firstColumnIndex; c <= lastColumnIndex; c++)
+                {
+                    ICell cell = row.GetCell(c) ?? row.CreateCell(c);
+                    cell.CellStyle = cellStyle;
+                }
+            }
+        }
+
+        public void ProtectColumn(int sheetIndex, int[] columnIndexes, bool block)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+
+            for (int r = 0; r <= sheet.LastRowNum; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                foreach (var c in columnIndexes)
+                {
+                    ICell cell = row.GetCell(c) ?? row.CreateCell(c);
+                    cell.CellStyle = cellStyle;
+                }
+            }
+        }
+
+        public void ProtectColumn(string sheetName, int[] columnIndexes, bool block)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            ICellStyle cellStyle = _workbook.CreateCellStyle();
+            cellStyle.IsLocked = block;
+
+            for (int r = 0; r <= sheet.LastRowNum; r++)
+            {
+                IRow row = sheet.GetRow(r) ?? sheet.CreateRow(r);
+                foreach (var c in columnIndexes)
+                {
+                    ICell cell = row.GetCell(c) ?? row.CreateCell(c);
+                    cell.CellStyle = cellStyle;
+                }
+            }
+        }
+
         
+
         //COMING SOON NEXT UPDATE
     }
 }

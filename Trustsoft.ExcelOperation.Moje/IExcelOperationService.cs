@@ -1569,6 +1569,148 @@ namespace Trustsoft.ExcelOperation.Moje
         /// <param name="comment">Comment to the range.</param>
         public void NameManager(string sheetName, string name, string range, string comment);
 
+        /// <summary>
+        /// Sets whether the cell to be protected. The sheet is identified by its index. The cell is identified by its row and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the cell is to be protected.</param>
+        /// <param name="rowIndex">The index of the row in which the cell is to be protected.</param>
+        /// <param name="columnIndex">The index of the row column in which the cell is to be protected.</param>
+        /// <param name="block">Blocks or unblocks the cell. If block = true the cell is protected if block = false the cell is not protected.</param>
+        public void ProtectCell(int sheetIndex, int rowIndex, int columnIndex, bool block);
+
+        /// <summary>
+        /// Sets whether the cell to be protected. The sheet is identified by its name. The cell is identified by its row and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the cell is to be protected.</param>
+        /// <param name="rowIndex">The index of the row in which the cell is to be protected.</param>
+        /// <param name="columnIndex">The index of the row column in which the cell is to be protected.</param>
+        /// <param name="block">Blocks or unblocks the cell. If block = true the cell is protected if block = false the cell is not protected.</param>
+        public void ProtectCell(string sheetName, int rowIndex, int columnIndex, bool block);
+
+        /// <summary>
+        /// Sets whether the cells to be protected. The sheet is identified by its index. The range is identified by its firstRow number, 
+        /// firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the cells to be protected.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range to be protected.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range to be protected.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range to be protected.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range to be protected.</param>
+        /// <param name="block">Blocks or unblocks the cells. If block = true the cells are protected if block = false the cells are not protected.</param>
+        public void ProtectCell(int sheetIndex, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, bool block);
+
+        /// <summary>
+        /// Sets whether the cells to be protected. The sheet is identified by its name. The range is identified by its firstRow number, 
+        /// firstColumn number, lastRow number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the cells to be protected.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range to be protected.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range to be protected.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range to be protected.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range to be protected.</param>
+        /// <param name="block">Blocks or unblocks the cells. If block = true the cells are protected if block = false the cells are not protected.</param>
+        public void ProtectCell(string sheetName, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex, bool block);
+
+        /// <summary>
+        /// Sets whether the row to be protected. The sheet is identified by its index. The row is identified by its row number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the row is to be protected.</param>
+        /// <param name="rowIndex">The index of the row in which the row is to be protected.</param>
+        /// <param name="block">Blocks or unblocks the row. If block = true the row is protected if block = false the row is not protected.</param>
+        public void ProtectRow(int sheetIndex, int rowIndex, bool block);
+
+        /// <summary>
+        /// Sets whether the row to be protected. The sheet is identified by its name. The row is identified by its row number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the row is to be protected.</param>
+        /// <param name="rowIndex">The index of the row in which the row is to be protected.</param>
+        /// <param name="block">Blocks or unblocks the row. If block = true the row is protected if block = false the row is not protected.</param>
+        public void ProtectRow(string sheetName, int rowIndex, bool block);
+
+        /// <summary>
+        /// Sets whether the rows to be protected. The sheet is identified by its index. The range is identified by its firstRow number and lastRow number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the rows to be protected.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range to be protected.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range to be protected.</param>
+        /// <param name="block">Blocks or unblocks the rows. If block = true the rows are protected if block = false the rows are not protected.</param>
+        public void ProtectRow(int sheetIndex, int firstRowIndex, int lastRowIndex, bool block);
+
+        /// <summary>
+        /// Sets whether the rows to be protected. The sheet is identified by its name. The range is identified by its firstRow number and lastRow number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the rows to be protected.</param>
+        /// <param name="firstRowIndex">The index of the first row in the range to be protected.</param>
+        /// <param name="lastRowIndex">The index of the last row in the range to be protected.</param>
+        /// <param name="block">Blocks or unblocks the rows. If block = true the rows are protected if block = false the rows are not protected.</param>
+        public void ProtectRow(string sheetName, int firstRowIndex, int lastRowIndex, bool block);
+
+        /// <summary>
+        /// Sets whether the rows to be protected. The sheet is identified by its index. Rows are identified by indexes from the rowIndexes array.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the rows to be protected.</param>
+        /// <param name="rowIndexes">The array of rows to be protected.</param>
+        /// <param name="block">Blocks or unblocks the rows. If block = true the rows are protected if block = false the rows are not protected.</param>
+        public void ProtectRow(int sheetIndex, int[] rowIndexes, bool block);
+
+        /// <summary>
+        /// Sets whether the rows to be protected. The sheet is identified by its name. Rows are identified by indexes from the rowIndexes array.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the rows to be protected.</param>
+        /// <param name="rowIndexes">The array of rows to be protected.</param>
+        /// <param name="block">Blocks or unblocks the rows. If block = true the rows are protected if block = false the rows are not protected.</param>
+        public void ProtectRow(string sheetName, int[] rowIndexes, bool block);
+
+        /// <summary>
+        /// Sets whether the column to be protected. The sheet is identified by its index. The column is identified by its column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the column is to be protected.</param>
+        /// <param name="columnIndex">The index of the column in which the column is to be protected.</param>
+        /// <param name="block">Blocks or unblocks the column. If block = true the column is protected if block = false the column is not protected.</param>
+        public void ProtectColumn(int sheetIndex, int columnIndex, bool block);
+
+        /// <summary>
+        /// Sets whether the column to be protected. The sheet is identified by its name. The column is identified by its column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the column is to be protected.</param>
+        /// <param name="columnIndex">The index of the column in which the column is to be protected.</param>
+        /// <param name="block">Blocks or unblocks the column. If block = true the column is protected if block = false the column is not protected.</param>
+        public void ProtectColumn(string sheetName, int columnIndex, bool block);
+
+        /// <summary>
+        /// Sets whether the columns to be protected. The sheet is identified by its index. The range is identified by its firstColumn number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the columns to be protected.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range to be protected.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range to be protected.</param>
+        /// <param name="block">Blocks or unblocks the columns. If block = true the columns are protected if block = false the columns are not protected.</param>
+        public void ProtectColumn(int sheetIndex, int firstColumnIndex, int lastColumnIndex, bool block);
+
+        /// <summary>
+        /// Sets whether the columns to be protected. The sheet is identified by its name. The range is identified by its firstColumn number and lastColumn number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the columns to be protected.</param>
+        /// <param name="firstColumnIndex">The index of the first column in the range to be protected.</param>
+        /// <param name="lastColumnIndex">The index of the last column in the range to be protected.</param>
+        /// <param name="block">Blocks or unblocks the columns. If block = true the columns are protected if block = false the columns are not protected.</param>
+        public void ProtectColumn(string sheetName, int firstColumnIndex, int lastColumnIndex, bool block);
+
+        /// <summary>
+        /// Sets whether the columns to be protected. The sheet is identified by its index. Columns are identified by indexes from the columnIndexes array.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the columns to be protected.</param>
+        /// <param name="columnIndexes">The array of columns to be protected.</param>
+        /// <param name="block">Blocks or unblocks the columns. If block = true the columns are protected if block = false the columns are not protected.</param>
+        public void ProtectColumn(int sheetIndex, int[] columnIndexes, bool block);
+
+        /// <summary>
+        /// Sets whether the columns to be protected. The sheet is identified by its name. Columns are identified by indexes from the columnIndexes array.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the columns to be protected.</param>
+        /// <param name="columnIndexes">The array of columns to be protected.</param>
+        /// <param name="block">Blocks or unblocks the columns. If block = true the columns are protected if block = false the columns are not protected.</param>
+        public void ProtectColumn(string sheetName, int[] columnIndexes, bool block);
+
 
         //COMING SOON NEXT UPDATE
     }
