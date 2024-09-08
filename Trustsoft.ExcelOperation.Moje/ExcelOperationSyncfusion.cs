@@ -15,6 +15,8 @@ using Syncfusion.XlsIO;
 using System;
 using System.Drawing;
 using Trustsoft.ExcelOperation.Moje.SyncfusionException;
+using static Soneta.Business.FieldCondition;
+using static Soneta.Business.SessionDataWriter;
 using static Soneta.Kalend.DefinicjaZestawieniaCzasu;
 using IDataValidation = Syncfusion.XlsIO.IDataValidation;
 using IName = Syncfusion.XlsIO.IName;
@@ -1385,7 +1387,7 @@ namespace Trustsoft.ExcelOperation.Moje
             _workbook.Worksheets[sheetName].Protect(password);
         }
 
-        public void DropDownList(int sheetIndex, string namedRange, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)//int dataSheetIndex, string rangeDataToList
+        public void DropDownList(int sheetIndex, string namedRange, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)
         {
             IWorksheet sheet = _workbook.Worksheets[sheetIndex];
             
@@ -1396,7 +1398,7 @@ namespace Trustsoft.ExcelOperation.Moje
             dataValidation.ShowErrorBox = true;
         }
 
-        public void DropDownList(string sheetName, string namedRange, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)//int dataSheetIndex, string rangeDataToList
+        public void DropDownList(string sheetName, string namedRange, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)
         {
             IWorksheet sheet = _workbook.Worksheets[sheetName];
             
@@ -1989,8 +1991,104 @@ namespace Trustsoft.ExcelOperation.Moje
                 _workbook.Worksheets[sheetName].Columns[columnIndex].CellStyle.Locked = block;
             }
         }
-
         
+        public void SetCellType(int sheetIndex, int rowIndex, int columnIndex, string format)
+        {
+            _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].NumberFormat = "@";
+        }
+
+        public void SetCellType(string sheetName, int rowIndex, int columnIndex, string format)
+        {
+            _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].NumberFormat = "@";
+        }
+
+        public int GetLastRowIndexInColumn(int sheetIndex, int columnIndex)
+        {
+            IRange usedRange = _workbook.Worksheets[sheetIndex].UsedRange;
+            int lastRowIndex = -1;
+            for (int row = 1; row <= usedRange.LastRow; row++)
+            {
+                IRange cell = _workbook.Worksheets[sheetIndex][row, columnIndex + 1];
+                if (cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
+                {
+                    lastRowIndex = row - 1;
+                }
+            }
+            if (lastRowIndex == -1)
+            {
+                throw new InvalidOperationException($"The column: {columnIndex - 1} did not contain any data.");
+            }
+            else
+            {
+                return lastRowIndex;
+            }
+        }
+
+        public int GetLastRowIndexInColumn(string sheetName, int columnIndex)
+        {
+            IRange usedRange = _workbook.Worksheets[sheetName].UsedRange;
+            int lastRowIndex = -1;
+            for (int row = 1; row <= usedRange.LastRow; row++)
+            {
+                IRange cell = _workbook.Worksheets[sheetName][row, columnIndex + 1];
+                if (cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
+                {
+                    lastRowIndex = row - 1;
+                }
+            }
+            if (lastRowIndex == -1)
+            {
+                throw new InvalidOperationException($"The column: {columnIndex - 1} did not contain any data.");
+            }
+            else
+            {
+                return lastRowIndex;
+            }
+        }
+
+        public int GetLastColumnIndexInRow(int sheetIndex, int rowIndex)
+        {
+            int lastColumnIndex = -1;
+            IRange usedRange = _workbook.Worksheets[sheetIndex].UsedRange;
+            for (int col = 1; col <= usedRange.LastColumn; col++)
+            {
+                IRange cell = _workbook.Worksheets[sheetIndex][rowIndex + 1, col];
+                if (cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
+                {
+                    lastColumnIndex = col - 1;
+                }
+            }
+            if (lastColumnIndex == -1)
+            {
+                throw new InvalidOperationException($"The row: {rowIndex - 1} did not contain any data.");
+            }
+            else
+            {
+                return lastColumnIndex;
+            }
+        }
+
+        public int GetLastColumnIndexInRow(string sheetName, int rowIndex)
+        {
+            int lastColumnIndex = -1;
+            IRange usedRange = _workbook.Worksheets[sheetName].UsedRange;
+            for (int col = 1; col <= usedRange.LastColumn; col++)
+            {
+                IRange cell = _workbook.Worksheets[sheetName][rowIndex + 1, col];
+                if (cell.Value != null && !string.IsNullOrEmpty(cell.Value.ToString()))
+                {
+                    lastColumnIndex = col - 1;
+                }
+            }
+            if (lastColumnIndex == -1)
+            {
+                throw new InvalidOperationException($"The row: {rowIndex - 1} did not contain any data.");
+            }
+            else
+            {
+                return lastColumnIndex;
+            }
+        }
 
         //COMING SOON NEXT UPDATE
     }

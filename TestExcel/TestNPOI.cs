@@ -32,6 +32,7 @@ namespace TestExcel
             IWorkbook workbook1 = workbook as IWorkbook;
             int index = excelOperationNPOI.AddWorksheet("Test1");
             int worksheet1 = excelOperationNPOI.AddWorksheet("Test2");
+            int worksheetPusty = excelOperationNPOI.AddWorksheet("Pusty");
             List<Sheet> sheets = excelOperationNPOI.GetNameSheet();
             int i = 0;
             foreach (var item in sheets)
@@ -174,6 +175,14 @@ namespace TestExcel
             excelOperationNPOI.ProtectCell("Test1", 0, 1, true);
             excelOperationNPOI.ProtectCell("Test1", 1, 0, true);
             excelOperationNPOI.SetProtectSheet("Test1", "XZ");
+
+            /*int lastRowInColumnPusty = excelOperationNPOI.GetLastRowIndexInColumn("Pusty", 0);
+            int lastColumnInRowPusty = excelOperationNPOI.GetLastColumnIndexInRow("Pusty", 0);
+            int lastRowInColumnTest1 = excelOperationNPOI.GetLastRowIndexInColumn("Test1", 0);
+            int lastRowInColumnTest12 = excelOperationNPOI.GetLastRowIndexInColumn("Test1", 1);
+            int lastColumnInRowTest1 = excelOperationNPOI.GetLastColumnIndexInRow("Test1", 0);
+            int lastColumnInRowTest12 = excelOperationNPOI.GetLastColumnIndexInRow("Test1", 10);
+            { }*/
 
             /*excelOperationNPOI.NameManager(indexManager, "Kowalski", "B2:B3");
             excelOperationNPOI.NameManager(indexManager, "Nowak", "B4:B5");

@@ -1711,7 +1711,55 @@ namespace Trustsoft.ExcelOperation.Moje
         /// <param name="block">Blocks or unblocks the columns. If block = true the columns are protected if block = false the columns are not protected.</param>
         public void ProtectColumn(string sheetName, int[] columnIndexes, bool block);
 
+        /// <summary>
+        /// Sets the cell format. The sheet is identified by its index. The cell is identified by its row and column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the cell is to have the format set.</param>
+        /// <param name="rowIndex">The index of the row at which the cell is to have the format set.</param>
+        /// <param name="columnIndex">The index of the column at which the cell is to have the format set.</param>
+        /// <param name="format">Cell format.</param>
+        public void SetCellType(int sheetIndex, int rowIndex, int columnIndex, string format);
 
+        /// <summary>
+        /// Sets the cell format. The sheet is identified by its name. The cell is identified by its row and column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the cell is to have the format set.</param>
+        /// <param name="rowIndex">The index of the row at which the cell is to have the format set.</param>
+        /// <param name="columnIndex">The index of the column at which the cell is to have the format set.</param>
+        /// <param name="format">Cell format.</param>
+        public void SetCellType(string sheetName, int rowIndex, int columnIndex, string format);
+
+        /// <summary>
+        /// Returns the index of the last row in column. The sheet is identified by its index. The column is identified by its column number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet from which the last row of the column is to be taken.</param>
+        /// <param name="columnIndex">The index of the column from which the last row is to be taken.</param>
+        /// <returns>Returns the index of the last row in column.</returns>
+        public int GetLastRowIndexInColumn(int sheetIndex, int columnIndex);
+
+        /// <summary>
+        /// Returns the index of the last row in column. The sheet is identified by its name. The column is identified by its column number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet from which the last row of the column is to be taken.</param>
+        /// <param name="columnIndex">The index of the column from which the last row is to be taken.</param>
+        /// <returns>Returns the index of the last row in column.</returns>
+        public int GetLastRowIndexInColumn(string sheetName, int columnIndex);
+
+        /// <summary>
+        /// Returns the index of the last column in row. The sheet is identified by its index. The row is identified by its row number.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet from which the last column of the row is to be taken.</param>
+        /// <param name="rowIndex">The index of the row form which the last colum is to be taken.</param>
+        /// <returns>Returns the index of the last column in row.</returns>
+        public int GetLastColumnIndexInRow(int sheetIndex, int rowIndex);
+
+        /// <summary>
+        /// Returns the index of the last column in row. The sheet is identified by its name. The row is identified by its row number.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet from which the last column of the row is to be taken.</param>
+        /// <param name="rowIndex">The index of the row form which the last colum is to be taken.</param>
+        /// <returns>Returns the index of the last column in row.</returns>
+        public int GetLastColumnIndexInRow(string sheetName, int rowIndex);
         //COMING SOON NEXT UPDATE
     }
 }

@@ -34,7 +34,7 @@ namespace TestExcel
                 
                 int index = excelOperationSyncfusion.AddWorksheet("Test1");
                 int worksheet1 = excelOperationSyncfusion.AddWorksheet("Test2");
-
+                int workshetPusty = excelOperationSyncfusion.AddWorksheet("Pusty");
                 //excelOperationSyncfusion.DeleteWorksheet("Test1");
                 //excelOperationSyncfusion.ChangeNameWorksheet("Sheet1", "ZMIANA");
                 //excelOperationSyncfusion.ChangeNameWorksheet(1, "ZMIANA1");
@@ -188,9 +188,13 @@ namespace TestExcel
                 excelOperationSyncfusion.ProtectCell("Test1", 1, 0, true);
                 excelOperationSyncfusion.SetProtectSheet("Test1", "XZ");
                 
-                
-
-
+                /*int lastRowInColumnPusty = excelOperationSyncfusion.GetLastRowIndexInColumn("Pusty",1);
+                int lastColumnInRowPusty = excelOperationSyncfusion.GetLastColumnIndexInRow("Pusty", 1);
+                int lastRowInColumnTest1 = excelOperationSyncfusion.GetLastRowIndexInColumn("Test1", 0);
+                int lastRowInColumnTest12 = excelOperationSyncfusion.GetLastRowIndexInColumn("Test1", 1);
+                int lastColumnInRowTest1 = excelOperationSyncfusion.GetLastColumnIndexInRow("Test1", 0);
+                int lastColumnInRowTest12 = excelOperationSyncfusion.GetLastColumnIndexInRow("Test1", 10);
+                { }*/
 
 
 

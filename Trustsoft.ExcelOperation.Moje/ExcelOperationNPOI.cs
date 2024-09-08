@@ -2829,7 +2829,7 @@ namespace Trustsoft.ExcelOperation.Moje
             sheet.ProtectSheet(password);
         }
 
-        public void DropDownList(int sheetIndex, string namedRange,  int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)//int dataSheetIndex, string rangeDataToList
+        public void DropDownList(int sheetIndex, string namedRange,  int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)
         {
             ISheet sheet = _workbook.GetSheetAt(sheetIndex);
 
@@ -2842,7 +2842,7 @@ namespace Trustsoft.ExcelOperation.Moje
             sheet.AddValidationData(dataValidation);
         }
 
-        public void DropDownList(string sheetName, string namedRange, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)//int dataSheetIndex, string rangeDataToList
+        public void DropDownList(string sheetName, string namedRange, int firstRowIndex, int firstColumnIndex, int lastRowIndex, int lastColumnIndex)
         {
             ISheet sheet = _workbook.GetSheet(sheetName);
 
@@ -3750,7 +3750,120 @@ namespace Trustsoft.ExcelOperation.Moje
             }
         }
 
-        
+        public void SetCellType(int sheetIndex, int rowIndex, int columnIndex, string format)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellType(CellType.String);
+            
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat("@");
+        }
+
+        public void SetCellType(string sheetName, int rowIndex, int columnIndex, string format)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+            ICell cell = row.GetCell(columnIndex) ?? row.CreateCell(columnIndex);
+
+            cell.SetCellType(CellType.String);
+
+            ICellStyle oldCellStyle = cell.CellStyle;
+            ICellStyle newCellStyle = _workbook.CreateCellStyle();
+            newCellStyle.CloneStyleFrom(oldCellStyle);
+            newCellStyle.DataFormat = _workbook.CreateDataFormat().GetFormat("@");
+        }
+
+        public int GetLastRowIndexInColumn(int sheetIndex, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+
+            int lastRowIndex = -1;
+            for (int r = sheet.FirstRowNum; r <= sheet.LastRowNum; r++)
+            {
+                IRow row = sheet.GetRow(r);
+
+                if (row != null)
+                {
+                    ICell cell = row.GetCell(columnIndex);
+                    if (cell != null && cell.CellType != CellType.Blank)
+                    {
+                        lastRowIndex = r;
+                    }
+                }
+            }
+
+            if (lastRowIndex == -1)
+            {
+                throw new InvalidOperationException($"The column: {columnIndex} did not contain any data.");
+            }
+            else
+            {
+                return lastRowIndex;
+            }
+        }
+
+        public int GetLastRowIndexInColumn(string sheetName, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+
+            int lastRowIndex = -1;
+            for (int r = sheet.FirstRowNum; r <= sheet.LastRowNum; r++)
+            {
+                IRow row = sheet.GetRow(r);
+
+                if (row != null)
+                {
+                    ICell cell = row.GetCell(columnIndex);
+                    if (cell != null && cell.CellType != CellType.Blank)
+                    {
+                        lastRowIndex = r;
+                    }
+                }
+            }
+
+            if (lastRowIndex == -1)
+            {
+                throw new InvalidOperationException($"The column: {columnIndex} did not contain any data.");
+            }
+            else
+            {
+                return lastRowIndex;
+            }
+        }
+
+        public int GetLastColumnIndexInRow(int sheetIndex, int rowIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex);
+
+            if (row == null)
+            {
+                throw new InvalidOperationException($"The row: {rowIndex} did not contain any data.");
+            }
+            else
+            {
+                return row.LastCellNum - 1;
+            }
+
+        }
+        public int GetLastColumnIndexInRow(string sheetName, int rowIndex)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex);
+            if (row == null)
+            {
+                throw new InvalidOperationException($"The row: {rowIndex} did not contain any data.");
+            }
+            else
+            {
+                return row.LastCellNum - 1;
+            }
+        }
 
         //COMING SOON NEXT UPDATE
     }
