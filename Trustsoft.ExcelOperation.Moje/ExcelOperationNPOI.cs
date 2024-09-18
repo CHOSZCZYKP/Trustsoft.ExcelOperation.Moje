@@ -3865,6 +3865,38 @@ namespace Trustsoft.ExcelOperation.Moje
             }
         }
 
+        public bool IsEmptyCell(int sheetIndex, int rowIndex, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheetAt(sheetIndex);
+            IRow row = sheet.GetRow(rowIndex);
+            if (row == null)
+            {
+                return true;
+            }
+            ICell cell = row.GetCell(columnIndex);
+            if (cell == null || string.IsNullOrEmpty(cell.StringCellValue))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsEmptyCell(string sheetName, int rowIndex, int columnIndex)
+        {
+            ISheet sheet = _workbook.GetSheet(sheetName);
+            IRow row = sheet.GetRow(rowIndex);
+            if (row == null)
+            {
+                return true;
+            }
+            ICell cell = row.GetCell(columnIndex);
+            if (cell == null || string.IsNullOrEmpty(cell.StringCellValue))
+            {
+                return true;
+            }
+            return false;
+        }
+
         //COMING SOON NEXT UPDATE
     }
 }

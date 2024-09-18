@@ -176,6 +176,11 @@ namespace TestExcel
             excelOperationNPOI.ProtectCell("Test1", 1, 0, true);
             excelOperationNPOI.SetProtectSheet("Test1", "XZ");
 
+            bool jest = excelOperationNPOI.IsEmptyCell("Test1", 2, 0);
+            bool niema = excelOperationNPOI.IsEmptyCell("Test1", 3, 0);
+            excelOperationNPOI.SetCellType("Test1", 4, 0, "@");
+            bool tylkoFormat = excelOperationNPOI.IsEmptyCell("Test1", 4, 0);
+            { }
             /*int lastRowInColumnPusty = excelOperationNPOI.GetLastRowIndexInColumn("Pusty", 0);
             int lastColumnInRowPusty = excelOperationNPOI.GetLastColumnIndexInRow("Pusty", 0);
             int lastRowInColumnTest1 = excelOperationNPOI.GetLastRowIndexInColumn("Test1", 0);

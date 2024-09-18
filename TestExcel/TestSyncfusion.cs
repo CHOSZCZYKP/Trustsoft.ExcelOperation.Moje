@@ -187,7 +187,13 @@ namespace TestExcel
                 excelOperationSyncfusion.ProtectCell("Test1", 0, 1, true);
                 excelOperationSyncfusion.ProtectCell("Test1", 1, 0, true);
                 excelOperationSyncfusion.SetProtectSheet("Test1", "XZ");
-                
+
+
+                bool jest = excelOperationSyncfusion.IsEmptyCell("Test1", 2, 0);
+                bool niema = excelOperationSyncfusion.IsEmptyCell("Test1", 3, 0);
+                excelOperationSyncfusion.SetCellType("Test1", 4, 0, "@");
+                bool tylkoFormat = excelOperationSyncfusion.IsEmptyCell("Test1", 4, 0);
+                { }
                 /*int lastRowInColumnPusty = excelOperationSyncfusion.GetLastRowIndexInColumn("Pusty",1);
                 int lastColumnInRowPusty = excelOperationSyncfusion.GetLastColumnIndexInRow("Pusty", 1);
                 int lastRowInColumnTest1 = excelOperationSyncfusion.GetLastRowIndexInColumn("Test1", 0);

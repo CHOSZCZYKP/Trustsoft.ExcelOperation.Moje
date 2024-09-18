@@ -2090,6 +2090,25 @@ namespace Trustsoft.ExcelOperation.Moje
             }
         }
 
+        public bool IsEmptyCell(int sheetIndex, int rowIndex, int columnIndex)
+        {
+            object cellValue = _workbook.Worksheets[sheetIndex][rowIndex + 1, columnIndex + 1].Value;
+            if (cellValue == null || string.IsNullOrEmpty(cellValue.ToString()))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsEmptyCell(string sheetName, int rowIndex, int columnIndex)
+        {
+            object cellValue = _workbook.Worksheets[sheetName][rowIndex + 1, columnIndex + 1].Value;
+            if(cellValue == null || string.IsNullOrEmpty(cellValue.ToString()))
+            {
+                return true;
+            }
+            return false;
+        }
         //COMING SOON NEXT UPDATE
     }
 }

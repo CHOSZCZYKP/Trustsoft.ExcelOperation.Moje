@@ -1760,6 +1760,26 @@ namespace Trustsoft.ExcelOperation.Moje
         /// <param name="rowIndex">The index of the row form which the last colum is to be taken.</param>
         /// <returns>Returns the index of the last column in row.</returns>
         public int GetLastColumnIndexInRow(string sheetName, int rowIndex);
+
+        /// <summary>
+        /// Returns true if the cell is empty and false if there is something in the cell. The sheet is identified by its index. 
+        /// The cell is identified by its row index and column index.
+        /// </summary>
+        /// <param name="sheetIndex">The index of the sheet in which the cell is to be checked for empty.</param>
+        /// <param name="rowIndex">The index of the row from which a cell is to be checked whether it is empty.</param>
+        /// <param name="columnIndex">The index of the column from which a cell is to be checked whether it is empty.</param>
+        /// <returns>Returns true if the cell is empty and false if there is something in the cell.</returns>
+        public bool IsEmptyCell(int sheetIndex, int rowIndex, int columnIndex);
+
+        /// <summary>
+        /// Returns true if the cell is empty and false if there is something in the cell. The sheet is identified by its name. 
+        /// The cell is identified by its row index and column index.
+        /// </summary>
+        /// <param name="sheetName">The name of the sheet in which the cell is to be checked for empty.</param>
+        /// <param name="rowIndex">The index of the row from which a cell is to be checked whether it is empty.</param>
+        /// <param name="columnIndex">The index of the column from which a cell is to be checked whether it is empty.</param>
+        /// <returns>Returns true if the cell is empty and false if there is something in the cell.</returns>
+        public bool IsEmptyCell(string sheetName, int rowIndex, int columnIndex);
         //COMING SOON NEXT UPDATE
     }
 }
